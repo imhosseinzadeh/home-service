@@ -2,6 +2,7 @@ package ir.maktab.homeserviceprovider.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -35,7 +36,7 @@ public class User implements BaseEntity<Long> {
     @UpdateTimestamp
     private LocalDateTime modifyDate;
 
-    @Enumerated(EnumType.STRING)
+    @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
     private UserStatus status;
 
     @Builder
@@ -51,4 +52,5 @@ public class User implements BaseEntity<Long> {
     protected void onCreate() {
         signDate = modifyDate = LocalDateTime.now();
     }
+
 }
