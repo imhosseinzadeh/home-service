@@ -1,26 +1,24 @@
 package ir.maktab.homeserviceprovider;
 
 import ir.maktab.homeserviceprovider.entity.Customer;
-import ir.maktab.homeserviceprovider.entity.Expert;
-import ir.maktab.homeserviceprovider.service.CustomerService;
+import ir.maktab.homeserviceprovider.entity.User;
+import ir.maktab.homeserviceprovider.entity.UserStatus;
 import ir.maktab.homeserviceprovider.service.ExpertService;
 
+import ir.maktab.homeserviceprovider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.Optional;
 
 @SpringBootApplication
 public class HomeServiceProviderApplication {
 
     @Autowired
-    CustomerService customerService;
+    UserService<User> userService;
 
     @Autowired
     ExpertService expertService;
@@ -33,20 +31,17 @@ public class HomeServiceProviderApplication {
     public CommandLineRunner init() {
         return args ->
         {
-            Customer customer = Customer.customerBuilder()
+            User user = User.builder()
                     .firstname("iman")
-                    .lastname("hosseinzadeh").
-                    password("1234").
-                    build();
-            customerService.saveOrUpdate(customer);
+                    .lastname("hosseinzadeh")
+                    .password("abcd1234")
+                    .email("ali@gmail.com")
+                    .status(UserStatus.NEW)
+                    .build();
+            Long id = userService.saveOrUpdate(user).getId();
 
-            Thread.sleep(10000);
-
-            Optional<Customer> customer2 = customerService.load(1L);
-            if (customer2.isPresent()) {
-                customer2.get().setEmail("eeej");
-                customerService.saveOrUpdate(customer2.get());
-            }
+            Optional<User> user2 = userService.load(id);
+            user2.ifPresent(System.out::println);
         };
 /*
         return args -> {
