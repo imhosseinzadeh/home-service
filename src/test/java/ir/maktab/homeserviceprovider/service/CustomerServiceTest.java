@@ -18,4 +18,24 @@ class CustomerServiceTest {
 
     @Autowired
     CustomerService service;
+
+    @Test
+    void updatePasswordById_PasswordChange_UpdatePassword() {
+        Customer customer = Customer.customerBuilder()
+                .firstname("iman")
+                .lastname("hosseinzadeh")
+                .password("12345678")
+                .build();
+        Long customerId = service.saveOrUpdate(customer).getId();
+
+        String newPass = "newPassword";
+        service.updatePasswordById(customerId, newPass);
+
+        if (service.load(customerId).isPresent()) {
+            Customer loadCustomer = service.load(customerId).get();
+            assertEquals(loadCustomer.getPassword(), newPass);
+        } else {
+            fail("Customer not found");
+        }
+    }
 }
