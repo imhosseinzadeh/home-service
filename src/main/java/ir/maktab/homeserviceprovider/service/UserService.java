@@ -17,4 +17,8 @@ public class UserService<U extends User> extends BaseService<U, Long> {
     public void updatePasswordById(Long id, String password) {
         repository.updatePasswordById(id, password);
     }
+
+    U findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 }
