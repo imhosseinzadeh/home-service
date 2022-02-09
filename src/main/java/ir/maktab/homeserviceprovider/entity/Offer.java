@@ -37,9 +37,4 @@ public class Offer implements BaseEntity<Long>, Serializable {
     public Long getId() {
         return this.id;
     }
-
-    @PrePersist
-    protected void onCreate() {
-        submitDate = LocalDateTime.now();
-    }
 }
