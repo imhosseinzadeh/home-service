@@ -13,4 +13,8 @@ public class UserService extends BaseService<User, Long> {
         super(userRepository);
         this.repository = userRepository;
     }
+
+    public void updatePasswordById(Long id, String password) {
+        repository.updatePasswordById(id, password);
+    }
 }
