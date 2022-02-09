@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "\"Order\"")
-public class Order implements BaseEntity<Long> {
+public class Order implements BaseEntity<Long>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

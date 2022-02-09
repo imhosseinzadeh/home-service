@@ -8,13 +8,14 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Expert extends User {
+public class Expert extends User implements Serializable {
 
     @OneToMany(mappedBy = "expert")
     private Set<Offer> offers = new HashSet<>();

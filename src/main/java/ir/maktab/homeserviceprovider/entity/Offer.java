@@ -3,13 +3,14 @@ package ir.maktab.homeserviceprovider.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 
 @Entity
-public class Offer implements BaseEntity<Long> {
+public class Offer implements BaseEntity<Long>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
