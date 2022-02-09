@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserServiceTest {
 
     @Autowired
-    private UserService service;
+    private UserService<User> service;
 
     @Test
     void updatePasswordById_PasswordChange_UpdatePassword() {
