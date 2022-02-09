@@ -28,10 +28,10 @@ public class User implements BaseEntity<Long> {
 
     @Column(unique = true)
     @Email
-    @NotNull(message = "User email cannot be null")
+    @NotNull(message = "User-email cannot be null")
     private String email;
 
-    @NotNull(message = "User password cannot be null")
+    @NotNull(message = "User-password cannot be null")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user password")
     private String password;
 
@@ -40,14 +40,8 @@ public class User implements BaseEntity<Long> {
     @Setter(AccessLevel.NONE)
     private LocalDateTime signDate;
 
-/*
-    @UpdateTimestamp
-    @Setter(AccessLevel.NONE)
-    private LocalDateTime modifyDate;
-*/
-
     @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
-    @NotNull(message = "User status cannot be null")
+    @NotNull(message = "User-status cannot be null")
     private UserStatus status;
 
     @Builder
@@ -58,12 +52,4 @@ public class User implements BaseEntity<Long> {
         this.password = password;
         this.status = status;
     }
-
-/*
-    @PrePersist
-    protected void onCreate() {
-        signDate = modifyDate = LocalDateTime.now();
-    }
-*/
-
 }
