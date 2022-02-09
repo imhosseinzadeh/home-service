@@ -20,12 +20,7 @@ class UserServiceTest {
 
     @Test
     void updatePasswordById_PasswordChange_UpdatePassword() {
-        User user = User.builder()
-                .firstname("iman")
-                .lastname("hosseinzadeh")
-                .password("12345678")
-                .build();
-        Long userId = service.saveOrUpdate(user).getId();
+        Long userId = saveUser("").getId();
 
         String newPass = "newPassword";
         service.updatePasswordById(userId, newPass);
@@ -36,5 +31,25 @@ class UserServiceTest {
         } else {
             fail("User not found");
         }
+    }
+
+    @Test
+    void findByEmail_SavedUserAndLoadUserEqual_SaveAndLoadUser() {
+        String userEmail = "user@gmail.com";
+        User saveUser = saveUser(userEmail);
+
+        User loadUser = service.findByEmail("user@gmail.com");
+
+        assertEquals(saveUser, loadUser);
+    }
+
+    private User saveUser(String email) {
+        User user = User.builder()
+                .firstname("iman")
+                .lastname("hosseinzadeh")
+                .password("12345678")
+                .email(email)
+                .build();
+        return service.saveOrUpdate(user);
     }
 }
