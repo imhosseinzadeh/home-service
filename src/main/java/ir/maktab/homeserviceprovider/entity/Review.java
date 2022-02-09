@@ -1,7 +1,5 @@
 package ir.maktab.homeserviceprovider.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,11 +17,14 @@ public class Review implements BaseEntity<Long> {
 
     private String comment;
 
-    @Type(type = "ir.maktab.homeserviceprovider.entity.Score")
-    private Score score;
+    private Integer score;
 
     @Override
     public Long getId() {
         return this.id;
+    }
+
+    public Integer getScore() {
+        return score;
     }
 }
