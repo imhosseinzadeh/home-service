@@ -1,6 +1,10 @@
 package ir.maktab.homeserviceprovider.entity;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Review implements BaseEntity<Long> {
@@ -15,9 +19,12 @@ public class Review implements BaseEntity<Long> {
     @ManyToOne
     private Expert expert;
 
-    private String comment;
-
+    @NotNull
+    @PositiveOrZero(message = "Review-score must be positive or zero")
+    @Range(min = 0, max = 5)
     private Integer score;
+
+    private String comment;
 
     @Override
     public Long getId() {
