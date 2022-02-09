@@ -14,7 +14,7 @@ public class SubService implements BaseEntity<Long> {
     private Long id;
 
     @Column(unique = true)
-    @NotNull(message = "SubService name cannot null")
+    @NotNull(message = "SubService-name cannot null")
     private String name;
 
     @ManyToOne
