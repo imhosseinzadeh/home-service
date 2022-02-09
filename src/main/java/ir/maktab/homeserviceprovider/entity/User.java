@@ -6,6 +6,9 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,6 +17,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class User implements BaseEntity<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
@@ -24,19 +28,25 @@ public class User implements BaseEntity<Long> {
     private String lastname;
 
     @Column(unique = true)
+    @Email
+    @NotNull(message = "Email cannot be null")
     private String email;
 
-    @Column(nullable = false)
+    @NotNull(message = "Password cannot be null")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message ="Incorrect pattern for password")
     private String password;
 
     @CreationTimestamp
     @Column(updatable = false)
+    @Setter(AccessLevel.NONE)
     private LocalDateTime signDate;
 
     @UpdateTimestamp
+    @Setter(AccessLevel.NONE)
     private LocalDateTime modifyDate;
 
     @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
+    @NotNull(message = "Status cannot be null")
     private UserStatus status;
 
     @Builder
@@ -52,5 +62,4 @@ public class User implements BaseEntity<Long> {
     protected void onCreate() {
         signDate = modifyDate = LocalDateTime.now();
     }
-
 }
