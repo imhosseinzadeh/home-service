@@ -5,11 +5,10 @@ import ir.maktab.homeserviceprovider.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService extends BaseService<Customer, Long> {
+public class CustomerService extends UserService<Customer> {
 
     private final CustomerRepository repository;
 
-    /*@Autowired//not necessary*/
     public CustomerService(CustomerRepository customerRepository) {
         super(customerRepository);
         this.repository = customerRepository;

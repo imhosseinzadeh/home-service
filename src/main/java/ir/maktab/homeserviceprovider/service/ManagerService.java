@@ -5,7 +5,7 @@ import ir.maktab.homeserviceprovider.repository.ManagerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ManagerService extends BaseService<Manager, Long> {
+public class ManagerService extends UserService<Manager> {
 
     private final ManagerRepository repository;
 

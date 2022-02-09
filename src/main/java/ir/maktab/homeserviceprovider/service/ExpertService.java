@@ -5,7 +5,7 @@ import ir.maktab.homeserviceprovider.repository.ExpertRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExpertService extends BaseService<Expert, Long> {
+public class ExpertService extends UserService<Expert> {
 
     private final ExpertRepository repository;
 

@@ -5,11 +5,11 @@ import ir.maktab.homeserviceprovider.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends BaseService<User, Long> {
+public class UserService<U extends User> extends BaseService<U, Long> {
 
-    private UserRepository repository;
+    private final UserRepository<U> repository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository<U> userRepository) {
         super(userRepository);
         this.repository = userRepository;
     }
