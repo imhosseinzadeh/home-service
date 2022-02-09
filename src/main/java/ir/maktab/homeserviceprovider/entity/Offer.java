@@ -21,8 +21,6 @@ public class Offer implements BaseEntity<Long> {
     @ManyToOne
     private Order order;
 
-    private BigDecimal price;
-
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime submitDate;
@@ -30,9 +28,9 @@ public class Offer implements BaseEntity<Long> {
     @Column(precision = 19, scale = 4, columnDefinition = "DECIMAL(19,4)")
     private BigDecimal proposalPrice;
 
-    private Period period;
-
     private LocalTime startTime;
+
+    private Period period;
 
     @Override
     public Long getId() {
