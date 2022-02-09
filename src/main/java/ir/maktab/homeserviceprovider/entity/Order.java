@@ -1,8 +1,10 @@
 package ir.maktab.homeserviceprovider.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -22,7 +24,8 @@ public class Order implements BaseEntity<Long> {
     @ManyToOne
     private SubService subService;
 
-    @Enumerated(EnumType.STRING)
+    @Type(type = "ir.maktab.homeserviceprovider.entity.OrderStatus")
+    @NotNull
     private OrderStatus status;
 
     @OneToMany(mappedBy = "order")
