@@ -32,17 +32,17 @@ public class User implements BaseEntity<Long> {
     private String email;
 
     @NotNull(message = "User-password cannot be null")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user password")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user-password")
     private String password;
+
+    @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
+    @NotNull(message = "User-status cannot be null")
+    private UserStatus status;
 
     @CreationTimestamp
     @Column(updatable = false)
     @Setter(AccessLevel.NONE)
     private LocalDateTime signDate;
-
-    @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
-    @NotNull(message = "User-status cannot be null")
-    private UserStatus status;
 
     @Builder
     public User(String firstname, String lastname, String email, String password, UserStatus status) {
