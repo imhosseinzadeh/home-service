@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExpertService extends BaseService<Expert, Long> {
 
-    private final ExpertRepository expertRepository;
+    private final ExpertRepository repository;
 
     public ExpertService(ExpertRepository expertRepository) {
         super(expertRepository);
-        this.expertRepository = expertRepository;
+        this.repository = expertRepository;
     }
 }
