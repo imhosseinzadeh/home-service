@@ -26,7 +26,7 @@ public class SubService implements BaseEntity<Long> {
 
     private BigDecimal basePrice;
 
-    private String explanation;
+    private String comment;
 
     @Override
     public Long getId() {
