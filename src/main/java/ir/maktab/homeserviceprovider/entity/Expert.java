@@ -3,8 +3,11 @@ package ir.maktab.homeserviceprovider.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +25,15 @@ public class Expert extends User {
     @Lob
     @Column(columnDefinition = "mediumblob")
     private byte[] image;
+
+    @PositiveOrZero(message = "Expert-score must be positive or zero")
+    @Range(min = 0, max = 5)
+    private Integer score;
+
+    public Integer getScore() {
+        this.score = reviews.stream().mapToInt(Review::getScore).sum() / reviews.size();
+        return score;
+    }
 
     @Builder(builderMethodName = "expertBuilder")
     public Expert(String firstname, String lastname, String email, String password, UserStatus status, byte[] image) {
