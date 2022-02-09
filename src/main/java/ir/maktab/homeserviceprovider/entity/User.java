@@ -3,7 +3,6 @@ package ir.maktab.homeserviceprovider.entity;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -29,11 +28,11 @@ public class User implements BaseEntity<Long> {
 
     @Column(unique = true)
     @Email
-    @NotNull(message = "Email cannot be null")
+    @NotNull(message = "User email cannot be null")
     private String email;
 
-    @NotNull(message = "Password cannot be null")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message ="Incorrect pattern for password")
+    @NotNull(message = "User password cannot be null")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user password")
     private String password;
 
     @CreationTimestamp
@@ -41,12 +40,14 @@ public class User implements BaseEntity<Long> {
     @Setter(AccessLevel.NONE)
     private LocalDateTime signDate;
 
+/*
     @UpdateTimestamp
     @Setter(AccessLevel.NONE)
     private LocalDateTime modifyDate;
+*/
 
     @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
-    @NotNull(message = "Status cannot be null")
+    @NotNull(message = "User status cannot be null")
     private UserStatus status;
 
     @Builder
@@ -58,8 +59,11 @@ public class User implements BaseEntity<Long> {
         this.status = status;
     }
 
+/*
     @PrePersist
     protected void onCreate() {
         signDate = modifyDate = LocalDateTime.now();
     }
+*/
+
 }
