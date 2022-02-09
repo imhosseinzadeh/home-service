@@ -18,8 +18,8 @@ public class BaseService<E, I extends Serializable> {
     private final JpaRepository<E, I> jpaRepository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    public void saveOrUpdate(E entity) {
-        jpaRepository.save(entity);
+    public E saveOrUpdate(E entity) {
+        return jpaRepository.save(entity);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
