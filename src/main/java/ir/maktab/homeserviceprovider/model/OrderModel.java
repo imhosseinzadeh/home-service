@@ -12,24 +12,24 @@ import java.util.Set;
 
 @Entity
 @Table(name = "\"Order\"")
-public class Order implements BaseModel<Long> {
+public class OrderModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Customer customer;
+    private CustomerModel customer;
 
     @ManyToOne
-    private SubService subService;
+    private SubServiceModel subService;
 
-    @Type(type = "ir.maktab.homeserviceprovider.model.OrderStatus")
+    @Type(type = "ir.maktab.homeserviceprovider.model.OrderModelStatus")
     @NotNull
-    private OrderStatus status;
+    private OrderModelStatus status;
 
     @OneToMany(mappedBy = "order")
-    private Set<Offer> offers = new HashSet<>();
+    private Set<OfferModel> offers = new HashSet<>();
 
     @CreationTimestamp
     @Column(updatable = false)

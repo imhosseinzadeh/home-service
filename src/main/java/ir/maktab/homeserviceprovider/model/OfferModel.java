@@ -10,17 +10,17 @@ import java.time.LocalTime;
 import java.time.Period;
 
 @Entity
-public class Offer implements BaseModel<Long> {
+public class OfferModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Expert expert;
+    private ExpertModel expert;
 
     @ManyToOne
-    private Order order;
+    private OrderModel order;
 
     @CreationTimestamp
     @Column(updatable = false)

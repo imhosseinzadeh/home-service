@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
-import ir.maktab.homeserviceprovider.model.User;
-import ir.maktab.homeserviceprovider.model.UserStatus;
+import ir.maktab.homeserviceprovider.model.UserModel;
+import ir.maktab.homeserviceprovider.model.UserModelStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,16 +20,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserServiceTest {
 
     @Autowired
-    private UserService<User> service;
+    private UserService<UserModel> service;
 
     @Test
     void updatePasswordById_BeChange_IfPasswordUpdated() {
-        User user = User.builder()
+        UserModel user = UserModel.builder()
                 .firstname("firstname")
                 .lastname("lastname")
                 .email("example@gmail.com")
                 .password("password1234")
-                .status(UserStatus.NEW)
+                .status(UserModelStatus.NEW)
                 .build();
         Long userId = service.saveOrUpdate(user).getId();
 
@@ -37,7 +37,7 @@ class UserServiceTest {
         service.updatePasswordById(userId, newPass);
 
         if (service.load(userId).isPresent()) {
-            User loadUser = service.load(userId).get();
+            UserModel loadUser = service.load(userId).get();
 
             assertEquals(loadUser.getPassword(), newPass);
         } else {
@@ -48,16 +48,16 @@ class UserServiceTest {
     @Test
     void findByEmail_BeFound_IfAUserSaved() {
         String userEmail = "example@gmail.com";
-        User user = User.builder()
+        UserModel user = UserModel.builder()
                 .firstname("firstname")
                 .lastname("lastname")
                 .email(userEmail)
                 .password("password1234")
-                .status(UserStatus.NEW)
+                .status(UserModelStatus.NEW)
                 .build();
-        User savedUser = service.saveOrUpdate(user);
+        UserModel savedUser = service.saveOrUpdate(user);
 
-        User loadUser = service.findByEmail(userEmail);
+        UserModel loadUser = service.findByEmail(userEmail);
 
         assertEquals(savedUser, loadUser);
     }
@@ -66,17 +66,17 @@ class UserServiceTest {
     void findAllByFirstnameAndLastname_BeFound_IfAUserSaved() {
         String firstname = "firstname";
         String lastname = "lastname";
-        User user = User.builder()
+        UserModel user = UserModel.builder()
                 .firstname(firstname)
                 .lastname(lastname)
                 .email("example@gmail.com")
                 .password("password1234")
-                .status(UserStatus.NEW)
+                .status(UserModelStatus.NEW)
                 .build();
-        User savedUser = service.saveOrUpdate(user);
+        UserModel savedUser = service.saveOrUpdate(user);
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<User> userPage = service.findAllByFirstnameAndLastname(firstname, lastname, pageable);
+        Page<UserModel> userPage = service.findAllByFirstnameAndLastname(firstname, lastname, pageable);
 
         assertTrue(userPage.get().anyMatch(loadUser -> loadUser.equals(savedUser)));
     }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User implements BaseModel<Long> {
+public class UserModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,9 @@ public class User implements BaseModel<Long> {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user-password")
     private String password;
 
-    @Type(type = "ir.maktab.homeserviceprovider.model.UserStatus")
+    @Type(type = "ir.maktab.homeserviceprovider.model.UserModelStatus")
     @NotNull(message = "User-status cannot be null")
-    private UserStatus status;
+    private UserModelStatus status;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -45,7 +45,7 @@ public class User implements BaseModel<Long> {
     private LocalDateTime signDate;
 
     @Builder
-    public User(String firstname, String lastname, String email, String password, UserStatus status) {
+    public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;

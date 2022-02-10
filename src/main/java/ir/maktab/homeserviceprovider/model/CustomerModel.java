@@ -11,16 +11,16 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-public class Customer extends User {
+public class CustomerModel extends UserModel {
 
     @OneToMany(mappedBy = "customer")
-    private Set<Order> orders = new HashSet<>();
+    private Set<OrderModel> orders = new HashSet<>();
 
     @OneToMany(mappedBy = "customer")
-    private Set<Review> reviews = new HashSet<>();
+    private Set<ReviewModel> reviews = new HashSet<>();
 
     @Builder(builderMethodName = "customerBuilder")
-    public Customer(String firstname, String lastname, String email, String password, UserStatus status, String customerFiled) {
+    public CustomerModel(String firstname, String lastname, String email, String password, UserModelStatus status, String customerFiled) {
         super(firstname, lastname, email, password, status);
     }
 }

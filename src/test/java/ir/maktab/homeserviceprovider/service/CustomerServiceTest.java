@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
-import ir.maktab.homeserviceprovider.model.Customer;
+import ir.maktab.homeserviceprovider.model.CustomerModel;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ class CustomerServiceTest {
 
     @Test
     void updatePasswordById_PasswordChange_UpdatePassword() {
-        Customer customer = Customer.customerBuilder()
+        CustomerModel customer = CustomerModel.customerBuilder()
                 .firstname("iman")
                 .lastname("hosseinzadeh")
                 .password("12345678")
@@ -32,7 +32,7 @@ class CustomerServiceTest {
         service.updatePasswordById(customerId, newPass);
 
         if (service.load(customerId).isPresent()) {
-            Customer loadCustomer = service.load(customerId).get();
+            CustomerModel loadCustomer = service.load(customerId).get();
             assertEquals(loadCustomer.getPassword(), newPass);
         } else {
             fail("Customer not found");

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Service implements BaseModel<Long> {
+public class ServiceModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,10 @@ public class Service implements BaseModel<Long> {
     private String name;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<SubService> subServices = new HashSet<>();
+    private Set<SubServiceModel> subServices = new HashSet<>();
 
     @OneToMany(mappedBy = "service")
-    private Set<ExpertService> expertServices = new HashSet<>();
+    private Set<ExpertServiceModel> expertServices = new HashSet<>();
 
     @Override
     public Long getId() {

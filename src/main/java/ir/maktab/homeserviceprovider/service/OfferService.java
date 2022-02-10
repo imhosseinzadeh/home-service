@@ -1,11 +1,12 @@
 package ir.maktab.homeserviceprovider.service;
 
-import ir.maktab.homeserviceprovider.model.Offer;
+import ir.maktab.homeserviceprovider.model.OfferModel;
 import ir.maktab.homeserviceprovider.repository.OfferRepository;
+
 import org.springframework.stereotype.Service;
 
 @Service
-public class OfferService extends BaseService<Offer, Long> {
+public class OfferService extends BaseService<OfferModel, Long> {
 
     private final OfferRepository repository;
 

@@ -1,14 +1,17 @@
 package ir.maktab.homeserviceprovider.service;
 
-import ir.maktab.homeserviceprovider.model.Expert;
-import ir.maktab.homeserviceprovider.model.Service;
+import ir.maktab.homeserviceprovider.model.ExpertModel;
+import ir.maktab.homeserviceprovider.model.ExpertServiceModel;
+import ir.maktab.homeserviceprovider.model.ServiceModel;
 import ir.maktab.homeserviceprovider.repository.ExpertRepository;
 import ir.maktab.homeserviceprovider.repository.ExpertServiceRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-@org.springframework.stereotype.Service
-public class ExpertService extends UserService<Expert> {
+@Service
+public class ExpertService extends UserService<ExpertModel> {
 
     private final ExpertRepository repository;
     private final ExpertServiceRepository expertServiceRepository;
@@ -19,8 +22,8 @@ public class ExpertService extends UserService<Expert> {
         this.expertServiceRepository = expertServiceRepository;
     }
 
-    Page<Expert> findExpertByService(Service service, Pageable pageable) {
-        Page<ir.maktab.homeserviceprovider.model.ExpertService> allByService = expertServiceRepository.findAllByService(service, pageable);
-        return allByService.map(ir.maktab.homeserviceprovider.model.ExpertService::getExpert);
+    Page<ExpertModel> findExpertByService(ServiceModel service, Pageable pageable) {
+        Page<ExpertServiceModel> allByService = expertServiceRepository.findAllByService(service, pageable);
+        return allByService.map(ExpertServiceModel::getExpert);
     }
 }

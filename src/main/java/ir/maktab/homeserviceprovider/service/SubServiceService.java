@@ -1,11 +1,12 @@
 package ir.maktab.homeserviceprovider.service;
 
-import ir.maktab.homeserviceprovider.model.SubService;
+import ir.maktab.homeserviceprovider.model.SubServiceModel;
 import ir.maktab.homeserviceprovider.repository.SubServiceRepository;
+
 import org.springframework.stereotype.Service;
 
 @Service
-public class SubServiceService extends BaseService<SubService, Long> {
+public class SubServiceService extends BaseService<SubServiceModel, Long> {
 
     private final SubServiceRepository repository;
 

@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 
 @Entity
 @NoArgsConstructor
-public class Manager extends User {
+public class ManagerModel extends UserModel {
     @Builder(builderMethodName = "managerBuilder")
-    public Manager(String firstname, String lastname, String email, String password, UserStatus status) {
+    public ManagerModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
         super(firstname, lastname, email, password, status);
     }
 }

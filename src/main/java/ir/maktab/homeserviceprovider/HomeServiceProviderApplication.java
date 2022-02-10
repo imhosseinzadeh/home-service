@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider;
 
-import ir.maktab.homeserviceprovider.model.User;
-import ir.maktab.homeserviceprovider.model.UserStatus;
+import ir.maktab.homeserviceprovider.model.UserModel;
+import ir.maktab.homeserviceprovider.model.UserModelStatus;
 import ir.maktab.homeserviceprovider.service.ExpertService;
 
 import ir.maktab.homeserviceprovider.service.UserService;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class HomeServiceProviderApplication {
 
     @Autowired
-    UserService<User> userService;
+    UserService<UserModel> userService;
 
     @Autowired
     ExpertService expertService;
@@ -30,16 +30,16 @@ public class HomeServiceProviderApplication {
     public CommandLineRunner init() {
         return args ->
         {
-            User user = User.builder()
+            UserModel user = UserModel.builder()
                     .firstname("iman")
                     .lastname("hosseinzadeh")
                     .password("abcd1234")
                     .email("ali@gmail.com")
-                    .status(UserStatus.NEW)
+                    .status(UserModelStatus.NEW)
                     .build();
             Long id = userService.saveOrUpdate(user).getId();
 
-            Optional<User> user2 = userService.load(id);
+            Optional<UserModel> user2 = userService.load(id);
             user2.ifPresent(System.out::println);
         };
 /*

@@ -7,17 +7,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
-public class Review implements BaseModel<Long> {
+public class ReviewModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Customer customer;
+    private CustomerModel customer;
 
     @ManyToOne
-    private Expert expert;
+    private ExpertModel expert;
 
     @NotNull
     @PositiveOrZero(message = "Review-score must be positive or zero")

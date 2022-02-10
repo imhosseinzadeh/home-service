@@ -6,29 +6,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 @Entity
-public class ExpertService implements BaseModel<ExpertServiceId> {
+public class ExpertServiceModel implements BaseModel<ExpertServiceModelId> {
 
     @EmbeddedId
-    private ExpertServiceId id = new ExpertServiceId();
+    private ExpertServiceModelId id = new ExpertServiceModelId();
 
     @ManyToOne
     @MapsId("expertId")
-    private Expert expert;
+    private ExpertModel expert;
 
     @ManyToOne
     @MapsId("serviceId")
-    private Service service;
+    private ServiceModel service;
 
     private Integer score;
 
     private Integer experienceYears;
 
     @Override
-    public ExpertServiceId getId() {
+    public ExpertServiceModelId getId() {
         return this.id;
     }
 
-    public Expert getExpert() {
+    public ExpertModel getExpert() {
         return expert;
     }
 }

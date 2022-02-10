@@ -4,15 +4,15 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class ExpertServiceId implements Serializable {
+public class ExpertServiceModelId implements Serializable {
 
     private Long expertId;
     private Long serviceId;
 
-    public ExpertServiceId() {
+    public ExpertServiceModelId() {
     }
 
-    public ExpertServiceId(Long expertId, Long serviceId) {
+    public ExpertServiceModelId(Long expertId, Long serviceId) {
         this.expertId = expertId;
         this.serviceId = serviceId;
     }

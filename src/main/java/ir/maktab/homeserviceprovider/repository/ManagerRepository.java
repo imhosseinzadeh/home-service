@@ -1,8 +1,9 @@
 package ir.maktab.homeserviceprovider.repository;
 
-import ir.maktab.homeserviceprovider.model.Manager;
+import ir.maktab.homeserviceprovider.model.ManagerModel;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ManagerRepository extends UserRepository<Manager> {
+public interface ManagerRepository extends UserRepository<ManagerModel> {
 }

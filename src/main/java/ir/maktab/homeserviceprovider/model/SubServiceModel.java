@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class SubService implements BaseModel<Long> {
+public class SubServiceModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class SubService implements BaseModel<Long> {
 
     @ManyToOne
     @NotNull(message = "SubService cannot exists without service")
-    private Service service;
+    private ServiceModel service;
 
     @OneToMany(mappedBy = "subService")
-    private Set<Order> orders = new HashSet<>();
+    private Set<OrderModel> orders = new HashSet<>();
 
     private BigDecimal basePrice;
 

@@ -14,32 +14,32 @@ import java.util.Set;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Expert extends User {
+public class ExpertModel extends UserModel {
 
     @Lob
     @Column(columnDefinition = "mediumblob")
     private byte[] image;
 
     @OneToMany(mappedBy = "expert")
-    private Set<ExpertService> expertServices = new HashSet<>();
+    private Set<ExpertServiceModel> expertServices = new HashSet<>();
 
     @OneToMany(mappedBy = "expert")
-    private Set<Offer> offers = new HashSet<>();
+    private Set<OfferModel> offers = new HashSet<>();
 
     @OneToMany(mappedBy = "expert")
-    private Set<Review> reviews = new HashSet<>();
+    private Set<ReviewModel> reviews = new HashSet<>();
 
     @PositiveOrZero(message = "Expert-score must be positive or zero")
     @Range(min = 0, max = 5)
     private Integer score;
 
     public Integer getScore() {
-        this.score = reviews.stream().mapToInt(Review::getScore).sum() / reviews.size();
+        this.score = reviews.stream().mapToInt(ReviewModel::getScore).sum() / reviews.size();
         return score;
     }
 
     @Builder(builderMethodName = "expertBuilder")
-    public Expert(String firstname, String lastname, String email, String password, UserStatus status, byte[] image) {
+    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
         super(firstname, lastname, email, password, status);
         this.image = image;
     }
