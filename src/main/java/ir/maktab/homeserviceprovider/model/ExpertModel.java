@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import lombok.Setter;
+
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -19,6 +21,7 @@ public class ExpertModel extends UserModel {
 
     @Lob
     @Column(columnDefinition = "mediumblob")
+    @Setter
     private byte[] image;
 
     @OneToMany(mappedBy = "expert")
@@ -43,10 +46,6 @@ public class ExpertModel extends UserModel {
     public Integer getScore() {
         this.score = reviews.stream().mapToInt(ReviewModel::getScore).sum() / reviews.size();
         return score;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public void setExpertServices(Set<ExpertServiceModel> expertServices) {
