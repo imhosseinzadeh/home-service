@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Service implements BaseEntity<Long> {
+public class Service implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

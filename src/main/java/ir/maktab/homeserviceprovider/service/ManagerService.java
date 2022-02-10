@@ -1,6 +1,6 @@
 package ir.maktab.homeserviceprovider.service;
 
-import ir.maktab.homeserviceprovider.entity.Manager;
+import ir.maktab.homeserviceprovider.model.Manager;
 import ir.maktab.homeserviceprovider.repository.ManagerRepository;
 import org.springframework.stereotype.Service;
 

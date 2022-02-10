@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 public enum OrderStatus {
     WAITING_FOR_EXPERTS_SUGGESTIONS(1),

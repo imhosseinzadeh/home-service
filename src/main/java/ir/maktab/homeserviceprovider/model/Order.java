@@ -1,11 +1,10 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -13,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "\"Order\"")
-public class Order implements BaseEntity<Long> {
+public class Order implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class Order implements BaseEntity<Long> {
     @ManyToOne
     private SubService subService;
 
-    @Type(type = "ir.maktab.homeserviceprovider.entity.OrderStatus")
+    @Type(type = "ir.maktab.homeserviceprovider.model.OrderStatus")
     @NotNull
     private OrderStatus status;
 

@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
-public class Review implements BaseEntity<Long> {
+public class Review implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,7 @@
 package ir.maktab.homeserviceprovider;
 
-import ir.maktab.homeserviceprovider.entity.Customer;
-import ir.maktab.homeserviceprovider.entity.User;
-import ir.maktab.homeserviceprovider.entity.UserStatus;
+import ir.maktab.homeserviceprovider.model.User;
+import ir.maktab.homeserviceprovider.model.UserStatus;
 import ir.maktab.homeserviceprovider.service.ExpertService;
 
 import ir.maktab.homeserviceprovider.service.UserService;

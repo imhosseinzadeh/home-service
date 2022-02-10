@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 import lombok.Builder;
 import lombok.NoArgsConstructor;

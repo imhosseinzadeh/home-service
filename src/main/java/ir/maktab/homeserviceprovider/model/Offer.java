@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.time.Period;
 
 @Entity
-public class Offer implements BaseEntity<Long> {
+public class Offer implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
-import ir.maktab.homeserviceprovider.entity.User;
-import ir.maktab.homeserviceprovider.entity.UserStatus;
+import ir.maktab.homeserviceprovider.model.User;
+import ir.maktab.homeserviceprovider.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

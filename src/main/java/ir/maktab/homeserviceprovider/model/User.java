@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.entity;
+package ir.maktab.homeserviceprovider.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User implements BaseEntity<Long> {
+public class User implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +35,7 @@ public class User implements BaseEntity<Long> {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user-password")
     private String password;
 
-    @Type(type = "ir.maktab.homeserviceprovider.entity.UserStatus")
+    @Type(type = "ir.maktab.homeserviceprovider.model.UserStatus")
     @NotNull(message = "User-status cannot be null")
     private UserStatus status;
 
