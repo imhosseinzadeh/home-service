@@ -20,6 +20,9 @@ public class Service implements BaseEntity<Long>, Serializable {
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<SubService> subServices = new HashSet<>();
 
+    @OneToMany(mappedBy = "service")
+    private Set<ExpertService> expertServices = new HashSet<>();
+
     @Override
     public Long getId() {
         return this.id;

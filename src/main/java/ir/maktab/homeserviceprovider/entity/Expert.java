@@ -17,15 +17,18 @@ import java.util.Set;
 @NoArgsConstructor
 public class Expert extends User implements Serializable {
 
+    @Lob
+    @Column(columnDefinition = "mediumblob")
+    private byte[] image;
+
+    @OneToMany(mappedBy = "expert")
+    private Set<ExpertService> expertServices = new HashSet<>();
+
     @OneToMany(mappedBy = "expert")
     private Set<Offer> offers = new HashSet<>();
 
     @OneToMany(mappedBy = "expert")
     private Set<Review> reviews = new HashSet<>();
-
-    @Lob
-    @Column(columnDefinition = "mediumblob")
-    private byte[] image;
 
     @PositiveOrZero(message = "Expert-score must be positive or zero")
     @Range(min = 0, max = 5)
