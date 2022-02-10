@@ -4,9 +4,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import java.io.Serializable;
 
 @Entity
-public class ExpertService implements BaseEntity<ExpertServiceId> {
+public class ExpertService implements BaseEntity<ExpertServiceId>, Serializable {
 
     @EmbeddedId
     private ExpertServiceId id = new ExpertServiceId();
@@ -26,5 +27,9 @@ public class ExpertService implements BaseEntity<ExpertServiceId> {
     @Override
     public ExpertServiceId getId() {
         return this.id;
+    }
+
+    public Expert getExpert() {
+        return expert;
     }
 }
