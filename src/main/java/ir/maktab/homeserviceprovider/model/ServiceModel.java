@@ -1,5 +1,7 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -7,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Service")
+@Getter
 public class ServiceModel implements BaseModel<Long> {
 
     @Id
@@ -23,8 +26,33 @@ public class ServiceModel implements BaseModel<Long> {
     @OneToMany(mappedBy = "service")
     private Set<ExpertServiceModel> expertServices = new HashSet<>();
 
-    @Override
-    public Long getId() {
-        return this.id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSubServices(Set<SubServiceModel> subServices) {
+        subServices.forEach(this::addSubService);
+        this.subServices = subServices;
+    }
+
+    public void setExpertServices(Set<ExpertServiceModel> expertServices) {
+        expertServices.forEach(this::addExpertService);
+        this.expertServices = expertServices;
+    }
+
+    public void addSubService(SubServiceModel subService) {
+        subService.setService(this);
+    }
+
+    public void removeSubService(SubServiceModel subService) {
+        this.subServices.remove(subService);
+    }
+
+    public void addExpertService(ExpertServiceModel expertService) {
+        expertService.setService(this);
+    }
+
+    public void removeExpertService(ExpertServiceModel expertService) {
+        this.expertServices.remove(expertService);
     }
 }
