@@ -51,4 +51,17 @@ public class CustomerModel extends UserModel {
     public void removeReview(ReviewModel review) {
         this.reviews.remove(review);
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + getId() +
+                ", firstname='" + getFirstname() + '\'' +
+                ", lastname='" + getLastname() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", status=" + getStatus() +
+                ", signDate=" + getSignDate() +
+                '}';
+    }
 }
