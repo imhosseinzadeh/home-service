@@ -55,4 +55,12 @@ public class ServiceModel implements BaseModel<Long> {
     public void removeExpertService(ExpertServiceModel expertService) {
         this.expertServices.remove(expertService);
     }
+
+    @Override
+    public String toString() {
+        return "ServiceModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
