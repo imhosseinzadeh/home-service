@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -39,8 +38,8 @@ public class BaseService<E extends BaseModel<I>, I extends Serializable> {
     }
 
     @Transactional(readOnly = true)
-    public List<E> findAll() {
-        return jpaRepository.findAll();
+    public Page<E> findAll(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
