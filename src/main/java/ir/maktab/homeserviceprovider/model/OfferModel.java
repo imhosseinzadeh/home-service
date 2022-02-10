@@ -1,6 +1,8 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,10 +15,12 @@ import java.time.Period;
 
 @Entity(name = "Offer")
 @Getter
+@Setter
 public class OfferModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @ManyToOne
@@ -25,8 +29,9 @@ public class OfferModel implements BaseModel<Long> {
     @ManyToOne
     private OrderModel order;
 
-    @CreationTimestamp
     @Column(updatable = false)
+    @CreationTimestamp
+    @Setter(AccessLevel.NONE)
     private LocalDateTime submitDate;
 
     @Column(precision = 19, scale = 4, columnDefinition = "DECIMAL(19,4)")
