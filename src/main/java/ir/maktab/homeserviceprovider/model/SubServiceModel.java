@@ -1,6 +1,8 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,10 +13,12 @@ import java.util.Set;
 
 @Entity(name = "SubService")
 @Getter
+@Setter
 public class SubServiceModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(unique = true)
@@ -31,10 +35,6 @@ public class SubServiceModel implements BaseModel<Long> {
     private BigDecimal basePrice;
 
     private String comment;
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setService(ServiceModel service) {
         service.getSubServices().add(this);
