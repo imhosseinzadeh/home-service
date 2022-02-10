@@ -22,6 +22,10 @@ public class BaseService<E extends BaseModel<I>, I extends Serializable> {
         return jpaRepository.save(entity);
     }
 
+    public Iterable<E> saveAll(Iterable<E> models) {
+        return jpaRepository.saveAll(models);
+    }
+
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void delete(E entity) {
         jpaRepository.delete(entity);
