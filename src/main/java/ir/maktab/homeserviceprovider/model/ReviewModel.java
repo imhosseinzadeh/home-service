@@ -1,5 +1,6 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity(name = "Review")
+@Getter
 public class ReviewModel implements BaseModel<Long> {
 
     @Id
@@ -26,12 +28,13 @@ public class ReviewModel implements BaseModel<Long> {
 
     private String comment;
 
-    @Override
-    public Long getId() {
-        return this.id;
+    public void setCustomer(CustomerModel customer) {
+        customer.getReviews().add(this);
+        this.customer = customer;
     }
 
-    public Integer getScore() {
-        return score;
+    public void setExpert(ExpertModel expert) {
+        expert.getReviews().add(this);
+        this.expert = expert;
     }
 }

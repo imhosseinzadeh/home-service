@@ -1,5 +1,7 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "SubService")
+@Getter
 public class SubServiceModel implements BaseModel<Long> {
 
     @Id
@@ -29,8 +32,25 @@ public class SubServiceModel implements BaseModel<Long> {
 
     private String comment;
 
-    @Override
-    public Long getId() {
-        return this.id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setService(ServiceModel service) {
+        service.getSubServices().add(this);
+        this.service = service;
+    }
+
+    public void setOrders(Set<OrderModel> orders) {
+        orders.forEach(this::addOrder);
+        this.orders = orders;
+    }
+
+    public void addOrder(OrderModel order) {
+        order.setSubService(this);
+    }
+
+    public void removeOrder(OrderModel order) {
+        this.orders.remove(order);
     }
 }

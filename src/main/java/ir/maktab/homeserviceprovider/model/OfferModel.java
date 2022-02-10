@@ -1,5 +1,7 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.Getter;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import java.time.LocalTime;
 import java.time.Period;
 
 @Entity(name = "Offer")
+@Getter
 public class OfferModel implements BaseModel<Long> {
 
     @Id
@@ -33,8 +36,13 @@ public class OfferModel implements BaseModel<Long> {
 
     private Period period;
 
-    @Override
-    public Long getId() {
-        return this.id;
+    public void setExpert(ExpertModel expert) {
+        expert.getOffers().add(this);
+        this.expert = expert;
+    }
+
+    public void setOrder(OrderModel order) {
+        order.getOffers().add(this);
+        this.order = order;
     }
 }

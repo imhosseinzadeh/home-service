@@ -1,5 +1,7 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
@@ -11,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "\"Order\"")
+@Getter
+@RequiredArgsConstructor
 public class OrderModel implements BaseModel<Long> {
 
     @Id
@@ -43,8 +47,26 @@ public class OrderModel implements BaseModel<Long> {
 
     private LocalDateTime dateTime;
 
-    @Override
-    public Long getId() {
-        return this.id;
+    public void setCustomer(CustomerModel customer) {
+        customer.getOrders().add(this);
+        this.customer = customer;
+    }
+
+    public void setSubService(SubServiceModel subService) {
+        subService.getOrders().add(this);
+        this.subService = subService;
+    }
+
+    public void setOffers(Set<OfferModel> offers) {
+        offers.forEach(this::addOffer);
+        this.offers = offers;
+    }
+
+    public void addOffer(OfferModel offer) {
+        offer.setOrder(this);
+    }
+
+    public void removeOffer(OfferModel offer) {
+        this.offers.remove(offer);
     }
 }
