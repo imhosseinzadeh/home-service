@@ -22,7 +22,7 @@ public class ExpertService extends UserService<ExpertModel> {
         this.expertServiceRepository = expertServiceRepository;
     }
 
-    Page<ExpertModel> findExpertByService(ServiceModel service, Pageable pageable) {
+    Page<ExpertModel> findExpertsByService(ServiceModel service, Pageable pageable) {
         Page<ExpertServiceModel> allByService = expertServiceRepository.findAllByService(service, pageable);
         return allByService.map(ExpertServiceModel::getExpert);
     }
