@@ -1,6 +1,8 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,10 +12,12 @@ import java.util.Set;
 
 @Entity(name = "Service")
 @Getter
+@Setter
 public class ServiceModel implements BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(unique = true)
@@ -25,10 +29,6 @@ public class ServiceModel implements BaseModel<Long> {
 
     @OneToMany(mappedBy = "service")
     private Set<ExpertServiceModel> expertServices = new HashSet<>();
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setSubServices(Set<SubServiceModel> subServices) {
         subServices.forEach(this::addSubService);
