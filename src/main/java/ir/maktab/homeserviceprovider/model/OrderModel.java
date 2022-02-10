@@ -34,7 +34,7 @@ public class OrderModel implements BaseModel<Long> {
     private SubServiceModel subService;
 
     @Type(type = "ir.maktab.homeserviceprovider.model.OrderModelStatus")
-    @NotNull
+    @NotNull(message = "Order-status cannot be null")
     private OrderModelStatus status;
 
     @OneToMany(mappedBy = "order")
