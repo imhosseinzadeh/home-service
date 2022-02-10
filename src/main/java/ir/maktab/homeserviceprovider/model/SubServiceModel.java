@@ -53,4 +53,15 @@ public class SubServiceModel implements BaseModel<Long> {
     public void removeOrder(OrderModel order) {
         this.orders.remove(order);
     }
+
+    @Override
+    public String toString() {
+        return "SubServiceModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", service=" + service +
+                ", basePrice=" + basePrice +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }
