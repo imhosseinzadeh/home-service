@@ -1,5 +1,6 @@
 package ir.maktab.homeserviceprovider.service;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Example;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class BaseService<E extends Serializable, I extends Serializable> {
+public class BaseService<E extends BaseModel<I>, I extends Serializable> {
 
     private final JpaRepository<E, I> jpaRepository;
 
