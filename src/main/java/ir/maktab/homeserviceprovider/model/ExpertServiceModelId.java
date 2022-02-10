@@ -1,19 +1,16 @@
 package ir.maktab.homeserviceprovider.model;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.Embeddable;
+
 import java.io.Serializable;
 
 @Embeddable
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class ExpertServiceModelId implements Serializable {
-
     private Long expertId;
     private Long serviceId;
-
-    public ExpertServiceModelId() {
-    }
-
-    public ExpertServiceModelId(Long expertId, Long serviceId) {
-        this.expertId = expertId;
-        this.serviceId = serviceId;
-    }
 }
