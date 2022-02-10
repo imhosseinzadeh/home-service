@@ -1,6 +1,7 @@
 package ir.maktab.homeserviceprovider.model;
 
 import lombok.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
 import java.time.LocalDateTime;
 
 @Entity(name = "User")
@@ -51,5 +53,18 @@ public class UserModel implements BaseModel<Long> {
         this.email = email;
         this.password = password;
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", signDate=" + signDate +
+                '}';
     }
 }
