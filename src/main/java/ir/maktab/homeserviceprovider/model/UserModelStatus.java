@@ -7,7 +7,7 @@ public enum UserModelStatus {
 
     private int value;
 
-    private UserModelStatus(int value) {
+    UserModelStatus(int value) {
         this.value = value;
     }
 
