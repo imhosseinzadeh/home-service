@@ -13,41 +13,41 @@ import java.io.Serializable;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class BaseService<E extends BaseModel<I>, I extends Serializable> {
+public class BaseService<M extends BaseModel<I>, I extends Serializable> {
 
-    private final JpaRepository<E, I> jpaRepository;
+    private final JpaRepository<M, I> jpaRepository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    public E saveOrUpdate(E entity) {
-        return jpaRepository.save(entity);
+    public M saveOrUpdate(M model) {
+        return jpaRepository.save(model);
     }
 
-    public Iterable<E> saveAll(Iterable<E> models) {
+    public Iterable<M> saveAll(Iterable<M> models) {
         return jpaRepository.saveAll(models);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    public void delete(E entity) {
-        jpaRepository.delete(entity);
+    public void delete(M model) {
+        jpaRepository.delete(model);
     }
 
     @Transactional(readOnly = true)
-    public Optional<E> load(I id) {
+    public Optional<M> load(I id) {
         return jpaRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
-    public Page<E> getPage(Pageable pageable) {
+    public Page<M> getPage(Pageable pageable) {
         return jpaRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
-    public Page<E> findAll(Pageable pageable) {
+    public Page<M> findAll(Pageable pageable) {
         return jpaRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
-    public boolean contains(Example<E> entity) {
+    public boolean contains(Example<M> entity) {
         return jpaRepository.exists(entity);
     }
 
