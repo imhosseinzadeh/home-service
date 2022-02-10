@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name = "Manager")
 @NoArgsConstructor
 public class ManagerModel extends UserModel {
     @Builder(builderMethodName = "managerBuilder")

@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Customer")
 @NoArgsConstructor
 public class CustomerModel extends UserModel {
 

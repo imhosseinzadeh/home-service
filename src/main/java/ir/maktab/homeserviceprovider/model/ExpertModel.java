@@ -11,7 +11,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Expert")
 @Getter
 @NoArgsConstructor
 public class ExpertModel extends UserModel {

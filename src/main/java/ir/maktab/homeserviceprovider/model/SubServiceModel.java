@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "SubService")
 public class SubServiceModel implements BaseModel<Long> {
 
     @Id

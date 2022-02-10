@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-@Entity
+@Entity(name = "Review")
 public class ReviewModel implements BaseModel<Long> {
 
     @Id

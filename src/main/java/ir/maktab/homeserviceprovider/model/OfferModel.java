@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 
-@Entity
+@Entity(name = "Offer")
 public class OfferModel implements BaseModel<Long> {
 
     @Id

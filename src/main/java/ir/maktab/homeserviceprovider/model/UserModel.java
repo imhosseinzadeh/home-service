@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "User")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
-@Entity
+@Entity(name = "ExpertService")
 public class ExpertServiceModel implements BaseModel<ExpertServiceModelId> {
 
     @EmbeddedId
