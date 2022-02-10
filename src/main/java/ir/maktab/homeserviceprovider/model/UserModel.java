@@ -29,7 +29,7 @@ public class UserModel implements BaseModel<Long> {
     private String lastname;
 
     @Column(unique = true)
-    @Email
+    @Email(message = "user-email not valid")
     @NotNull(message = "User-email cannot be null")
     private String email;
 
