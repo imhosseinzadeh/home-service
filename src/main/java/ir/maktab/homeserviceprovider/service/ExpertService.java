@@ -1,16 +1,26 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.entity.Expert;
+import ir.maktab.homeserviceprovider.entity.Service;
 import ir.maktab.homeserviceprovider.repository.ExpertRepository;
-import org.springframework.stereotype.Service;
+import ir.maktab.homeserviceprovider.repository.ExpertServiceRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-@Service
+@org.springframework.stereotype.Service
 public class ExpertService extends UserService<Expert> {
 
     private final ExpertRepository repository;
+    private final ExpertServiceRepository expertServiceRepository;
 
-    public ExpertService(ExpertRepository expertRepository) {
+    public ExpertService(ExpertRepository expertRepository, ExpertServiceRepository expertServiceRepository) {
         super(expertRepository);
         this.repository = expertRepository;
+        this.expertServiceRepository = expertServiceRepository;
+    }
+
+    Page<Expert> findExpertByService(Service service, Pageable pageable) {
+        Page<ir.maktab.homeserviceprovider.entity.ExpertService> allByService = expertServiceRepository.findAllByService(service, pageable);
+        return allByService.map(ir.maktab.homeserviceprovider.entity.ExpertService::getExpert);
     }
 }
