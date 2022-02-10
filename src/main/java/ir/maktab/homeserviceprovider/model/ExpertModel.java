@@ -3,6 +3,7 @@ package ir.maktab.homeserviceprovider.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -33,14 +34,57 @@ public class ExpertModel extends UserModel {
     @Range(min = 0, max = 5)
     private Integer score;
 
+    @Builder(builderMethodName = "expertBuilder")
+    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
+        super(firstname, lastname, email, password, status);
+        this.image = image;
+    }
+
     public Integer getScore() {
         this.score = reviews.stream().mapToInt(ReviewModel::getScore).sum() / reviews.size();
         return score;
     }
 
-    @Builder(builderMethodName = "expertBuilder")
-    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
-        super(firstname, lastname, email, password, status);
+    public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public void setExpertServices(Set<ExpertServiceModel> expertServices) {
+        expertServices.forEach(this::addExpertService);
+        this.expertServices = expertServices;
+    }
+
+    public void setOffers(Set<OfferModel> offers) {
+        offers.forEach(this::addOffer);
+        this.offers = offers;
+    }
+
+    public void setReviews(Set<ReviewModel> reviews) {
+        reviews.forEach(this::addReview);
+        this.reviews = reviews;
+    }
+
+    public void addExpertService(ExpertServiceModel expertService) {
+        expertService.setExpert(this);
+    }
+
+    public void removeExpertService(ExpertServiceModel expertService) {
+        this.expertServices.remove(expertService);
+    }
+
+    public void addOffer(OfferModel offer) {
+        offer.setExpert(this);
+    }
+
+    public void removeOffer(OfferModel offer) {
+        this.offers.remove(offer);
+    }
+
+    public void addReview(ReviewModel review) {
+        review.setExpert(this);
+    }
+
+    public void removeReview(ReviewModel review) {
+        this.reviews.remove(review);
     }
 }
