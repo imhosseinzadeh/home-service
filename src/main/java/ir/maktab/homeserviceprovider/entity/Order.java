@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "\"Order\"")
-public class Order implements BaseEntity<Long>, Serializable {
+public class Order implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
