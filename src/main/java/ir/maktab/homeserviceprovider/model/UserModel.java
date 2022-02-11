@@ -41,29 +41,36 @@ public class UserModel implements BaseModel<Long> {
     @NotNull(message = "User-status cannot be null")
     private UserModelStatus status;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @NotNull(message = "User-wallet cannot be null")
+    private WalletModel wallet;
+
     @CreationTimestamp
     @Column(updatable = false)
     @Setter(AccessLevel.NONE)
     private LocalDateTime signDate;
 
     @Builder
-    public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
+    public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.status = status;
+        this.wallet = wallet;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserModel{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
+                ", wallet balance=" + wallet.getBalance() +
                 ", signDate=" + signDate +
                 '}';
     }
