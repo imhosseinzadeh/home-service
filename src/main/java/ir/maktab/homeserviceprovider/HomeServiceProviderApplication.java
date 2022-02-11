@@ -2,6 +2,7 @@ package ir.maktab.homeserviceprovider;
 
 import ir.maktab.homeserviceprovider.model.UserModel;
 import ir.maktab.homeserviceprovider.model.UserModelStatus;
+import ir.maktab.homeserviceprovider.model.WalletModel;
 import ir.maktab.homeserviceprovider.service.ExpertService;
 
 import ir.maktab.homeserviceprovider.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -30,13 +32,18 @@ public class HomeServiceProviderApplication {
     public CommandLineRunner init() {
         return args ->
         {
+            WalletModel wallet = new WalletModel();
+            wallet.setBalance(BigDecimal.valueOf(10000));
+
             UserModel user = UserModel.builder()
                     .firstname("iman")
                     .lastname("hosseinzadeh")
                     .password("abcd1234")
                     .email("ali@gmail.com")
                     .status(UserModelStatus.NEW)
+                    .wallet(wallet)
                     .build();
+
             Long id = userService.saveOrUpdate(user).getId();
 
             Optional<UserModel> user2 = userService.load(id);
