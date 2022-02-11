@@ -58,6 +58,11 @@ public class UserModel implements BaseModel<Long> {
         this.email = email;
         this.password = password;
         this.status = status;
+        setWallet(wallet);
+    }
+
+    public void setWallet(WalletModel wallet) {
+        wallet.setUser(this);
         this.wallet = wallet;
     }
 
