@@ -2,7 +2,6 @@ package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.model.UserModel;
 import ir.maktab.homeserviceprovider.repository.UserRepository;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
