@@ -1,8 +1,22 @@
+/*
+  TEST METHOD NAME CONVENTION
+
+  MethodName_ExpectedBehavior_StateUnderTest
+
+  EXAMPLES:
+  isAdult_False_AgeLessThan18
+  withdrawMoney_ThrowsException_IfAccountIsInvalid
+  admitStudent_FailToAdmit_IfMandatoryFieldsAreMissing
+ */
+
+
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
 import ir.maktab.homeserviceprovider.model.UserModel;
 import ir.maktab.homeserviceprovider.model.UserModelStatus;
+import ir.maktab.homeserviceprovider.model.WalletModel;
+import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -11,6 +25,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +39,55 @@ class UserServiceTest {
     @Autowired
     private UserService<UserModel> service;
 
+    private final WalletModel wallet = new WalletModel();
+
+    @Test
+    void saveOrUpdate_BeFound_IfAUserSaved() {
+        UserModel savedUser = service.saveOrUpdate(buildUser());
+        Long userId = savedUser.getId();
+
+        if (service.load(userId).isPresent()) {
+            UserModel loadUser = service.load(userId).get();
+
+            assertEquals(savedUser, loadUser);
+        } else {
+            fail("User not found");
+        }
+    }
+
+    @Test
+    void saveAll_BeFound_IfUsersSaved() {
+        List<UserModel> userList = build3User();
+
+        service.saveAll(userList);
+
+        Page<UserModel> page = service.findAll(Pageable.ofSize(10));
+        assertEquals(userList.size(), page.getTotalElements());
+
+    }
+
+    @Test
+    void delete_NotFound_DeleteUser() {
+        UserModel savedUser = service.saveOrUpdate(buildUser());
+
+        service.delete(savedUser);
+
+        Optional<UserModel> load = service.load(savedUser.getId());
+        if (load.isPresent()) {
+            fail("User could not be deleted");
+        }
+    }
+
+    @Test
+    void findAll_EqualElementNumber_SaveThreeElement() {
+        List<UserModel> userList = build3User();
+        service.saveAll(userList);
+
+        Page<UserModel> page = service.findAll(Pageable.ofSize(10));
+
+        assertEquals(userList.size(), page.getTotalElements());
+    }
+
     @Test
     void updatePasswordById_BeChange_IfPasswordUpdated() {
         UserModel user = UserModel.builder()
@@ -30,6 +96,7 @@ class UserServiceTest {
                 .email("example@gmail.com")
                 .password("password1234")
                 .status(UserModelStatus.NEW)
+                .wallet(wallet)
                 .build();
         Long userId = service.saveOrUpdate(user).getId();
 
@@ -54,6 +121,7 @@ class UserServiceTest {
                 .email(userEmail)
                 .password("password1234")
                 .status(UserModelStatus.NEW)
+                .wallet(wallet)
                 .build();
         UserModel savedUser = service.saveOrUpdate(user);
 
@@ -72,6 +140,7 @@ class UserServiceTest {
                 .email("example@gmail.com")
                 .password("password1234")
                 .status(UserModelStatus.NEW)
+                .wallet(wallet)
                 .build();
         UserModel savedUser = service.saveOrUpdate(user);
 
@@ -79,5 +148,40 @@ class UserServiceTest {
         Page<UserModel> userPage = service.findAllByFirstnameAndLastname(firstname, lastname, pageable);
 
         assertTrue(userPage.get().anyMatch(loadUser -> loadUser.equals(savedUser)));
+    }
+
+    private UserModel buildUser() {
+        return UserModel.builder()
+                .firstname("firstname")
+                .lastname("lastname")
+                .email("example@gmail.com")
+                .password("password1234")
+                .status(UserModelStatus.NEW)
+                .wallet(wallet)
+                .build();
+    }
+
+    private List<UserModel> build3User() {
+        UserModel user1 = service.saveOrUpdate(UserModel.builder()
+                .email("example111@gmail.com")
+                .password("password1234")
+                .status(UserModelStatus.NEW)
+                .wallet(wallet)
+                .build());
+
+        UserModel user2 = service.saveOrUpdate(UserModel.builder()
+                .email("example222@gmail.com")
+                .password("password1234")
+                .status(UserModelStatus.NEW)
+                .wallet(wallet)
+                .build());
+
+        UserModel user3 = service.saveOrUpdate(UserModel.builder()
+                .email("example333@gmail.com")
+                .password("password1234")
+                .status(UserModelStatus.NEW)
+                .wallet(wallet)
+                .build());
+        return List.of(user1, user2, user3);
     }
 }
