@@ -38,8 +38,8 @@ public class ExpertModel extends UserModel {
     private Integer score;
 
     @Builder(builderMethodName = "expertBuilder")
-    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
-        super(firstname, lastname, email, password, status);
+    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet, byte[] image) {
+        super(firstname, lastname, email, password, status, wallet);
         this.image = image;
     }
 

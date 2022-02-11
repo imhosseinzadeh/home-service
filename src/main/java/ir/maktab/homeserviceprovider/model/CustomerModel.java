@@ -22,8 +22,8 @@ public class CustomerModel extends UserModel {
     private Set<ReviewModel> reviews = new HashSet<>();
 
     @Builder(builderMethodName = "customerBuilder")
-    public CustomerModel(String firstname, String lastname, String email, String password, UserModelStatus status, String customerFiled) {
-        super(firstname, lastname, email, password, status);
+    public CustomerModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
+        super(firstname, lastname, email, password, status, wallet);
     }
 
     public void setOrders(Set<OrderModel> orders) {

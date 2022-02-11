@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class ManagerModel extends UserModel {
     @Builder(builderMethodName = "managerBuilder")
-    public ManagerModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
-        super(firstname, lastname, email, password, status);
+    public ManagerModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
+        super(firstname, lastname, email, password, status, wallet);
     }
 }
