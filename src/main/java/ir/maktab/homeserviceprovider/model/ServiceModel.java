@@ -27,7 +27,7 @@ public class ServiceModel implements BaseModel<Long> {
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<SubServiceModel> subServices = new HashSet<>();
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ExpertServiceModel> expertServices = new HashSet<>();
 
     public void setSubServices(Set<SubServiceModel> subServices) {

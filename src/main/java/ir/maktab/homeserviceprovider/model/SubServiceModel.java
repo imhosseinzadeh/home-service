@@ -29,7 +29,7 @@ public class SubServiceModel implements BaseModel<Long> {
     @NotNull(message = "SubService cannot exists without service")
     private ServiceModel service;
 
-    @OneToMany(mappedBy = "subService")
+    @OneToMany(mappedBy = "subService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderModel> orders = new HashSet<>();
 
     private BigDecimal basePrice;

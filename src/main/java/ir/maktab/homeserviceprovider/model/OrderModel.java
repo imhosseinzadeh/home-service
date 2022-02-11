@@ -37,7 +37,7 @@ public class OrderModel implements BaseModel<Long> {
     @NotNull(message = "Order-status cannot be null")
     private OrderModelStatus status;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OfferModel> offers = new HashSet<>();
 
     @CreationTimestamp

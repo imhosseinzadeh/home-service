@@ -24,13 +24,13 @@ public class ExpertModel extends UserModel {
     @Setter
     private byte[] image;
 
-    @OneToMany(mappedBy = "expert")
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ExpertServiceModel> expertServices = new HashSet<>();
 
-    @OneToMany(mappedBy = "expert")
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OfferModel> offers = new HashSet<>();
 
-    @OneToMany(mappedBy = "expert")
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ReviewModel> reviews = new HashSet<>();
 
     @PositiveOrZero(message = "Expert-score must be positive or zero")
