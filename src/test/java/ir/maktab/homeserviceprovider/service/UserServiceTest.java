@@ -8,15 +8,12 @@
   withdrawMoney_ThrowsException_IfAccountIsInvalid
   admitStudent_FailToAdmit_IfMandatoryFieldsAreMissing
  */
-
-
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
 import ir.maktab.homeserviceprovider.model.UserModel;
 import ir.maktab.homeserviceprovider.model.UserModelStatus;
 import ir.maktab.homeserviceprovider.model.WalletModel;
-import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -46,10 +43,11 @@ class UserServiceTest {
         UserModel savedUser = service.saveOrUpdate(buildUser());
         Long userId = savedUser.getId();
 
-        if (service.load(userId).isPresent()) {
-            UserModel loadUser = service.load(userId).get();
+        Optional<UserModel> loadedUserOpt = service.load(userId);
+        if (loadedUserOpt.isPresent()) {
+            UserModel loadedUser = loadedUserOpt.get();
 
-            assertEquals(savedUser, loadUser);
+            assertEquals(savedUser, loadedUser);
         } else {
             fail("User not found");
         }
@@ -72,8 +70,8 @@ class UserServiceTest {
 
         service.delete(savedUser);
 
-        Optional<UserModel> load = service.load(savedUser.getId());
-        if (load.isPresent()) {
+        Optional<UserModel> loadUserOpt = service.load(savedUser.getId());
+        if (loadUserOpt.isPresent()) {
             fail("User could not be deleted");
         }
     }
@@ -103,8 +101,9 @@ class UserServiceTest {
         String newPass = "newPassword1234";
         service.updatePasswordById(userId, newPass);
 
-        if (service.load(userId).isPresent()) {
-            UserModel loadUser = service.load(userId).get();
+        Optional<UserModel> loadedUserOpt = service.load(userId);
+        if (loadedUserOpt.isPresent()) {
+            UserModel loadUser = loadedUserOpt.get();
 
             assertEquals(loadUser.getPassword(), newPass);
         } else {
@@ -125,9 +124,9 @@ class UserServiceTest {
                 .build();
         UserModel savedUser = service.saveOrUpdate(user);
 
-        UserModel loadUser = service.findByEmail(userEmail);
+        UserModel loadedUser = service.findByEmail(userEmail);
 
-        assertEquals(savedUser, loadUser);
+        assertEquals(savedUser, loadedUser);
     }
 
     @Test
