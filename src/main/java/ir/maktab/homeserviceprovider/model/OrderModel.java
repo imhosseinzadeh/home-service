@@ -33,7 +33,7 @@ public class OrderModel implements BaseModel<Long> {
     @ManyToOne
     private SubServiceModel subService;
 
-    @Type(type = "ir.maktab.homeserviceprovider.model.OrderModelStatus")
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "Order-status cannot be null")
     private OrderModelStatus status;
 

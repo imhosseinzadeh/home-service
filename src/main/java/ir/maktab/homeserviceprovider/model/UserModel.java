@@ -37,7 +37,7 @@ public class UserModel implements BaseModel<Long> {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for user-password")
     private String password;
 
-    @Type(type = "ir.maktab.homeserviceprovider.model.UserModelStatus")
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "User-status cannot be null")
     private UserModelStatus status;
 
