@@ -3,14 +3,11 @@ package ir.maktab.homeserviceprovider.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import lombok.Setter;
-
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
-
 import java.util.HashSet;
 import java.util.Set;
 

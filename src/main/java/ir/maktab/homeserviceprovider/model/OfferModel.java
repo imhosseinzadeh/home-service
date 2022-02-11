@@ -3,11 +3,9 @@ package ir.maktab.homeserviceprovider.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
