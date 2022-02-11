@@ -3,7 +3,6 @@ package ir.maktab.homeserviceprovider.model;
 import lombok.*;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -61,14 +60,14 @@ public class UserModel implements BaseModel<Long> {
         setWallet(wallet);
     }
 
-    public void setWallet(WalletModel wallet) {
+    public void setWallet(@NotNull(message = "User-wallet cannot be null") WalletModel wallet) {
         wallet.setUser(this);
         this.wallet = wallet;
     }
 
     @Override
     public String toString() {
-        return "UserModel{" +
+        return "User{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
