@@ -17,16 +17,17 @@ public class BaseService<M extends BaseModel<I>, I extends Serializable> {
 
     private final JpaRepository<M, I> jpaRepository;
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public M saveOrUpdate(M model) {
         return jpaRepository.save(model);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Iterable<M> saveAll(Iterable<M> models) {
         return jpaRepository.saveAll(models);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(M model) {
         jpaRepository.delete(model);
     }
@@ -34,11 +35,6 @@ public class BaseService<M extends BaseModel<I>, I extends Serializable> {
     @Transactional(readOnly = true)
     public Optional<M> load(I id) {
         return jpaRepository.findById(id);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<M> getPage(Pageable pageable) {
-        return jpaRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
