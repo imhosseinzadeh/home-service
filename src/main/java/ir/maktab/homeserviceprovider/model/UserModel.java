@@ -24,7 +24,7 @@ public class UserModel extends BaseModel<Long> {
     private String lastname;
 
     @Column(unique = true)
-    @Email(message = "user-email not valid")
+    @Email(message = "User-email not valid")
     @NotNull(message = "User-email cannot be null")
     private String email;
 
