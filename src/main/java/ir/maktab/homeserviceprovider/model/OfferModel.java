@@ -3,11 +3,9 @@ package ir.maktab.homeserviceprovider.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 
@@ -26,11 +24,6 @@ public class OfferModel extends BaseModel<Long> {
 
     @ManyToOne
     private OrderModel order;
-
-    @Column(updatable = false)
-    @CreationTimestamp
-    @Setter(AccessLevel.NONE)
-    private LocalDateTime submitDate;
 
     @Column(precision = 19, scale = 4, columnDefinition = "DECIMAL(19,4)")
     private BigDecimal proposalPrice;

@@ -1,13 +1,11 @@
 package ir.maktab.homeserviceprovider.model;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
 
 @Entity(name = "User")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -43,11 +41,6 @@ public class UserModel extends BaseModel<Long> {
     @NotNull(message = "User-wallet cannot be null")
     private WalletModel wallet;
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    @Setter(AccessLevel.NONE)
-    private LocalDateTime signDate;
-
     @Builder
     public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
         this.firstname = firstname;
@@ -73,7 +66,6 @@ public class UserModel extends BaseModel<Long> {
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", wallet balance=" + wallet.getBalance() +
-                ", signDate=" + signDate +
                 '}';
     }
 }

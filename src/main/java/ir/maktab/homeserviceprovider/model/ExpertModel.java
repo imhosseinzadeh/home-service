@@ -93,7 +93,7 @@ public class ExpertModel extends UserModel {
                 ", email='" + getEmail() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 ", status=" + getStatus() +
-                ", signDate=" + getSignDate() +
+                ", createDate=" + getCreateDate() +
                 ", score=" + score +
                 '}';
     }

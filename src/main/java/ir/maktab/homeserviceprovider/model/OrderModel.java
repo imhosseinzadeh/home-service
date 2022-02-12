@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -36,11 +35,6 @@ public class OrderModel extends BaseModel<Long> {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OfferModel> offers = new HashSet<>();
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    @Setter(AccessLevel.NONE)
-    private LocalDateTime submitDate;
 
     @Column(precision = 19, scale = 4, columnDefinition = "DECIMAL(19,4)")
     private BigDecimal proposedPrice;
