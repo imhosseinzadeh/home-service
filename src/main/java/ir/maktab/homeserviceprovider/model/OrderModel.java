@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class OrderModel implements BaseModel<Long> {
+public class OrderModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

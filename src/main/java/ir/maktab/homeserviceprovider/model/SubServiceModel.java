@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity(name = "SubService")
 @Getter
 @Setter
-public class SubServiceModel implements BaseModel<Long> {
+public class SubServiceModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

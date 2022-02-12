@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity(name = "Service")
 @Getter
 @Setter
-public class ServiceModel implements BaseModel<Long> {
+public class ServiceModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

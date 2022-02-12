@@ -9,7 +9,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Entity(name = "Review")
 @Getter
-public class ReviewModel implements BaseModel<Long> {
+public class ReviewModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

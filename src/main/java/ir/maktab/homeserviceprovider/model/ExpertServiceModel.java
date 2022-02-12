@@ -11,7 +11,7 @@ import javax.persistence.MapsId;
 @Entity(name = "ExpertService")
 @Getter
 @Setter
-public class ExpertServiceModel implements BaseModel<ExpertServiceModelId> {
+public class ExpertServiceModel extends BaseModel<ExpertServiceModelId> {
 
     @EmbeddedId
     private ExpertServiceModelId id = new ExpertServiceModelId();

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class WalletModel implements BaseModel<Long> {
+public class WalletModel extends BaseModel<Long> {
 
     @Id
     @Setter(AccessLevel.NONE)

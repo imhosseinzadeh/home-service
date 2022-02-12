@@ -14,7 +14,7 @@ import java.time.Period;
 @Entity(name = "Offer")
 @Getter
 @Setter
-public class OfferModel implements BaseModel<Long> {
+public class OfferModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
