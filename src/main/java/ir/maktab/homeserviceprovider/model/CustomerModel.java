@@ -62,7 +62,7 @@ public class CustomerModel extends UserModel {
                 ", email='" + getEmail() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 ", status=" + getStatus() +
-                ", signDate=" + getSignDate() +
+                ", createDate=" + getCreateDate() +
                 '}';
     }
 }
