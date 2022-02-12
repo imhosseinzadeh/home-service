@@ -38,7 +38,7 @@ public class BaseService<M extends BaseModel<I>, I extends Serializable> {
     }
 
     @Transactional(readOnly = true)
-    public Page<M> findAll(Pageable pageable) {
+    public Page<M> findAllByPage(Pageable pageable) {
         return jpaRepository.findAll(pageable);
     }
 

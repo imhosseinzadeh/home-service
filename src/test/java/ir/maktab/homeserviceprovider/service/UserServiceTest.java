@@ -59,7 +59,7 @@ class UserServiceTest {
 
         service.saveAll(userList);
 
-        Page<UserModel> page = service.findAll(Pageable.ofSize(10));
+        Page<UserModel> page = service.findAllByPage(Pageable.ofSize(10));
         assertEquals(userList.size(), page.getTotalElements());
 
     }
@@ -81,7 +81,7 @@ class UserServiceTest {
         List<UserModel> userList = build3User();
         service.saveAll(userList);
 
-        Page<UserModel> page = service.findAll(Pageable.ofSize(10));
+        Page<UserModel> page = service.findAllByPage(Pageable.ofSize(10));
 
         assertEquals(userList.size(), page.getTotalElements());
     }
