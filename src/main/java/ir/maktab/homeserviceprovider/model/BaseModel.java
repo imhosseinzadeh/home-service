@@ -25,12 +25,12 @@ public abstract class BaseModel<I extends Serializable> implements Serializable 
     abstract I getId();
 
     @PrePersist
-    public void setCreateDate() {
+    public void onPersist() {
         createDate = updateDate = LocalDateTime.now();
     }
 
     @PreUpdate
-    public void setUpdateDate() {
+    public void onUpdate() {
         updateDate = LocalDateTime.now();
     }
 }
