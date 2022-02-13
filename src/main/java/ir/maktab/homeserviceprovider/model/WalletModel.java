@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity(name = "wallet")
 @RequiredArgsConstructor
@@ -27,15 +25,10 @@ public class WalletModel extends BaseModel<Long> {
     @NotNull(message = "Wallet-user cannot be null")
     private UserModel user;
 
+    @OneToMany(mappedBy = "wallet")
+    private Set<Transaction> transactions;
+
     private BigDecimal balance;
-
-    public void withdraw(BigDecimal amount) {
-        this.balance = this.balance.subtract(amount);
-    }
-
-    public void deposit(BigDecimal amount) {
-        this.balance = this.balance.add(amount);
-    }
 
     @Override
     public String toString() {
