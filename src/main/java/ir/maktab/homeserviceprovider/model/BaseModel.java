@@ -24,6 +24,10 @@ public abstract class BaseModel<I extends Serializable> implements Serializable 
 
     abstract I getId();
 
+    public boolean isNew() {
+        return getId() == null;
+    }
+
     @PrePersist
     public void onPersist() {
         createDate = updateDate = LocalDateTime.now();
