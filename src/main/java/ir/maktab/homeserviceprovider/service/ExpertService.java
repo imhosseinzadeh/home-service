@@ -8,6 +8,7 @@ import ir.maktab.homeserviceprovider.repository.ExpertServiceRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ExpertService extends UserService<ExpertModel> {
@@ -21,7 +22,8 @@ public class ExpertService extends UserService<ExpertModel> {
         this.expertServiceRepository = expertServiceRepository;
     }
 
-    Page<ExpertModel> findExpertsByService(ServiceModel service, Pageable pageable) {
+    @Transactional(readOnly = true)
+    public Page<ExpertModel> findExpertsByService(ServiceModel service, Pageable pageable) {
         Page<ExpertServiceModel> allByService = expertServiceRepository.findAllByService(service, pageable);
         return allByService.map(ExpertServiceModel::getExpert);
     }
