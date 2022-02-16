@@ -1,10 +1,10 @@
 package ir.maktab.homeserviceprovider;
 
-import ir.maktab.homeserviceprovider.model.UserModel;
-import ir.maktab.homeserviceprovider.model.UserModelStatus;
-import ir.maktab.homeserviceprovider.model.WalletModel;
-import ir.maktab.homeserviceprovider.service.ExpertService;
-import ir.maktab.homeserviceprovider.service.UserService;
+import ir.maktab.homeserviceprovider.model.user.UserModel;
+import ir.maktab.homeserviceprovider.model.user.UserModelStatus;
+import ir.maktab.homeserviceprovider.model.wallet.WalletModel;
+import ir.maktab.homeserviceprovider.service.user.ExpertService;
+import ir.maktab.homeserviceprovider.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
