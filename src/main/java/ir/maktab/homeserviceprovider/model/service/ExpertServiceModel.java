@@ -1,5 +1,7 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.service;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
+import ir.maktab.homeserviceprovider.model.user.ExpertModel;
 import lombok.Getter;
 import lombok.Setter;
 

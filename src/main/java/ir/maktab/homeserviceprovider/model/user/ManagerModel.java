@@ -1,5 +1,6 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.user;
 
+import ir.maktab.homeserviceprovider.model.wallet.WalletModel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 

@@ -1,5 +1,7 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.user;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
+import ir.maktab.homeserviceprovider.model.wallet.WalletModel;
 import lombok.*;
 
 import javax.persistence.*;

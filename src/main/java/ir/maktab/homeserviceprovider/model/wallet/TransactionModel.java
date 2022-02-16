@@ -1,5 +1,6 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.wallet;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transaction extends BaseModel<Long> {
+public class TransactionModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

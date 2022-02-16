@@ -1,5 +1,8 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.order;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
+import ir.maktab.homeserviceprovider.model.service.SubServiceModel;
+import ir.maktab.homeserviceprovider.model.user.CustomerModel;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

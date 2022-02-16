@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

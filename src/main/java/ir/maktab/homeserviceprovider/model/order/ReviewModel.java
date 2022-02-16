@@ -1,5 +1,8 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.order;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
+import ir.maktab.homeserviceprovider.model.user.CustomerModel;
+import ir.maktab.homeserviceprovider.model.user.ExpertModel;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
 

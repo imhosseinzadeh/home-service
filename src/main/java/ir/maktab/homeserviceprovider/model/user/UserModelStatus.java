@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.user;
 
 public enum UserModelStatus {
     NEW(1),

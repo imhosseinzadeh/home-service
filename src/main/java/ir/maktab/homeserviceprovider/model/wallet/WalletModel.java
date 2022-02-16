@@ -1,5 +1,7 @@
-package ir.maktab.homeserviceprovider.model;
+package ir.maktab.homeserviceprovider.model.wallet;
 
+import ir.maktab.homeserviceprovider.model.BaseModel;
+import ir.maktab.homeserviceprovider.model.user.UserModel;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,7 @@ public class WalletModel extends BaseModel<Long> {
     private UserModel user;
 
     @OneToMany(mappedBy = "wallet")
-    private Set<Transaction> transactions;
+    private Set<TransactionModel> transactions;
 
     private BigDecimal balance;
 
