@@ -1,6 +1,6 @@
-package ir.maktab.homeserviceprovider.repository;
+package ir.maktab.homeserviceprovider.repository.order;
 
-import ir.maktab.homeserviceprovider.model.ReviewModel;
+import ir.maktab.homeserviceprovider.model.order.ReviewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

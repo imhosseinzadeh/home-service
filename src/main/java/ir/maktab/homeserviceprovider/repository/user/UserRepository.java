@@ -1,6 +1,6 @@
-package ir.maktab.homeserviceprovider.repository;
+package ir.maktab.homeserviceprovider.repository.user;
 
-import ir.maktab.homeserviceprovider.model.UserModel;
+import ir.maktab.homeserviceprovider.model.user.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
