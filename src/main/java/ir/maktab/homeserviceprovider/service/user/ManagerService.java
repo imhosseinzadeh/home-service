@@ -1,7 +1,7 @@
-package ir.maktab.homeserviceprovider.service;
+package ir.maktab.homeserviceprovider.service.user;
 
-import ir.maktab.homeserviceprovider.model.ManagerModel;
-import ir.maktab.homeserviceprovider.repository.ManagerRepository;
+import ir.maktab.homeserviceprovider.model.user.ManagerModel;
+import ir.maktab.homeserviceprovider.repository.user.ManagerRepository;
 import org.springframework.stereotype.Service;
 
 @Service

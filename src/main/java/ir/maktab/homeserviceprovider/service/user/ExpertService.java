@@ -1,10 +1,10 @@
-package ir.maktab.homeserviceprovider.service;
+package ir.maktab.homeserviceprovider.service.user;
 
-import ir.maktab.homeserviceprovider.model.ExpertModel;
-import ir.maktab.homeserviceprovider.model.ExpertServiceModel;
-import ir.maktab.homeserviceprovider.model.ServiceModel;
-import ir.maktab.homeserviceprovider.repository.ExpertRepository;
-import ir.maktab.homeserviceprovider.repository.ExpertServiceRepository;
+import ir.maktab.homeserviceprovider.model.user.ExpertModel;
+import ir.maktab.homeserviceprovider.model.service.ExpertServiceModel;
+import ir.maktab.homeserviceprovider.model.service.ServiceModel;
+import ir.maktab.homeserviceprovider.repository.user.ExpertRepository;
+import ir.maktab.homeserviceprovider.repository.service.ExpertServiceRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
