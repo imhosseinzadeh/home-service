@@ -22,7 +22,7 @@ public abstract class BaseModel<I extends Serializable> implements Serializable 
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    abstract I getId();
+    public abstract I getId();
 
     public boolean isNew() {
         return getId() == null;
