@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -33,7 +33,7 @@ public class OrderModel extends BaseModel<Long> {
     private SubServiceModel subService;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Order-status cannot be null")
+    @NotBlank(message = "Order-status cannot be blank")
     private OrderModelStatus status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity(name = "Review")
@@ -24,7 +24,7 @@ public class ReviewModel extends BaseModel<Long> {
     @ManyToOne
     private ExpertModel expert;
 
-    @NotNull
+    @NotBlank(message = "Review-score can not be blank")
     @PositiveOrZero(message = "Review-score must be positive or zero")
     @Range(min = 0, max = 5)
     private Integer score;

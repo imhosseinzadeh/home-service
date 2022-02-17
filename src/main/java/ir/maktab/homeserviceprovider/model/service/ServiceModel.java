@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +21,7 @@ public class ServiceModel extends BaseModel<Long> {
     private Long id;
 
     @Column(unique = true)
-    @NotNull(message = "Service-name cannot be null")
+    @NotBlank(message = "Service-name cannot be blank")
     private String name;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
