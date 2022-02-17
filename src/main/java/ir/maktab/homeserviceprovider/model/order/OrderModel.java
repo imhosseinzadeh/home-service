@@ -51,7 +51,7 @@ public class OrderModel extends BaseModel<Long> {
     @NotBlank(message = "OrderModel-address cannot be blank")
     private String address;
 
-    @NotNull(message = "OrderModel-address cannot be blank")
+    @NotNull(message = "OrderModel-dateTime cannot be blank")
     private LocalDateTime dateTime;
 
     public void setCustomer(CustomerModel customer) {

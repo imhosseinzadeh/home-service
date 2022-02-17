@@ -24,20 +24,20 @@ public class SubServiceModel extends BaseModel<Long> {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank(message = "SubService-name cannot be blank")
+    @NotBlank(message = "SubServiceModel-name cannot be blank")
     private String name;
 
     @ManyToOne
-    @NotNull(message = "SubService cannot exists without service")
+    @NotNull(message = "SubServiceModel-service cannot exists without service")
     private ServiceModel service;
 
     @OneToMany(mappedBy = "subService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderModel> orders = new HashSet<>();
 
-    @NotNull(message = "SubService-basePrice can not null")
+    @NotNull(message = "SubServiceModel-basePrice can not null")
     private BigDecimal basePrice;
 
-    @NotBlank(message = "SubService-comment cannot be blank")
+    @NotBlank(message = "SubServiceModel-comment cannot be blank")
     private String comment;
 
     public void setService(ServiceModel service) {

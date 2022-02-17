@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -19,11 +20,14 @@ public class PaymentModel extends BaseModel<Long> {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "PaymentModel-srcWallet cannot be null")
     private WalletModel srcWallet;
 
     @ManyToOne
+    @NotNull(message = "PaymentModel-trgWallet cannot be null")
     private WalletModel trgWallet;
 
+    @NotNull(message = "PaymentModel-amount cannot be null")
     private BigDecimal amount;
 
     @Override

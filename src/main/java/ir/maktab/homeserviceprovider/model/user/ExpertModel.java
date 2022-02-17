@@ -34,7 +34,7 @@ public class ExpertModel extends UserModel {
     @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ReviewModel> reviews = new HashSet<>();
 
-    @PositiveOrZero(message = "Expert-score must be positive or zero")
+    @PositiveOrZero(message = "ExpertModel-score must be positive or zero")
     @Range(min = 0, max = 5)
     private Integer score;
 

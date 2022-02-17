@@ -21,7 +21,7 @@ public class ServiceModel extends BaseModel<Long> {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank(message = "Service-name cannot be blank")
+    @NotBlank(message = "ServiceModel-name cannot be blank")
     private String name;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

@@ -24,12 +24,13 @@ public class WalletModel extends BaseModel<Long> {
 
     @OneToOne(optional = false)
     @MapsId
-    @NotNull(message = "Wallet-user cannot be null")
+    @NotNull(message = "WalletModel-user cannot be null")
     private UserModel user;
 
     @OneToMany(mappedBy = "wallet")
     private Set<TransactionModel> transactions;
 
+    @NotNull(message = "WalletModel-balance cannot be null")
     private BigDecimal balance;
 
     @Override

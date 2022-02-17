@@ -22,15 +22,15 @@ public class ExpertServiceModel extends BaseModel<ExpertServiceModelId> {
 
     @ManyToOne
     @MapsId("expertId")
-    @NotNull(message = "ExpertService-expert can not be null")
+    @NotNull(message = "ExpertServiceModel-expert can not be null")
     private ExpertModel expert;
 
     @ManyToOne
     @MapsId("serviceId")
-    @NotNull(message = "ExpertService-service can not be null")
+    @NotNull(message = "ExpertServiceModel-service can not be null")
     private ServiceModel service;
 
-    @PositiveOrZero(message = "ExpertService-experienceYears must be positive or zero")
+    @PositiveOrZero(message = "ExpertServiceModel-experienceYears must be positive or zero")
     private Integer experienceYears;
 
     private Integer score;

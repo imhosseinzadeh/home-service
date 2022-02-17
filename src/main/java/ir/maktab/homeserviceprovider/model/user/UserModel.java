@@ -27,21 +27,21 @@ public class UserModel extends BaseModel<Long> {
     private String lastname;
 
     @Column(unique = true)
-    @Email(message = "User-email not valid")
-    @NotBlank(message = "User-email cannot be null")
+    @Email(message = "UserModel-email not valid")
+    @NotBlank(message = "UserModel-email cannot be null")
     private String email;
 
-    @NotBlank(message = "User-password cannot be null")
+    @NotBlank(message = "UserModel-password cannot be null")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for User-password")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "User-status cannot be null")
+    @NotNull(message = "UserModel-status cannot be null")
     private UserModelStatus status;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    @NotNull(message = "User-wallet cannot be null")
+    @NotNull(message = "UserModel-wallet cannot be null")
     private WalletModel wallet;
 
     @Builder
@@ -54,7 +54,7 @@ public class UserModel extends BaseModel<Long> {
         setWallet(wallet);
     }
 
-    public void setWallet(@NotNull(message = "User-wallet cannot be null") WalletModel wallet) {
+    public void setWallet(@NotNull(message = "UserModel-wallet cannot be null") WalletModel wallet) {
         wallet.setUser(this);
         this.wallet = wallet;
     }

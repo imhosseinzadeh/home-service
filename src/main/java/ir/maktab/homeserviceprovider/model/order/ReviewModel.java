@@ -19,13 +19,15 @@ public class ReviewModel extends BaseModel<Long> {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "ReviewModel-customer cannot be null")
     private CustomerModel customer;
 
     @ManyToOne
+    @NotNull(message = "ReviewModel-expert cannot be null")
     private ExpertModel expert;
 
-    @NotNull(message = "Review-score can not be null")
-    @PositiveOrZero(message = "Review-score must be positive or zero")
+    @NotNull(message = "ReviewModel-score cannot be null")
+    @PositiveOrZero(message = "ReviewModel-score must be positive or zero")
     @Range(min = 0, max = 5)
     private Integer score;
 
