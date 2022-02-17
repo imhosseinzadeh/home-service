@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,25 +28,30 @@ public class OrderModel extends BaseModel<Long> {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "OrderModel-customer cannot be null")
     private CustomerModel customer;
 
     @ManyToOne
+    @NotNull(message = "OrderModel-subService cannot be null")
     private SubServiceModel subService;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Order-status cannot be null")
+    @NotNull(message = "OrderModel-status cannot be null")
     private OrderModelStatus status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OfferModel> offers = new HashSet<>();
 
-    @Column(precision = 19, scale = 4, columnDefinition = "DECIMAL(19,4)")
+    @NotNull(message = "OrderModel-proposedPrice cannot be null")
     private BigDecimal proposedPrice;
 
+    @NotBlank(message = "OrderModel-description cannot be blank")
     private String description;
 
+    @NotBlank(message = "OrderModel-address cannot be blank")
     private String address;
 
+    @NotNull(message = "OrderModel-address cannot be blank")
     private LocalDateTime dateTime;
 
     public void setCustomer(CustomerModel customer) {
