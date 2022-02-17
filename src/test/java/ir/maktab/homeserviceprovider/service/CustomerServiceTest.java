@@ -27,7 +27,7 @@ class CustomerServiceTest {
                 .lastname("hosseinzadeh")
                 .password("12345678")
                 .build();
-        Long customerId = service.saveOrUpdate(customer).getId();
+        Long customerId = service.save(customer).getId();
 
         String newPass = "newPassword";
         service.updatePasswordById(customerId, newPass);

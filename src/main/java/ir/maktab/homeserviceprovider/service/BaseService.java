@@ -18,7 +18,11 @@ public class BaseService<M extends BaseModel<I>, I extends Serializable> {
     private final JpaRepository<M, I> jpaRepository;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public M saveOrUpdate(M model) {
+    public M save(M model) {
+        return jpaRepository.save(model);
+    }
+
+    public M update(M model) {
         return jpaRepository.save(model);
     }
 

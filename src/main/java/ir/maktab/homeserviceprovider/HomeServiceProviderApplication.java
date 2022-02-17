@@ -43,7 +43,7 @@ public class HomeServiceProviderApplication {
                     .wallet(wallet)
                     .build();
 
-            Long id = userService.saveOrUpdate(user).getId();
+            Long id = userService.save(user).getId();
 
             Optional<UserModel> user2 = userService.load(id);
             user2.ifPresent(System.out::println);

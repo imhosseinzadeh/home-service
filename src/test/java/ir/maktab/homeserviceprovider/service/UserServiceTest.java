@@ -40,8 +40,8 @@ class UserServiceTest {
     private final WalletModel wallet = new WalletModel();
 
     @Test
-    void saveOrUpdate_BeFound_IfAUserSaved() {
-        UserModel savedUser = service.saveOrUpdate(buildUser());
+    void save_BeFound_IfAUserSaved() {
+        UserModel savedUser = service.save(buildUser());
         Long userId = savedUser.getId();
 
         Optional<UserModel> loadedUserOpt = service.load(userId);
@@ -67,7 +67,7 @@ class UserServiceTest {
 
     @Test
     void delete_NotFound_DeleteUser() {
-        UserModel savedUser = service.saveOrUpdate(buildUser());
+        UserModel savedUser = service.save(buildUser());
 
         service.delete(savedUser);
 
@@ -97,7 +97,7 @@ class UserServiceTest {
                 .status(UserModelStatus.NEW)
                 .wallet(wallet)
                 .build();
-        Long userId = service.saveOrUpdate(user).getId();
+        Long userId = service.save(user).getId();
 
         String newPass = "newPassword1234";
         service.updatePasswordById(userId, newPass);
@@ -123,7 +123,7 @@ class UserServiceTest {
                 .status(UserModelStatus.NEW)
                 .wallet(wallet)
                 .build();
-        UserModel savedUser = service.saveOrUpdate(user);
+        UserModel savedUser = service.save(user);
 
         UserModel loadedUser = service.findByEmail(userEmail);
 
@@ -142,7 +142,7 @@ class UserServiceTest {
                 .status(UserModelStatus.NEW)
                 .wallet(wallet)
                 .build();
-        UserModel savedUser = service.saveOrUpdate(user);
+        UserModel savedUser = service.save(user);
 
         Pageable pageable = PageRequest.of(0, 10);
         Page<UserModel> userPage = service.findAllByFirstnameAndLastname(firstname, lastname, pageable);
@@ -162,21 +162,21 @@ class UserServiceTest {
     }
 
     private List<UserModel> build3User() {
-        UserModel user1 = service.saveOrUpdate(UserModel.builder()
+        UserModel user1 = service.save(UserModel.builder()
                 .email("example111@gmail.com")
                 .password("password1234")
                 .status(UserModelStatus.NEW)
                 .wallet(wallet)
                 .build());
 
-        UserModel user2 = service.saveOrUpdate(UserModel.builder()
+        UserModel user2 = service.save(UserModel.builder()
                 .email("example222@gmail.com")
                 .password("password1234")
                 .status(UserModelStatus.NEW)
                 .wallet(wallet)
                 .build());
 
-        UserModel user3 = service.saveOrUpdate(UserModel.builder()
+        UserModel user3 = service.save(UserModel.builder()
                 .email("example333@gmail.com")
                 .password("password1234")
                 .status(UserModelStatus.NEW)
