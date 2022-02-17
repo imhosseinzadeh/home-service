@@ -8,6 +8,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
 @Aspect
 @Slf4j
@@ -15,7 +17,7 @@ public class LoggingAspect {
 
     @Before("within(ir.maktab.homeserviceprovider..*)")
     public void logBefore(JoinPoint joinPoint) {
-        log.info("@Before: " + joinPoint.getSignature().toShortString());
+        log.info("@Before: " + joinPoint.getSignature().toShortString() + " | Args: " + Arrays.toString(joinPoint.getArgs()));
     }
 
     @After("within(ir.maktab.homeserviceprovider..*)")
