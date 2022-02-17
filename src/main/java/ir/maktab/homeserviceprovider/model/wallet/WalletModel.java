@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ public class WalletModel extends BaseModel<Long> {
 
     @OneToOne(optional = false)
     @MapsId
-    @NotBlank(message = "Wallet-user cannot be blank")
+    @NotNull(message = "Wallet-user cannot be null")
     private UserModel user;
 
     @OneToMany(mappedBy = "wallet")

@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity(name = "User")
@@ -35,12 +36,12 @@ public class UserModel extends BaseModel<Long> {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "User-status cannot be blank")
+    @NotNull(message = "User-status cannot be null")
     private UserModelStatus status;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    @NotBlank(message = "User-wallet cannot be blank")
+    @NotNull(message = "User-wallet cannot be null")
     private WalletModel wallet;
 
     @Builder
@@ -53,7 +54,7 @@ public class UserModel extends BaseModel<Long> {
         setWallet(wallet);
     }
 
-    public void setWallet(@NotBlank(message = "User-wallet cannot be blank") WalletModel wallet) {
+    public void setWallet(@NotNull(message = "User-wallet cannot be null") WalletModel wallet) {
         wallet.setUser(this);
         this.wallet = wallet;
     }

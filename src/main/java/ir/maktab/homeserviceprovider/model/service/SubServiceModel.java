@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class SubServiceModel extends BaseModel<Long> {
     private String name;
 
     @ManyToOne
-    @NotBlank(message = "SubService cannot exists without service")
+    @NotNull(message = "SubService cannot exists without service")
     private ServiceModel service;
 
     @OneToMany(mappedBy = "subService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
