@@ -9,6 +9,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity(name = "ExpertService")
 @Getter
@@ -20,12 +22,15 @@ public class ExpertServiceModel extends BaseModel<ExpertServiceModelId> {
 
     @ManyToOne
     @MapsId("expertId")
+    @NotNull(message = "ExpertService-expert can not be null")
     private ExpertModel expert;
 
     @ManyToOne
     @MapsId("serviceId")
+    @NotNull(message = "ExpertService-service can not be null")
     private ServiceModel service;
 
+    @PositiveOrZero(message = "ExpertService-experienceYears must be positive or zero")
     private Integer experienceYears;
 
     private Integer score;
