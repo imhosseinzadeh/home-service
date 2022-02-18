@@ -17,16 +17,18 @@ import java.util.Optional;
 public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
 
     private final JpaRepository<M, I> jpaRepository;
-
     protected final ModelMapper mapper = new ModelMapper();
 
     protected abstract Class<M> getModelClass();
-
     protected abstract Class<D> getDtoClass();
 
-    protected abstract D mapToDto(M model);
+    protected D mapToDto(M model) {
+        return this.mapper.map(model, getDtoClass());
+    }
 
-    protected abstract M mapToModel(D dto);
+    protected M mapToModel(D dto) {
+        return this.mapper.map(dto, getModelClass());
+    }
 
     @Transactional
     public Optional<D> save(D dto) {
