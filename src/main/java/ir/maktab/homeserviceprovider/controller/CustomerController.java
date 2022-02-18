@@ -21,7 +21,7 @@ public class CustomerController {
     @PostMapping("/signup")
     public ResponseEntity<String> signup
             (@RequestBody @Valid CustomerDto signupRequest) {
-        service.save2(signupRequest);
+        service.save(signupRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body("Customer created successfully");
     }
 
@@ -42,10 +42,10 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerDto> update
+    public ResponseEntity<String> update
             (@PathVariable Long id, @RequestBody @Valid CustomerDto customerDto) {
         customerDto.setId(id);
-        service.update2(customerDto);
-        return null;
+        service.update(customerDto);
+        return ResponseEntity.status(HttpStatus.OK).body("Customer updated successfully");
     }
 }
