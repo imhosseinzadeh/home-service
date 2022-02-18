@@ -1,6 +1,7 @@
 package ir.maktab.homeserviceprovider.controller;
 
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
+import ir.maktab.homeserviceprovider.exception.UserNotFoundException;
 import ir.maktab.homeserviceprovider.service.user.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,13 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
-        this.service.deleteById(id);
-        return ResponseEntity.ok("Customer deleted successfully");
+        try {
+            this.service.deleteById(id);
+            return ResponseEntity.ok("Customer deleted successfully");
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok("Customer with id:" + id + " not found");
     }
 
 }
