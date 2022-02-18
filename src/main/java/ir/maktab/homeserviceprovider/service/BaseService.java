@@ -47,9 +47,12 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
 
     @Transactional
     public Optional<D> update(D dto) {
-        Optional<D> load = load(dto.getId());
-        if (load.isPresent()) {
-            return save(dto);
+        Optional<M> optModel = this.jpaRepository.findById(dto.getId());
+        if (optModel.isPresent()) {
+            M loadedModel = optModel.get();
+            this.mapper.map(dto, loadedModel);
+            this.jpaRepository.save(loadedModel);
+            return Optional.of(mapToDto(loadedModel));
         }
         return Optional.empty();
     }
@@ -63,6 +66,7 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     public void deleteById(I id) throws UserNotFoundException {
         if (existsById(id)) {
             jpaRepository.deleteById(id);
+            return;
         }
         throw new UserNotFoundException();
     }
