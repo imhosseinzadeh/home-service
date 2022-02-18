@@ -29,9 +29,15 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
         return jpaRepository.save(model);
     }
 
+    @Transactional
     public M update(D dto) {
-        M model = this.mapper.map(dto, getModelClass());
-        return jpaRepository.save(model);
+        Optional<M> optModel = load(dto.getId());
+        if (optModel.isPresent()) {
+            M loadedModel = optModel.get();
+            this.mapper.map(dto, loadedModel);
+            return jpaRepository.save(loadedModel);
+        }
+        return null;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
