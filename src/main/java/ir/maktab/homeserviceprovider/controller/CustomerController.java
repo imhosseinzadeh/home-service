@@ -1,7 +1,6 @@
 package ir.maktab.homeserviceprovider.controller;
 
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
-import ir.maktab.homeserviceprovider.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.service.user.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,33 +18,32 @@ public class CustomerController {
     private final CustomerService service;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup
-            (@RequestBody @Valid CustomerDto signupRequest) {
-        service.save(signupRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Customer created successfully");
+    public ResponseEntity<CustomerDto> signup(@RequestBody @Valid CustomerDto customerDto) {
+        Optional<CustomerDto> optSaved = service.save(customerDto);
+        return optSaved.map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto))
+                .orElse(null);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDto> get
+    public ResponseEntity<CustomerDto> getProfile
             (@PathVariable Long id) {
-        Optional<CustomerModel> resultOpt = service.load(id);
-        if (resultOpt.isPresent()) {
-            CustomerModel result = resultOpt.get();
-            return ResponseEntity.ok(CustomerDto.builder()
-                    .id(result.getId())
-                    .email(result.getEmail())
-                    .password(result.getPassword())
-                    .build()
-            );
-        }
-        return null;
+        Optional<CustomerDto> optLoaded = this.service.load(id);
+        return optLoaded.map(ResponseEntity::ok)
+                .orElse(null);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update
+    public ResponseEntity<CustomerDto> updateProfile
             (@PathVariable Long id, @RequestBody @Valid CustomerDto customerDto) {
         customerDto.setId(id);
-        service.update(customerDto);
-        return ResponseEntity.status(HttpStatus.OK).body("Customer updated successfully");
+        Optional<CustomerDto> optUpdated = this.service.update(customerDto);
+        return optUpdated.map(ResponseEntity::ok).orElse(null);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
+        this.service.deleteById(id);
+        return ResponseEntity.ok("Customer deleted successfully");
+    }
+
 }
