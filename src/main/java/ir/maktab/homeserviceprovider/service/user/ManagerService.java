@@ -1,11 +1,12 @@
 package ir.maktab.homeserviceprovider.service.user;
 
+import ir.maktab.homeserviceprovider.dto.user.ManagerDto;
 import ir.maktab.homeserviceprovider.model.user.ManagerModel;
 import ir.maktab.homeserviceprovider.repository.user.ManagerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ManagerService extends UserService<ManagerModel> {
+public class ManagerService extends UserService<ManagerModel, ManagerDto> {
 
     private final ManagerRepository repository;
 
@@ -13,4 +14,10 @@ public class ManagerService extends UserService<ManagerModel> {
         super(managerRepository);
         this.repository = managerRepository;
     }
+
+    @Override
+    protected Class<ManagerModel> getModelClass() {
+        return ManagerModel.class;
+    }
+
 }
