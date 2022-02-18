@@ -20,4 +20,9 @@ public class ManagerService extends UserService<ManagerModel, ManagerDto> {
         return ManagerModel.class;
     }
 
+    @Override
+    protected Class<ManagerDto> getDtoClass() {
+        return ManagerDto.class;
+    }
+
 }

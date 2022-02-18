@@ -21,4 +21,9 @@ public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
         return OrderModel.class;
     }
 
+    @Override
+    protected Class<OrderDto> getDtoClass() {
+        return OrderDto.class;
+    }
+
 }

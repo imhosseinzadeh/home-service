@@ -21,4 +21,9 @@ public class WalletService extends BaseService<WalletModel, WalletDto, Long> {
         return WalletModel.class;
     }
 
+    @Override
+    protected Class<WalletDto> getDtoClass() {
+        return WalletDto.class;
+    }
+
 }

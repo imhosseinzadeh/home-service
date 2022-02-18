@@ -21,4 +21,9 @@ public class SubServiceService extends BaseService<SubServiceModel, SubServiceDt
         return SubServiceModel.class;
     }
 
+    @Override
+    protected Class<SubServiceDto> getDtoClass() {
+        return SubServiceDto.class;
+    }
+
 }

@@ -21,4 +21,9 @@ public class ReviewService extends BaseService<ReviewModel, ReviewDto, Long> {
         return ReviewModel.class;
     }
 
+    @Override
+    protected Class<ReviewDto> getDtoClass() {
+        return ReviewDto.class;
+    }
+
 }

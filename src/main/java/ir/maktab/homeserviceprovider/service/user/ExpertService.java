@@ -28,6 +28,11 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
         return ExpertModel.class;
     }
 
+    @Override
+    protected Class<ExpertDto> getDtoClass() {
+        return ExpertDto.class;
+    }
+
     @Transactional(readOnly = true)
     public Page<ExpertModel> findExpertsByService(ServiceModel service, Pageable pageable) {
         Page<ExpertServiceModel> allByService = expertServiceRepository.findAllByService(service, pageable);

@@ -22,4 +22,9 @@ public class ExpertServiceService extends BaseService<ExpertServiceModel, Expert
         return ExpertServiceModel.class;
     }
 
+    @Override
+    protected Class<ExpertServiceDto> getDtoClass() {
+        return ExpertServiceDto.class;
+    }
+
 }

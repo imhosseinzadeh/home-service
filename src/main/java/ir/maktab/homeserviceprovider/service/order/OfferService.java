@@ -21,4 +21,9 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
         return OfferModel.class;
     }
 
+    @Override
+    protected Class<OfferDto> getDtoClass() {
+        return OfferDto.class;
+    }
+
 }

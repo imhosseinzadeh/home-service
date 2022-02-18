@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.model.user;
 
-import ir.maktab.homeserviceprovider.model.service.ExpertServiceModel;
 import ir.maktab.homeserviceprovider.model.order.OfferModel;
 import ir.maktab.homeserviceprovider.model.order.ReviewModel;
+import ir.maktab.homeserviceprovider.model.service.ExpertServiceModel;
 import ir.maktab.homeserviceprovider.model.wallet.WalletModel;
 import lombok.Builder;
 import lombok.Getter;

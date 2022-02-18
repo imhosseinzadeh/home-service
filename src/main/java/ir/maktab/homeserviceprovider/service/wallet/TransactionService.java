@@ -21,4 +21,9 @@ public class TransactionService extends BaseService<TransactionModel, Transactio
         return TransactionModel.class;
     }
 
+    @Override
+    protected Class<TransactionDto> getDtoClass() {
+        return TransactionDto.class;
+    }
+
 }

@@ -20,6 +20,7 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     protected final ModelMapper mapper = new ModelMapper();
 
     protected abstract Class<M> getModelClass();
+
     protected abstract Class<D> getDtoClass();
 
     protected D mapToDto(M model) {

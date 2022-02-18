@@ -21,4 +21,9 @@ public class ServiceService extends BaseService<ServiceModel, ServiceDto, Long> 
         return ServiceModel.class;
     }
 
+    @Override
+    protected Class<ServiceDto> getDtoClass() {
+        return ServiceDto.class;
+    }
+
 }

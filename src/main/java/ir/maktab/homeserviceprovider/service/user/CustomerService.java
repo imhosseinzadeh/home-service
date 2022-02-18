@@ -20,4 +20,9 @@ public class CustomerService extends UserService<CustomerModel, CustomerDto> {
         return CustomerModel.class;
     }
 
+    @Override
+    protected Class<CustomerDto> getDtoClass() {
+        return CustomerDto.class;
+    }
+
 }

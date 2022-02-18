@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public abstract class UserService<U extends UserModel, D extends UserDto> extends BaseService<U, D, Long> {
 
@@ -23,11 +25,12 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
     }
 
     @Override
-    public U save(D dto) {
-        U model = this.mapper.map(dto, getModelClass());
+    public Optional<D> save(D dto) {
+        U model = mapToModel(dto);
         model.setStatus(UserModelStatus.NEW);
         model.setWallet(new WalletModel());
-        return repository.save(model);
+        U save = repository.save(model);
+        return Optional.ofNullable(mapToDto(save));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

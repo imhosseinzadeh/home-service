@@ -21,4 +21,9 @@ public class PaymentService extends BaseService<PaymentModel, PaymentDto, Long> 
         return PaymentModel.class;
     }
 
+    @Override
+    protected Class<PaymentDto> getDtoClass() {
+        return PaymentDto.class;
+    }
+
 }
