@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
-@Entity(name = "Manager")
+@Entity(name = "Admin")
 @NoArgsConstructor
-public class ManagerModel extends UserModel {
-    @Builder(builderMethodName = "managerBuilder")
-    public ManagerModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
+public class AdminModel extends UserModel {
+    @Builder(builderMethodName = "adminBuilder")
+    public AdminModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
         super(firstname, lastname, email, password, status, wallet);
     }
 }
