@@ -1,6 +1,7 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.dto.BaseDto;
+import ir.maktab.homeserviceprovider.exception.UserNotFoundException;
 import ir.maktab.homeserviceprovider.model.BaseModel;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -59,8 +60,11 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     }
 
     @Transactional
-    public void deleteById(I id) {
-        jpaRepository.deleteById(id);
+    public void deleteById(I id) throws UserNotFoundException {
+        if (existsById(id)) {
+            jpaRepository.deleteById(id);
+        }
+        throw new UserNotFoundException();
     }
 
     @Transactional(readOnly = true)
