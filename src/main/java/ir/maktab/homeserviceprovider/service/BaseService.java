@@ -46,6 +46,11 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
         jpaRepository.delete(model);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteById(I id) {
+        jpaRepository.deleteById(id);
+    }
+
     @Transactional(readOnly = true)
     public Optional<M> load(I id) {
         return jpaRepository.findById(id);
