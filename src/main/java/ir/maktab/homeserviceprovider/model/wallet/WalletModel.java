@@ -41,4 +41,11 @@ public class WalletModel extends BaseModel<Long> {
                 ", balance=" + balance +
                 '}';
     }
+
+    @Override
+    public void onPersist() {
+        super.onPersist();
+        balance = new BigDecimal(0);
+    }
+
 }
