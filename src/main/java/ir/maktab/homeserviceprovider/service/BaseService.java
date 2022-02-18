@@ -4,11 +4,9 @@ import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.model.BaseModel;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -19,57 +17,58 @@ import java.util.Optional;
 public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
 
     private final JpaRepository<M, I> jpaRepository;
+
     protected final ModelMapper mapper = new ModelMapper();
 
     protected abstract Class<M> getModelClass();
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public M save(D dto) {
-        M model = this.mapper.map(dto, getModelClass());
-        return jpaRepository.save(model);
+    protected abstract Class<D> getDtoClass();
+
+    protected abstract D mapToDto(M model);
+
+    protected abstract M mapToModel(D dto);
+
+    @Transactional
+    public Optional<D> save(D dto) {
+        M savedModel = jpaRepository.save(mapToModel(dto));
+        return Optional.ofNullable(mapToDto(savedModel));
     }
 
     @Transactional
-    public M update(D dto) {
-        Optional<M> optModel = load(dto.getId());
-        if (optModel.isPresent()) {
-            M loadedModel = optModel.get();
-            this.mapper.map(dto, loadedModel);
-            return jpaRepository.save(loadedModel);
+    public Optional<List<D>> saveAll(Iterable<D> dIterable) {
+        Iterable<M> mIterable = this.mapper.<List<M>>map(dIterable, getModelClass());
+        List<M> mList = jpaRepository.saveAll(mIterable);
+        return Optional.ofNullable(this.mapper.<List<D>>map(mList, getDtoClass()));
+    }
+
+    @Transactional
+    public Optional<D> update(D dto) {
+        Optional<D> load = load(dto.getId());
+        if (load.isPresent()) {
+            return save(dto);
         }
-        return null;
+        return Optional.empty();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Iterable<M> saveAll(Iterable<D> dtoIterable) {
-        Iterable<M> mIterable = this.mapper.<List<M>>map(dtoIterable, getModelClass());
-        return jpaRepository.saveAll(mIterable);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void delete(D dto) {
-        M model = this.mapper.map(dto, getModelClass());
-        jpaRepository.delete(model);
+        jpaRepository.delete(mapToModel(dto));
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void deleteById(I id) {
         jpaRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)
-    public Optional<M> load(I id) {
-        return jpaRepository.findById(id);
+    public Optional<D> load(I id) {
+        return jpaRepository.findById(id).map(this::mapToDto);
     }
 
     @Transactional(readOnly = true)
-    public Page<M> findAllByPage(Pageable pageable) {
-        return jpaRepository.findAll(pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public boolean contains(Example<M> modelExample) {
-        return jpaRepository.exists(modelExample);
+    public Page<D> findAllByPage(Pageable pageable) {
+        Page<M> modelPage = jpaRepository.findAll(pageable);
+        return this.mapper.<Page<D>>map(modelPage, getDtoClass());
     }
 
     @Transactional(readOnly = true)
