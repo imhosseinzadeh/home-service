@@ -5,8 +5,10 @@ import ir.maktab.homeserviceprovider.model.order.OfferModel;
 import ir.maktab.homeserviceprovider.model.order.OrderModelStatus;
 import ir.maktab.homeserviceprovider.model.service.SubServiceModel;
 import ir.maktab.homeserviceprovider.model.user.CustomerModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
@@ -17,6 +19,8 @@ import java.util.Set;
 
 @Data
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OrderDto extends BaseDto<Long> {
 

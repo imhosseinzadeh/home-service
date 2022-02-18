@@ -1,12 +1,16 @@
 package ir.maktab.homeserviceprovider.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
-@SuperBuilder
 @Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class BaseDto<I extends Serializable> {
     private I id;
 

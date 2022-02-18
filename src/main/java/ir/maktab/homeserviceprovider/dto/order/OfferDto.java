@@ -3,8 +3,10 @@ package ir.maktab.homeserviceprovider.dto.order;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.model.order.OrderModel;
 import ir.maktab.homeserviceprovider.model.user.ExpertModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.ManyToOne;
@@ -15,6 +17,8 @@ import java.time.Period;
 
 @Data
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OfferDto extends BaseDto<Long> {
 

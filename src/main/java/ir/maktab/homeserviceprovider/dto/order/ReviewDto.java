@@ -3,8 +3,10 @@ package ir.maktab.homeserviceprovider.dto.order;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.model.user.ExpertModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
 
@@ -13,6 +15,8 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Data
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ReviewDto extends BaseDto<Long> {
 

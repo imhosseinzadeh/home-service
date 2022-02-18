@@ -4,8 +4,10 @@ import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.model.service.ExpertServiceModelId;
 import ir.maktab.homeserviceprovider.model.service.ServiceModel;
 import ir.maktab.homeserviceprovider.model.user.ExpertModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
@@ -13,6 +15,8 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Data
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ExpertServiceDto extends BaseDto<ExpertServiceModelId> {
 
