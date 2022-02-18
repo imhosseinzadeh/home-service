@@ -1,7 +1,9 @@
 package ir.maktab.homeserviceprovider.service;
 
+import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.model.BaseModel;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,29 +12,37 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class BaseService<M extends BaseModel<I>, I extends Serializable> {
+public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
 
     private final JpaRepository<M, I> jpaRepository;
+    protected final ModelMapper mapper = new ModelMapper();
+
+    protected abstract Class<M> getModelClass();
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public M save(M model) {
+    public M save(D dto) {
+        M model = this.mapper.map(dto, getModelClass());
         return jpaRepository.save(model);
     }
 
-    public M update(M model) {
+    public M update(D dto) {
+        M model = this.mapper.map(dto, getModelClass());
         return jpaRepository.save(model);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Iterable<M> saveAll(Iterable<M> models) {
-        return jpaRepository.saveAll(models);
+    public Iterable<M> saveAll(Iterable<D> dtoIterable) {
+        Iterable<M> mIterable = this.mapper.<List<M>>map(dtoIterable, getModelClass());
+        return jpaRepository.saveAll(mIterable);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void delete(M model) {
+    public void delete(D dto) {
+        M model = this.mapper.map(dto, getModelClass());
         jpaRepository.delete(model);
     }
 
@@ -47,12 +57,13 @@ public class BaseService<M extends BaseModel<I>, I extends Serializable> {
     }
 
     @Transactional(readOnly = true)
-    public boolean contains(Example<M> entity) {
-        return jpaRepository.exists(entity);
+    public boolean contains(Example<M> modelExample) {
+        return jpaRepository.exists(modelExample);
     }
 
     @Transactional(readOnly = true)
     public boolean existsById(I id) {
         return jpaRepository.existsById(id);
     }
+
 }
