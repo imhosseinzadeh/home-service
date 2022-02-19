@@ -11,30 +11,16 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
-import ir.maktab.homeserviceprovider.model.user.UserModel;
-import ir.maktab.homeserviceprovider.model.user.UserModelStatus;
-import ir.maktab.homeserviceprovider.model.wallet.WalletModel;
-import ir.maktab.homeserviceprovider.service.user.UserService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest//find beans in repository layer
 @ActiveProfiles(value = "test")
 @SpringJUnitConfig(value = AppUnitTestConfig.class)//find beans in service layer
 class UserServiceTest {
 
-    @Autowired
+/*    @Autowired
     private UserService<UserModel> service;
 
     private final WalletModel wallet = new WalletModel();
@@ -183,5 +169,5 @@ class UserServiceTest {
                 .wallet(wallet)
                 .build());
         return List.of(user1, user2, user3);
-    }
+    }*/
 }
