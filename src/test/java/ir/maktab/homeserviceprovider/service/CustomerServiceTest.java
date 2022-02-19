@@ -20,7 +20,7 @@ class CustomerServiceTest {
     @Autowired
     CustomerService service;
 
-    @Test
+/*    @Test
     void updatePasswordById_PasswordChange_UpdatePassword() {
         CustomerModel customer = CustomerModel.customerBuilder()
                 .firstname("iman")
@@ -38,5 +38,5 @@ class CustomerServiceTest {
         } else {
             fail("Customer not found");
         }
-    }
+    }*/
 }

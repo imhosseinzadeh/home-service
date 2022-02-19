@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringJUnitConfig(value = AppUnitTestConfig.class)//find beans in service layer
 class UserServiceTest {
 
-    @Autowired
+/*    @Autowired
     private UserService<UserModel> service;
 
     private final WalletModel wallet = new WalletModel();
@@ -183,5 +183,5 @@ class UserServiceTest {
                 .wallet(wallet)
                 .build());
         return List.of(user1, user2, user3);
-    }
+    }*/
 }
