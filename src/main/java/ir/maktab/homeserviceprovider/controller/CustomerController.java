@@ -6,9 +6,16 @@ import ir.maktab.homeserviceprovider.service.user.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.ConstraintViolationException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -58,6 +65,19 @@ public class CustomerController implements IUserController<CustomerDto> {
         } catch (DataNotExistsException e) {
             return ResponseEntity.ok("Customer with id:" + id + " does not exist");
         }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 
 }
