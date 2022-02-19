@@ -1,6 +1,7 @@
 package ir.maktab.homeserviceprovider.service.user;
 
 import ir.maktab.homeserviceprovider.dto.user.UserDto;
+import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.model.user.UserModel;
 import ir.maktab.homeserviceprovider.model.user.UserModelStatus;
 import ir.maktab.homeserviceprovider.model.wallet.WalletModel;
@@ -9,7 +10,6 @@ import ir.maktab.homeserviceprovider.service.BaseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -33,9 +33,11 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
         return Optional.ofNullable(mapToDto(save));
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void updatePasswordById(Long id, String password) {
-        repository.updatePasswordById(id, password);
+    @Transactional
+    public void updatePasswordById(Long id, String password) throws DataNotExistsException {
+        if (existsById(id)) {
+            repository.updatePasswordById(id, password);
+        }
     }
 
     @Transactional(readOnly = true)
