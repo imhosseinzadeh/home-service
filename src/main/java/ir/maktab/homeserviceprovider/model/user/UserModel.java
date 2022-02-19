@@ -32,7 +32,7 @@ public class UserModel extends BaseModel<Long> {
     private String email;
 
     @NotBlank(message = "UserModel-password cannot be null")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for User-password")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for UserModel-password")
     private String password;
 
     @Enumerated(EnumType.STRING)
