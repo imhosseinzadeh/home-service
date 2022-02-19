@@ -1,6 +1,6 @@
 package ir.maktab.homeserviceprovider.repository.user;
 
-import ir.maktab.homeserviceprovider.model.user.AdminModel;
+import ir.maktab.homeserviceprovider.domain.model.user.AdminModel;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
+import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
-import ir.maktab.homeserviceprovider.service.user.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

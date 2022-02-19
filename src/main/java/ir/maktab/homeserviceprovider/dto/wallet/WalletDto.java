@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider.dto.wallet;
 
+import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
-import ir.maktab.homeserviceprovider.model.user.UserModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;

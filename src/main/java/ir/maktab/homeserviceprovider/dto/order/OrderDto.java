@@ -1,10 +1,10 @@
 package ir.maktab.homeserviceprovider.dto.order;
 
+import ir.maktab.homeserviceprovider.domain.model.order.OfferModel;
+import ir.maktab.homeserviceprovider.domain.model.order.OrderModelStatus;
+import ir.maktab.homeserviceprovider.domain.model.service.SubServiceModel;
+import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
-import ir.maktab.homeserviceprovider.model.order.OfferModel;
-import ir.maktab.homeserviceprovider.model.order.OrderModelStatus;
-import ir.maktab.homeserviceprovider.model.service.SubServiceModel;
-import ir.maktab.homeserviceprovider.model.user.CustomerModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

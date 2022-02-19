@@ -1,6 +1,6 @@
 package ir.maktab.homeserviceprovider.repository.wallet;
 
-import ir.maktab.homeserviceprovider.model.wallet.TransactionModel;
+import ir.maktab.homeserviceprovider.domain.model.wallet.TransactionModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

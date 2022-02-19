@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.repository.service;
 
-import ir.maktab.homeserviceprovider.model.service.ExpertServiceModel;
-import ir.maktab.homeserviceprovider.model.service.ExpertServiceModelId;
-import ir.maktab.homeserviceprovider.model.service.ServiceModel;
+import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModel;
+import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModelId;
+import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

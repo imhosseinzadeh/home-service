@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider.dto.service;
 
+import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
-import ir.maktab.homeserviceprovider.model.service.ServiceModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

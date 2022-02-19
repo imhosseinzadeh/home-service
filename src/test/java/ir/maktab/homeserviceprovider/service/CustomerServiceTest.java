@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider.service;
 
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
-import ir.maktab.homeserviceprovider.service.user.CustomerService;
+import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;

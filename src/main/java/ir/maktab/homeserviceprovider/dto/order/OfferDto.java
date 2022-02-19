@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.dto.order;
 
+import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
+import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
-import ir.maktab.homeserviceprovider.model.order.OrderModel;
-import ir.maktab.homeserviceprovider.model.user.ExpertModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
