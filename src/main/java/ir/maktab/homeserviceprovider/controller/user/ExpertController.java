@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.controller;
+package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
