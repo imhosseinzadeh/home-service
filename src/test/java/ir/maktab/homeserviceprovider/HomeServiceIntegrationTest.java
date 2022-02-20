@@ -21,14 +21,16 @@ class HomeServiceIntegrationTest {
 
     @LocalServerPort
     private int serverPort;
-    private final TestRestTemplate restTemplate = new TestRestTemplate();
 
-    private final String signupUrl = createUrl("/customers/signup");
-    private final String changePasswordUrl = createUrl("/customers/change-password/{0}");
-    private final String getProfileUrl = createUrl("/customers/profile/{id}");
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
 
     @Test
     void signup_changePassword_getProfile() {
+        //urls
+        String signupUrl = createUrl("/customers/signup");
+        String changePasswordUrl = createUrl("/customers/change-password/{0}");
+        String getProfileUrl = createUrl("/customers/profile/{0}");
+
         //SIGNUP
         String email = "example@Email.com";
         String password = "password1234";
@@ -36,7 +38,7 @@ class HomeServiceIntegrationTest {
 
 
         ResponseEntity<CustomerDto> signupResponse = this.restTemplate
-                .postForEntity(this.signupUrl, signupRequest, CustomerDto.class);
+                .postForEntity(signupUrl, signupRequest, CustomerDto.class);
 
         CustomerDto signupResponseBody = signupResponse.getBody();
         Long id = signupResponseBody.getId();
@@ -56,12 +58,12 @@ class HomeServiceIntegrationTest {
 
 
         this.restTemplate
-                .put(this.changePasswordUrl, passwordParam, id);
+                .put(changePasswordUrl, passwordParam, id);
 
 
         //GET PROFILE
         ResponseEntity<CustomerDto> getProfileResponse = this.restTemplate
-                .getForEntity(this.getProfileUrl, CustomerDto.class, id);
+                .getForEntity(getProfileUrl, CustomerDto.class, id);
         CustomerDto getProfileResponseBody = getProfileResponse.getBody();
 
         assertEquals(newPassword, getProfileResponseBody.getPassword());
