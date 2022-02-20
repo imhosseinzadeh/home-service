@@ -15,9 +15,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ServiceDto extends BaseDto<Long> {
-
-    private Long id;
-
     @NotBlank(message = "ServiceDto-name cannot be blank")
     private String name;
 }
