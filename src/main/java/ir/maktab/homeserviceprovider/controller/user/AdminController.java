@@ -28,7 +28,7 @@ public class AdminController implements IUserController<AdminDto> {
     private final AdminService service;
 
     @Override
-    public ResponseEntity<AdminDto> signUp(AdminDto registerDto) {
+    public ResponseEntity<AdminDto> signup(AdminDto registerDto) {
         Optional<AdminDto> optSaved = this.service.save(registerDto);
         return optSaved
                 .map(savedDto -> ResponseEntity

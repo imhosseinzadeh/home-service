@@ -28,7 +28,7 @@ public class CustomerController implements IUserController<CustomerDto> {
     private final CustomerService service;
 
     @Override
-    public ResponseEntity<CustomerDto> signUp(CustomerDto registerDto) {
+    public ResponseEntity<CustomerDto> signup(CustomerDto registerDto) {
         Optional<CustomerDto> optSaved = this.service.save(registerDto);
         return optSaved
                 .map(savedDto -> ResponseEntity

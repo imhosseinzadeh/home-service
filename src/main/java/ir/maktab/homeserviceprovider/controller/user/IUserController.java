@@ -12,7 +12,7 @@ import javax.validation.Valid;
 public interface IUserController<D extends UserDto> {
 
     @PostMapping("/signup")
-    ResponseEntity<D> signUp(@RequestBody @Valid D registerDto);
+    ResponseEntity<D> signup(@RequestBody @Valid D registerDto);
 
     @GetMapping("/profile/{id}")
     ResponseEntity<D> getProfile(@PathVariable Long id);

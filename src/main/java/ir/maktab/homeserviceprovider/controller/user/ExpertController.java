@@ -28,7 +28,7 @@ public class ExpertController implements IUserController<ExpertDto> {
     private final ExpertService service;
 
     @Override
-    public ResponseEntity<ExpertDto> signUp(ExpertDto registerDto) {
+    public ResponseEntity<ExpertDto> signup(ExpertDto registerDto) {
         Optional<ExpertDto> optSaved = this.service.save(registerDto);
         return optSaved
                 .map(savedDto -> ResponseEntity
