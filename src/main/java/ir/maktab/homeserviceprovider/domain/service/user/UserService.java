@@ -39,16 +39,15 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
     public void updatePasswordById(Long id, ChangePasswordParam param) throws DataNotExistsException, WrongDataInputException {
         Optional<D> optUser = load(id);
         if (optUser.isPresent()) {
-            D user = optUser.get();
 
-            String userPass = user.getPassword();
+            String userPass = optUser.get().getPassword();
             String paramOldPass = param.getOldPassword();
 
             if (userPass.equals(paramOldPass)) {
                 this.repository.updatePasswordById(id, param.getNewPassword());
                 return;
             }
-            throw new WrongDataInputException("Wrong password");
+            throw new WrongDataInputException("Wrong current password");
         }
         throw new DataNotExistsException("User with id: " + id + "does not exist");
     }
