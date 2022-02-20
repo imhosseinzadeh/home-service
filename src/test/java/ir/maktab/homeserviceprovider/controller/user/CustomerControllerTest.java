@@ -25,6 +25,8 @@ class CustomerControllerTest extends AbstractRestControllerTest {
     @MockBean
     private CustomerService service;
 
+    private final String signupUrl = "/customers/signup";
+
     @BeforeEach
     void setUp() {
     }
@@ -36,23 +38,22 @@ class CustomerControllerTest extends AbstractRestControllerTest {
     @Test
     void signup() throws Exception {
         //request
-        CustomerDto registerDto = CustomerDto.builder()
-                .email("example@Email.com")
-                .password("validPassword1")
-                .build();
+        String email = "example@Email.com";
+        String password = "password1234";
+        CustomerDto registerDto = new CustomerDto(email, password);
 
         //mock service
         Optional<CustomerDto> serviceResult = Optional.of(registerDto);
         Mockito.when(service.save(any())).thenReturn(serviceResult);
 
-        mockMvc.perform(post("/customers/signup")
+        mockMvc.perform(post(this.signupUrl)
                         .content(writeJson(registerDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.email").value(registerDto.getEmail()))
-                .andExpect(jsonPath("$.password").value(registerDto.getPassword()));
+                .andExpect(jsonPath("$.email").value(email))
+                .andExpect(jsonPath("$.password").value(password));
     }
 
     @Test
