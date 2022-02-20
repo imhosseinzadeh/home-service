@@ -28,10 +28,10 @@ public class UserModel extends BaseModel<Long> {
 
     @Column(unique = true)
     @Email(message = "UserModel-email not valid")
-    @NotBlank(message = "UserModel-email cannot be null")
+    @NotBlank(message = "UserModel-email cannot be blank")
     private String email;
 
-    @NotBlank(message = "UserModel-password cannot be null")
+    @NotBlank(message = "UserModel-password cannot be blank")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Incorrect pattern for UserModel-password")
     private String password;
 
