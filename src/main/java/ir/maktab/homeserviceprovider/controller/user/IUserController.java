@@ -21,8 +21,7 @@ public interface IUserController<D extends UserDto> {
     ResponseEntity<D> updateProfile(@PathVariable Long id, @RequestBody @Valid D dto);
 
     @PutMapping("/change-password/{id}")
-    ResponseEntity<String> changePassword(@PathVariable Long id,
-                                          @RequestBody @Valid ChangePasswordParam param);
+    ResponseEntity<String> changePassword(@PathVariable Long id, @RequestBody @Valid ChangePasswordParam param);
 
     @DeleteMapping("/delete-account/{id}")
     ResponseEntity<String> deleteAccount(@PathVariable Long id);
