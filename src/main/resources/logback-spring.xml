@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration debug="false">
 
     <!--Provides conversion rules, pattern properties and common logger configurations-->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
@@ -14,8 +14,8 @@
         </encoder>
     </appender>
 
-    # File appender
-    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    # File appender for main
+    <appender name="FILE-ROLLING-MAIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${LOG_FILE}.log</file>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
@@ -36,17 +36,43 @@
         <append>true</append>
     </appender>
 
+    # File appender for test
+    <appender name="FILE-ROLLING-TEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_FILE}-test.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archive-test/year_%d{yyyy, aux}/month_%d{MM,
+                aux}/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+
+        <append>true</append>
+    </appender>
+
     <springProfile name="dev">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="FILE-ROLLING"/>
+            <appender-ref ref="FILE-ROLLING-MAIN"/>
         </root>
     </springProfile>
 
     <springProfile name="prod">
         <root level="WARN">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="FILE-ROLLING"/>
+            <appender-ref ref="FILE-ROLLING-MAIN"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE-ROLLING-TEST"/>
         </root>
     </springProfile>
 
