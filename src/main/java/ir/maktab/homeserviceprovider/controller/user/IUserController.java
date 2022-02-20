@@ -22,7 +22,7 @@ public interface IUserController<D extends UserDto> {
 
     @PutMapping("/change-password/{id}")
     ResponseEntity<String> changePassword(@PathVariable Long id,
-                                          @RequestBody ChangePasswordParam changePasswordParam);
+                                          @RequestBody @Valid ChangePasswordParam param);
 
     @DeleteMapping("/delete-account/{id}")
     ResponseEntity<String> deleteAccount(@PathVariable Long id);
