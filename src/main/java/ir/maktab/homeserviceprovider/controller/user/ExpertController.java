@@ -30,23 +30,34 @@ public class ExpertController implements IUserController<ExpertDto> {
     @Override
     public ResponseEntity<ExpertDto> signUp(ExpertDto registerDto) {
         Optional<ExpertDto> optSaved = this.service.save(registerDto);
-        return optSaved.map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto))
-                .orElse(null);
+        return optSaved
+                .map(savedDto -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(savedDto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
     public ResponseEntity<ExpertDto> getProfile(Long id) {
         Optional<ExpertDto> optLoaded = this.service.load(id);
-        return optLoaded.map(ResponseEntity::ok)
-                .orElse(null);
+        return optLoaded
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
     public ResponseEntity<ExpertDto> updateProfile(Long id, ExpertDto dto) {
         dto.setId(id);
         Optional<ExpertDto> optUpdated = this.service.update(dto);
-        return optUpdated.map(ResponseEntity::ok)
-                .orElse(null);
+        return optUpdated
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
@@ -55,7 +66,9 @@ public class ExpertController implements IUserController<ExpertDto> {
             service.updatePasswordById(id, param);
             return ResponseEntity.ok("Expert password changed successfully");
         } catch (WrongDataInputException | DataNotExistsException e) {
-            return ResponseEntity.ok().body(e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 
@@ -65,7 +78,9 @@ public class ExpertController implements IUserController<ExpertDto> {
             this.service.deleteById(id);
             return ResponseEntity.ok("Expert account has been successfully deleted");
         } catch (DataNotExistsException e) {
-            return ResponseEntity.ok("Expert with id:" + id + " does not exist");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Expert with id: " + id + " does not exist");
         }
     }
 

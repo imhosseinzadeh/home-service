@@ -30,23 +30,34 @@ public class AdminController implements IUserController<AdminDto> {
     @Override
     public ResponseEntity<AdminDto> signUp(AdminDto registerDto) {
         Optional<AdminDto> optSaved = this.service.save(registerDto);
-        return optSaved.map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto))
-                .orElse(null);
+        return optSaved
+                .map(savedDto -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(savedDto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
     public ResponseEntity<AdminDto> getProfile(Long id) {
         Optional<AdminDto> optLoaded = this.service.load(id);
-        return optLoaded.map(ResponseEntity::ok)
-                .orElse(null);
+        return optLoaded
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
     public ResponseEntity<AdminDto> updateProfile(Long id, AdminDto dto) {
         dto.setId(id);
         Optional<AdminDto> optUpdated = this.service.update(dto);
-        return optUpdated.map(ResponseEntity::ok)
-                .orElse(null);
+        return optUpdated
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
@@ -55,7 +66,9 @@ public class AdminController implements IUserController<AdminDto> {
             this.service.updatePasswordById(id, param);
             return ResponseEntity.ok("Admin password changed successfully");
         } catch (WrongDataInputException | DataNotExistsException e) {
-            return ResponseEntity.ok().body(e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 
@@ -65,7 +78,9 @@ public class AdminController implements IUserController<AdminDto> {
             this.service.deleteById(id);
             return ResponseEntity.ok("Admin account has been successfully deleted");
         } catch (DataNotExistsException e) {
-            return ResponseEntity.ok("Admin with id:" + id + " does not exist");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Admin with id: " + id + " does not exist");
         }
     }
 

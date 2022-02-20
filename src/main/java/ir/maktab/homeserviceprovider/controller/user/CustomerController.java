@@ -30,23 +30,34 @@ public class CustomerController implements IUserController<CustomerDto> {
     @Override
     public ResponseEntity<CustomerDto> signUp(CustomerDto registerDto) {
         Optional<CustomerDto> optSaved = this.service.save(registerDto);
-        return optSaved.map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto))
-                .orElse(null);
+        return optSaved
+                .map(savedDto -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(savedDto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
     public ResponseEntity<CustomerDto> getProfile(Long id) {
         Optional<CustomerDto> optLoaded = this.service.load(id);
-        return optLoaded.map(ResponseEntity::ok)
-                .orElse(null);
+        return optLoaded
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
     public ResponseEntity<CustomerDto> updateProfile(Long id, CustomerDto dto) {
         dto.setId(id);
         Optional<CustomerDto> optUpdated = this.service.update(dto);
-        return optUpdated.map(ResponseEntity::ok)
-                .orElse(null);
+        return optUpdated
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
@@ -55,7 +66,9 @@ public class CustomerController implements IUserController<CustomerDto> {
             this.service.updatePasswordById(id, param);
             return ResponseEntity.ok("Customer password changed successfully");
         } catch (WrongDataInputException | DataNotExistsException e) {
-            return ResponseEntity.ok().body(e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 
@@ -65,12 +78,16 @@ public class CustomerController implements IUserController<CustomerDto> {
             this.service.deleteById(id);
             return ResponseEntity.ok("Customer account has been successfully deleted");
         } catch (DataNotExistsException e) {
-            return ResponseEntity.ok("Customer with id:" + id + " does not exist");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Customer with id: " + id + " does not exist");
         }
     }
 
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
+
     public Map<String, String> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
