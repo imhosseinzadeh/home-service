@@ -45,7 +45,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/archive/test/year_%d{yyyy, aux}/month_%d{MM,
-                aux}/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log
+                aux}/${LOG_FILE}-test.%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <totalSizeCap>10GB</totalSizeCap>
