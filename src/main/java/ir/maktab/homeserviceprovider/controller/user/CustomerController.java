@@ -1,8 +1,10 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
+import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
+import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,12 +50,12 @@ public class CustomerController implements IUserController<CustomerDto> {
     }
 
     @Override
-    public ResponseEntity<String> changePassword(Long id, String newPassword) {
+    public ResponseEntity<String> changePassword(Long id, ChangePasswordParam param) {
         try {
-            service.updatePasswordById(id, newPassword);
+            this.service.updatePasswordById(id, param);
             return ResponseEntity.ok("Customer password changed successfully");
-        } catch (DataNotExistsException e) {
-            return ResponseEntity.ok("Customer with id:" + id + " does not exist");
+        } catch (WrongDataInputException | DataNotExistsException e) {
+            return ResponseEntity.ok().body(e.getMessage());
         }
     }
 

@@ -1,8 +1,10 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
+import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
+import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +43,12 @@ public class ExpertController implements IUserController<ExpertDto> {
     }
 
     @Override
-    public ResponseEntity<String> changePassword(Long id, String newPassword) {
+    public ResponseEntity<String> changePassword(Long id, ChangePasswordParam param) {
         try {
-            service.updatePasswordById(id, newPassword);
+            service.updatePasswordById(id, param);
             return ResponseEntity.ok("Expert password changed successfully");
-        } catch (DataNotExistsException e) {
-            return ResponseEntity.ok("Expert with id:" + id + " does not exist");
+        } catch (WrongDataInputException | DataNotExistsException e) {
+            return ResponseEntity.ok().body(e.getMessage());
         }
     }
 
