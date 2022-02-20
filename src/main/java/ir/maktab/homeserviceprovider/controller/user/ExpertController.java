@@ -22,7 +22,7 @@ public class ExpertController implements IUserController<ExpertDto> {
 
     @Override
     public ResponseEntity<ExpertDto> signUp(ExpertDto registerDto) {
-        Optional<ExpertDto> optSaved = service.save(registerDto);
+        Optional<ExpertDto> optSaved = this.service.save(registerDto);
         return optSaved.map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto))
                 .orElse(null);
     }
