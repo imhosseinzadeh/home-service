@@ -84,10 +84,8 @@ public class CustomerController implements IUserController<CustomerDto> {
         }
     }
 
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
-
     public Map<String, String> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
