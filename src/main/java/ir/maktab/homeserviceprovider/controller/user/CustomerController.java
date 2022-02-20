@@ -42,9 +42,9 @@ public class CustomerController implements IUserController<CustomerDto> {
     }
 
     @Override
-    public ResponseEntity<CustomerDto> updateProfile(Long id, CustomerDto customerDto) {
-        customerDto.setId(id);
-        Optional<CustomerDto> optUpdated = this.service.update(customerDto);
+    public ResponseEntity<CustomerDto> updateProfile(Long id, CustomerDto dto) {
+        dto.setId(id);
+        Optional<CustomerDto> optUpdated = this.service.update(dto);
         return optUpdated.map(ResponseEntity::ok)
                 .orElse(null);
     }
