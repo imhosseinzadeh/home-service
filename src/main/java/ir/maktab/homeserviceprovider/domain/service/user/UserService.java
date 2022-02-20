@@ -4,8 +4,10 @@ import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
 import ir.maktab.homeserviceprovider.domain.model.user.UserModelStatus;
 import ir.maktab.homeserviceprovider.domain.model.wallet.WalletModel;
 import ir.maktab.homeserviceprovider.domain.service.BaseService;
+import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.UserDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
+import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,10 +36,21 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
     }
 
     @Transactional
-    public void updatePasswordById(Long id, String password) throws DataNotExistsException {
-        if (existsById(id)) {
-            repository.updatePasswordById(id, password);
+    public void updatePasswordById(Long id, ChangePasswordParam param) throws DataNotExistsException, WrongDataInputException {
+        Optional<D> optUser = load(id);
+        if (optUser.isPresent()) {
+            D user = optUser.get();
+
+            String userPass = user.getPassword();
+            String paramOldPass = param.getOldPassword();
+
+            if (userPass.equals(paramOldPass)) {
+                this.repository.updatePasswordById(id, param.getNewPassword());
+                return;
+            }
+            throw new WrongDataInputException("Wrong password");
         }
+        throw new DataNotExistsException("User with id: " + id + "does not exist");
     }
 
     @Transactional(readOnly = true)
