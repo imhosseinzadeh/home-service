@@ -70,7 +70,7 @@
     </springProfile>
 
     <springProfile name="test">
-        <root level="DEBUG">
+        <root level="WARN">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE-ROLLING-TEST"/>
         </root>
