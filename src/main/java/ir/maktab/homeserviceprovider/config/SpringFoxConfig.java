@@ -1,5 +1,6 @@
 package ir.maktab.homeserviceprovider.config;
 
+import ir.maktab.homeserviceprovider.util.ApplicationInfoUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,12 +26,12 @@ public class SpringFoxConfig {
     }
 
     private ApiInfo info() {
-        return new ApiInfoBuilder().title(ApplicationInfo.TITLE)
-                .description(ApplicationInfo.DESCRIPTION)
-                .contact(ApplicationInfo.CONTACT)
-                .license(ApplicationInfo.LICENSE)
-                .licenseUrl(ApplicationInfo.LICENSE_URL)
-                .version(ApplicationInfo.VERSION)
+        return new ApiInfoBuilder().title(ApplicationInfoUtil.TITLE)
+                .description(ApplicationInfoUtil.DESCRIPTION)
+                .contact(ApplicationInfoUtil.CONTACT)
+                .license(ApplicationInfoUtil.LICENSE)
+                .licenseUrl(ApplicationInfoUtil.LICENSE_URL)
+                .version(ApplicationInfoUtil.VERSION)
                 .build();
     }
 }
