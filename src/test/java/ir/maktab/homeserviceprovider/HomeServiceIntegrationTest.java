@@ -19,10 +19,10 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class HomeServiceIntegrationTest {
 
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
+
     @LocalServerPort
     private int serverPort;
-
-    private final TestRestTemplate restTemplate = new TestRestTemplate();
 
     @Test
     void signup_changePassword_getProfile() {
