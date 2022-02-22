@@ -22,10 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CustomerController.class)
 class CustomerControllerTest extends AbstractRestControllerTest {
 
+    private final String signupUrl = "/customers/signup";
+
     @MockBean
     private CustomerService service;
-
-    private final String signupUrl = "/customers/signup";
 
     @BeforeEach
     void setUp() {

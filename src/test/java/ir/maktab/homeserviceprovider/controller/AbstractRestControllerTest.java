@@ -7,10 +7,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 public abstract class AbstractRestControllerTest {
 
+    private final ObjectMapper mapper = new ObjectMapper();
+
     @Autowired
     protected MockMvc mockMvc;
-
-    private final ObjectMapper mapper = new ObjectMapper();
 
     protected String writeJson(Object obj) throws JsonProcessingException {
         return mapper.writeValueAsString(obj);
