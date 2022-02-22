@@ -17,8 +17,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
 
-    private final JpaRepository<M, I> jpaRepository;
     protected final ModelMapper mapper = new ModelMapper();
+    private final JpaRepository<M, I> jpaRepository;
 
     protected abstract Class<M> getModelClass();
 
