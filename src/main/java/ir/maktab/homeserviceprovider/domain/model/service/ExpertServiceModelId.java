@@ -30,5 +30,5 @@ public class ExpertServiceModelId implements Serializable {
     public int hashCode() {
         return Objects.hash(expertId, serviceId);
     }
-    
+
 }
