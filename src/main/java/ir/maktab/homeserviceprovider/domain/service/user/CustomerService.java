@@ -2,7 +2,7 @@ package ir.maktab.homeserviceprovider.domain.service.user;
 
 import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
-import ir.maktab.homeserviceprovider.mapper.CustomerMapper;
+import ir.maktab.homeserviceprovider.mapper.user.CustomerMapper;
 import ir.maktab.homeserviceprovider.repository.user.CustomerRepository;
 import org.springframework.stereotype.Service;
 
