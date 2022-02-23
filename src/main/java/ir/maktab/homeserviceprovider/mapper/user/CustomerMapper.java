@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.mapper;
+package ir.maktab.homeserviceprovider.mapper.user;
 
 import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
