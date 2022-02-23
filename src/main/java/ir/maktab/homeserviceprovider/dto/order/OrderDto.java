@@ -1,9 +1,6 @@
 package ir.maktab.homeserviceprovider.dto.order;
 
-import ir.maktab.homeserviceprovider.domain.model.order.OfferModel;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModelStatus;
-import ir.maktab.homeserviceprovider.domain.model.service.SubServiceModel;
-import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 @SuperBuilder
@@ -24,16 +20,13 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class OrderDto extends BaseDto<Long> {
 
-    @NotNull(message = "OrderDto-customer cannot be null")
-    private CustomerModel customer;
+    @NotNull(message = "OrderDto-customerId cannot be null")
+    private Long customerId;
 
-    @NotNull(message = "OrderDto-subService cannot be null")
-    private SubServiceModel subService;
+    @NotNull(message = "OrderDto-subServiceId cannot be null")
+    private Long subServiceId;
 
-    @NotNull(message = "OrderDto-status cannot be null")
     private OrderModelStatus status;
-
-    private Set<OfferModel> offers;
 
     @NotNull(message = "OrderDto-proposedPrice cannot be null")
     private BigDecimal proposedPrice;
