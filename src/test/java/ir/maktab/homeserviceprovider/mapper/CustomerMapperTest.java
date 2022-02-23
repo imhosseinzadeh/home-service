@@ -3,6 +3,7 @@ package ir.maktab.homeserviceprovider.mapper;
 import ir.maktab.homeserviceprovider.config.AppUnitTestConfig;
 import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
+import ir.maktab.homeserviceprovider.mapper.user.CustomerMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
