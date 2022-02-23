@@ -1,19 +1,22 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.user.AdminService;
+import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
+import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
 import ir.maktab.homeserviceprovider.dto.user.AdminDto;
 import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
+import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
+import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
@@ -26,6 +29,24 @@ import java.util.Optional;
 public class AdminController implements IUserController<AdminDto> {
 
     private final AdminService service;
+    private final CustomerService customerService;
+    private final ExpertService expertService;
+
+    @GetMapping("/customer-list/{page}")
+    public ResponseEntity<Page<CustomerDto>> getCustomerList(@PathVariable int page) {
+        return ResponseEntity
+                .ok(this.customerService.findAllByPage(Pageable
+                        .ofSize(10)
+                        .withPage(page - 1)));
+    }
+
+    @GetMapping("/expert-list/{page}")
+    public ResponseEntity<Page<ExpertDto>> getExpertsList(@PathVariable int page) {
+        return ResponseEntity
+                .ok(this.expertService.findAllByPage(Pageable
+                        .ofSize(10)
+                        .withPage(page - 1)));
+    }
 
     @Override
     public ResponseEntity<AdminDto> signup(AdminDto registerDto) {
