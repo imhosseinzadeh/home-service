@@ -76,4 +76,11 @@ public class OrderModel extends BaseModel<Long> {
     public void removeOffer(OfferModel offer) {
         this.offers.remove(offer);
     }
+
+    @Override
+    public void onPersist() {
+        super.onPersist();
+        this.status = OrderModelStatus.WAITING_FOR_EXPERTS_SUGGESTIONS;
+    }
+
 }
