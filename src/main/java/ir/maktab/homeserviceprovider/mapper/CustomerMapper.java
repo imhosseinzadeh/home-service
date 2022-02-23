@@ -7,6 +7,7 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
+
     CustomerDto mapToDto(CustomerModel model);
 
     CustomerModel mapToModel(CustomerDto dto);
@@ -14,4 +15,5 @@ public interface CustomerMapper {
     void updateDtoByModel(@MappingTarget CustomerDto dto, CustomerModel model);
 
     void updateModelByDto(@MappingTarget CustomerModel model, CustomerDto dto);
+
 }
