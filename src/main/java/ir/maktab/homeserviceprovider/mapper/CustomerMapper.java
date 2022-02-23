@@ -11,7 +11,7 @@ public interface CustomerMapper {
 
     CustomerModel mapToModel(CustomerDto dto);
 
-    void updateDtoByModel(CustomerModel model, @MappingTarget CustomerDto dto);
+    void updateDtoByModel(@MappingTarget CustomerDto dto, CustomerModel model);
 
-    void updateModelByDto(CustomerDto dto, @MappingTarget CustomerModel model);
+    void updateModelByDto(@MappingTarget CustomerModel model, CustomerDto dto);
 }
