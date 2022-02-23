@@ -20,20 +20,25 @@ public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
     }
 
     @Override
+    protected OrderDto mapToDto(OrderModel model) {
+        return null;
+    }
+
+    @Override
+    protected OrderModel mapToModel(OrderDto dto) {
+        return null;
+    }
+
+    @Override
+    protected void updateModelByDto(OrderDto dto, OrderModel model) {
+
+    }
+
+    @Override
     public Optional<OrderDto> save(OrderDto dto) {
         dto.setStatus(OrderModelStatus.WAITING_FOR_EXPERTS_SUGGESTIONS);
         OrderModel savedModel = repository.save(mapToModel(dto));
         return Optional.ofNullable(mapToDto(savedModel));
-    }
-
-    @Override
-    protected Class<OrderModel> getModelClass() {
-        return OrderModel.class;
-    }
-
-    @Override
-    protected Class<OrderDto> getDtoClass() {
-        return OrderDto.class;
     }
 
 }

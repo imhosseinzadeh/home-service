@@ -17,13 +17,17 @@ public class ReviewService extends BaseService<ReviewModel, ReviewDto, Long> {
     }
 
     @Override
-    protected Class<ReviewModel> getModelClass() {
-        return ReviewModel.class;
+    protected ReviewDto mapToDto(ReviewModel model) {
+        return null;
     }
 
     @Override
-    protected Class<ReviewDto> getDtoClass() {
-        return ReviewDto.class;
+    protected ReviewModel mapToModel(ReviewDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(ReviewDto dto, ReviewModel model) {
+
+    }
 }

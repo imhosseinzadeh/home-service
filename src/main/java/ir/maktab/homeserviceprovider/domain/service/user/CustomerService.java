@@ -16,13 +16,17 @@ public class CustomerService extends UserService<CustomerModel, CustomerDto> {
     }
 
     @Override
-    protected Class<CustomerModel> getModelClass() {
-        return CustomerModel.class;
+    protected CustomerDto mapToDto(CustomerModel model) {
+        return null;
     }
 
     @Override
-    protected Class<CustomerDto> getDtoClass() {
-        return CustomerDto.class;
+    protected CustomerModel mapToModel(CustomerDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(CustomerDto dto, CustomerModel model) {
+
+    }
 }

@@ -17,13 +17,17 @@ public class TransactionService extends BaseService<TransactionModel, Transactio
     }
 
     @Override
-    protected Class<TransactionModel> getModelClass() {
-        return TransactionModel.class;
+    protected TransactionDto mapToDto(TransactionModel model) {
+        return null;
     }
 
     @Override
-    protected Class<TransactionDto> getDtoClass() {
-        return TransactionDto.class;
+    protected TransactionModel mapToModel(TransactionDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(TransactionDto dto, TransactionModel model) {
+
+    }
 }

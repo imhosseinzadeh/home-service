@@ -17,13 +17,17 @@ public class WalletService extends BaseService<WalletModel, WalletDto, Long> {
     }
 
     @Override
-    protected Class<WalletModel> getModelClass() {
-        return WalletModel.class;
+    protected WalletDto mapToDto(WalletModel model) {
+        return null;
     }
 
     @Override
-    protected Class<WalletDto> getDtoClass() {
-        return WalletDto.class;
+    protected WalletModel mapToModel(WalletDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(WalletDto dto, WalletModel model) {
+
+    }
 }

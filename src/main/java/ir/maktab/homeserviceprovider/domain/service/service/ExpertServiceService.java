@@ -18,13 +18,17 @@ public class ExpertServiceService extends BaseService<ExpertServiceModel, Expert
     }
 
     @Override
-    protected Class<ExpertServiceModel> getModelClass() {
-        return ExpertServiceModel.class;
+    protected ExpertServiceDto mapToDto(ExpertServiceModel model) {
+        return null;
     }
 
     @Override
-    protected Class<ExpertServiceDto> getDtoClass() {
-        return ExpertServiceDto.class;
+    protected ExpertServiceModel mapToModel(ExpertServiceDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(ExpertServiceDto dto, ExpertServiceModel model) {
+
+    }
 }

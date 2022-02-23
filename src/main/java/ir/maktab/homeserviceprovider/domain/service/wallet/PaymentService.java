@@ -16,14 +16,19 @@ public class PaymentService extends BaseService<PaymentModel, PaymentDto, Long> 
         this.repository = paymentRepository;
     }
 
+
     @Override
-    protected Class<PaymentModel> getModelClass() {
-        return PaymentModel.class;
+    protected PaymentDto mapToDto(PaymentModel model) {
+        return null;
     }
 
     @Override
-    protected Class<PaymentDto> getDtoClass() {
-        return PaymentDto.class;
+    protected PaymentModel mapToModel(PaymentDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(PaymentDto dto, PaymentModel model) {
+
+    }
 }

@@ -16,14 +16,19 @@ public class SubServiceService extends BaseService<SubServiceModel, SubServiceDt
         this.repository = subServiceRepository;
     }
 
+
     @Override
-    protected Class<SubServiceModel> getModelClass() {
-        return SubServiceModel.class;
+    protected SubServiceDto mapToDto(SubServiceModel model) {
+        return null;
     }
 
     @Override
-    protected Class<SubServiceDto> getDtoClass() {
-        return SubServiceDto.class;
+    protected SubServiceModel mapToModel(SubServiceDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(SubServiceDto dto, SubServiceModel model) {
+
+    }
 }

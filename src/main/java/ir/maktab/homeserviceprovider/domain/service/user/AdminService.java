@@ -16,13 +16,17 @@ public class AdminService extends UserService<AdminModel, AdminDto> {
     }
 
     @Override
-    protected Class<AdminModel> getModelClass() {
-        return AdminModel.class;
+    protected AdminDto mapToDto(AdminModel model) {
+        return null;
     }
 
     @Override
-    protected Class<AdminDto> getDtoClass() {
-        return AdminDto.class;
+    protected AdminModel mapToModel(AdminDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(AdminDto dto, AdminModel model) {
+
+    }
 }

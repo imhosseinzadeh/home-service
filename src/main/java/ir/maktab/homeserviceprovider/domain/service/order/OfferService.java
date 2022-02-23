@@ -17,13 +17,17 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
     }
 
     @Override
-    protected Class<OfferModel> getModelClass() {
-        return OfferModel.class;
+    protected OfferDto mapToDto(OfferModel model) {
+        return null;
     }
 
     @Override
-    protected Class<OfferDto> getDtoClass() {
-        return OfferDto.class;
+    protected OfferModel mapToModel(OfferDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(OfferDto dto, OfferModel model) {
+
+    }
 }

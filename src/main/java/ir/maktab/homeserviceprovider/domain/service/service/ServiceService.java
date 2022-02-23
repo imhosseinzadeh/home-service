@@ -17,13 +17,17 @@ public class ServiceService extends BaseService<ServiceModel, ServiceDto, Long> 
     }
 
     @Override
-    protected Class<ServiceModel> getModelClass() {
-        return ServiceModel.class;
+    protected ServiceDto mapToDto(ServiceModel model) {
+        return null;
     }
 
     @Override
-    protected Class<ServiceDto> getDtoClass() {
-        return ServiceDto.class;
+    protected ServiceModel mapToModel(ServiceDto dto) {
+        return null;
     }
 
+    @Override
+    protected void updateModelByDto(ServiceDto dto, ServiceModel model) {
+
+    }
 }

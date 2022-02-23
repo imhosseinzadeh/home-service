@@ -28,15 +28,7 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
         this.expertServiceRepository = expertServiceRepository;
     }
 
-    @Override
-    protected Class<ExpertModel> getModelClass() {
-        return ExpertModel.class;
-    }
 
-    @Override
-    protected Class<ExpertDto> getDtoClass() {
-        return ExpertDto.class;
-    }
 
     @Transactional(readOnly = true)
     public List<OrderModel> getRelatedOrders(ExpertModel expert, Pageable pageable) {
@@ -75,5 +67,20 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     public Page<ExpertModel> findExpertsByService(ServiceModel service, Pageable pageable) {
         Page<ExpertServiceModel> allByService = expertServiceRepository.findAllByService(service, pageable);
         return allByService.map(ExpertServiceModel::getExpert);
+    }
+
+    @Override
+    protected ExpertDto mapToDto(ExpertModel model) {
+        return null;
+    }
+
+    @Override
+    protected ExpertModel mapToModel(ExpertDto dto) {
+        return null;
+    }
+
+    @Override
+    protected void updateModelByDto(ExpertDto dto, ExpertModel model) {
+
     }
 }
