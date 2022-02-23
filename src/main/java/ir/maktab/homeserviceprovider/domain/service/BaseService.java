@@ -64,8 +64,8 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     }
 
     @Transactional(readOnly = true)
-    public Page<M> findAllByPage(Pageable pageable) {
-        return jpaRepository.findAll(pageable);
+    public Page<D> findAllByPage(Pageable pageable) {
+        return jpaRepository.findAll(pageable).map(this::mapToDto);
     }
 
     @Transactional(readOnly = true)
