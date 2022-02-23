@@ -42,21 +42,16 @@ public class UserModel extends BaseModel<Long> {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     @NotNull(message = "UserModel-wallet cannot be null")
+    @Setter(AccessLevel.NONE)
     private WalletModel wallet;
 
     @Builder
-    public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
+    public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.status = status;
-        setWallet(wallet);
-    }
-
-    public void setWallet(@NotNull(message = "UserModel-wallet cannot be null") WalletModel wallet) {
-        wallet.setUser(this);
-        this.wallet = wallet;
     }
 
     @Override
@@ -70,5 +65,13 @@ public class UserModel extends BaseModel<Long> {
                 ", status=" + status +
                 ", wallet balance=" + wallet.getBalance() +
                 '}';
+    }
+
+    @Override
+    public void onPersist() {
+        super.onPersist();
+        this.wallet = new WalletModel();
+        wallet.setUser(this);
+        this.status = UserModelStatus.NEW;
     }
 }
