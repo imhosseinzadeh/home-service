@@ -2,7 +2,6 @@ package ir.maktab.homeserviceprovider.domain.model.user;
 
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
 import ir.maktab.homeserviceprovider.domain.model.order.ReviewModel;
-import ir.maktab.homeserviceprovider.domain.model.wallet.WalletModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +25,8 @@ public class CustomerModel extends UserModel {
     private Set<ReviewModel> reviews = new HashSet<>();
 
     @Builder(builderMethodName = "customerBuilder")
-    public CustomerModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet) {
-        super(firstname, lastname, email, password, status, wallet);
+    public CustomerModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
+        super(firstname, lastname, email, password, status);
     }
 
     public void setOrders(Set<OrderModel> orders) {

@@ -3,7 +3,6 @@ package ir.maktab.homeserviceprovider.domain.model.user;
 import ir.maktab.homeserviceprovider.domain.model.order.OfferModel;
 import ir.maktab.homeserviceprovider.domain.model.order.ReviewModel;
 import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModel;
-import ir.maktab.homeserviceprovider.domain.model.wallet.WalletModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,8 +38,8 @@ public class ExpertModel extends UserModel {
     private Integer score;
 
     @Builder(builderMethodName = "expertBuilder")
-    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, WalletModel wallet, byte[] image) {
-        super(firstname, lastname, email, password, status, wallet);
+    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
+        super(firstname, lastname, email, password, status);
         this.image = image;
     }
 
