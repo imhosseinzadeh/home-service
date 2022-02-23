@@ -4,33 +4,24 @@ import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
 
-    protected final ModelMapper mapper = new ModelMapper();
     private final JpaRepository<M, I> jpaRepository;
 
-    protected abstract Class<M> getModelClass();
+    protected abstract D mapToDto(M model);
 
-    protected abstract Class<D> getDtoClass();
+    protected abstract M mapToModel(D dto);
 
-    protected D mapToDto(M model) {
-        return this.mapper.map(model, getDtoClass());
-    }
-
-    protected M mapToModel(D dto) {
-        return this.mapper.map(dto, getModelClass());
-    }
+    protected abstract void updateModelByDto(D dto, M model);
 
     @Transactional
     public Optional<D> save(D dto) {
@@ -39,10 +30,8 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     }
 
     @Transactional
-    public Optional<List<D>> saveAll(Iterable<D> dIterable) {
-        Iterable<M> mIterable = this.mapper.<List<M>>map(dIterable, getModelClass());
-        List<M> mList = jpaRepository.saveAll(mIterable);
-        return Optional.ofNullable(this.mapper.<List<D>>map(mList, getDtoClass()));
+    public void saveAll(Iterable<D> dIterable) {
+        dIterable.forEach(this::save);
     }
 
     @Transactional
@@ -50,7 +39,7 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
         Optional<M> optModel = this.jpaRepository.findById(dto.getId());
         if (optModel.isPresent()) {
             M loadedModel = optModel.get();
-            this.mapper.map(dto, loadedModel);
+            updateModelByDto(dto, loadedModel);
             this.jpaRepository.save(loadedModel);
             return Optional.of(mapToDto(loadedModel));
         }
@@ -75,9 +64,8 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     }
 
     @Transactional(readOnly = true)
-    public Page<D> findAllByPage(Pageable pageable) {
-        Page<M> modelPage = jpaRepository.findAll(pageable);
-        return this.mapper.<Page<D>>map(modelPage, getDtoClass());
+    public Page<M> findAllByPage(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
