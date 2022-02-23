@@ -28,8 +28,6 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
         this.expertServiceRepository = expertServiceRepository;
     }
 
-
-
     @Transactional(readOnly = true)
     public List<OrderModel> getRelatedOrders(ExpertModel expert, Pageable pageable) {
         Page<ServiceModel> relatedServices = findServicesByExpert(expert, pageable);
