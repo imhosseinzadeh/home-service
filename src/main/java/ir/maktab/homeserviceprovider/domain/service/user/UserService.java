@@ -1,8 +1,6 @@
 package ir.maktab.homeserviceprovider.domain.service.user;
 
 import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
-import ir.maktab.homeserviceprovider.domain.model.user.UserModelStatus;
-import ir.maktab.homeserviceprovider.domain.model.wallet.WalletModel;
 import ir.maktab.homeserviceprovider.domain.service.BaseService;
 import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.UserDto;
@@ -28,10 +26,7 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
 
     @Override
     public Optional<D> save(D dto) {
-        U model = mapToModel(dto);
-        model.setStatus(UserModelStatus.NEW);
-        model.setWallet(new WalletModel());
-        U save = repository.save(model);
+        U save = repository.save(mapToModel(dto));
         return Optional.ofNullable(mapToDto(save));
     }
 
