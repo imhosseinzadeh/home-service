@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
-import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.UserDto;
+import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
