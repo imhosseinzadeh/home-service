@@ -8,6 +8,8 @@ import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
 import ir.maktab.homeserviceprovider.repository.user.UserSpecifications;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,9 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
         this.repository = userRepository;
         this.specifications = specifications;
     }
+
+    @Transactional(readOnly = true)
+    public abstract Page<U> findAll(Pageable pageable);
 
     @Transactional(readOnly = true)
     public U findByEmail(String email) {
