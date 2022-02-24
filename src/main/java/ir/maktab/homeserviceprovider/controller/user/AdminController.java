@@ -11,7 +11,7 @@ import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -35,17 +35,13 @@ public class AdminController implements IUserController<AdminDto> {
     @GetMapping("/customer-list/{page}")
     public ResponseEntity<Page<CustomerDto>> getCustomerList(@PathVariable int page) {
         return ResponseEntity
-                .ok(this.customerService.findAllByPage(Pageable
-                        .ofSize(10)
-                        .withPage(page - 1)));
+                .ok(this.customerService.findAllByPage(PageRequest.of(page, 10)));
     }
 
     @GetMapping("/expert-list/{page}")
     public ResponseEntity<Page<ExpertDto>> getExpertsList(@PathVariable int page) {
         return ResponseEntity
-                .ok(this.expertService.findAllByPage(Pageable
-                        .ofSize(10)
-                        .withPage(page - 1)));
+                .ok(this.expertService.findAllByPage(PageRequest.of(page, 10)));
     }
 
     @Override
