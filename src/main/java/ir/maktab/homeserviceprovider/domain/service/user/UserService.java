@@ -7,8 +7,7 @@ import ir.maktab.homeserviceprovider.dto.user.UserDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import ir.maktab.homeserviceprovider.repository.user.UserSpecifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,16 +17,17 @@ import java.util.Optional;
 public abstract class UserService<U extends UserModel, D extends UserDto> extends BaseService<U, D, Long> {
 
     private final UserRepository<U> repository;
+    private final UserSpecifications<U> specifications;
 
-    protected UserService(UserRepository<U> userRepository) {
+    protected UserService(UserRepository<U> userRepository, UserSpecifications<U> specifications) {
         super(userRepository);
         this.repository = userRepository;
+        this.specifications = specifications;
     }
 
-    @Override
-    public Optional<D> save(D dto) {
-        U save = repository.save(mapToModel(dto));
-        return Optional.ofNullable(mapToDto(save));
+    @Transactional(readOnly = true)
+    public U findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     @Transactional
@@ -45,16 +45,6 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
             throw new WrongDataInputException("Wrong current password");
         }
         throw new DataNotExistsException("User with id: " + id + "does not exist");
-    }
-
-    @Transactional(readOnly = true)
-    public U findByEmail(String email) {
-        return repository.findByEmail(email);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<UserModel> findAllByFirstnameAndLastname(String firstname, String lastname, Pageable pageable) {
-        return repository.findAllByFirstnameAndLastname(firstname, lastname, pageable);
     }
 
 }
