@@ -2,8 +2,9 @@ package ir.maktab.homeserviceprovider.domain.service.user;
 
 import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
 import ir.maktab.homeserviceprovider.domain.service.BaseService;
-import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.UserDto;
+import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
+import ir.maktab.homeserviceprovider.dto.user.param.UserSearchParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
@@ -28,7 +29,7 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
     }
 
     @Transactional(readOnly = true)
-    public abstract Page<U> findAll(Pageable pageable);
+    public abstract Page<U> findAll(UserSearchParam searchParam, Pageable pageable);
 
     @Transactional(readOnly = true)
     public U findByEmail(String email) {
