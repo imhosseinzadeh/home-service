@@ -1,8 +1,8 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
-import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
+import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;

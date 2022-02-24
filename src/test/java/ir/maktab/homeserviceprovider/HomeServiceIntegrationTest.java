@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider;
 
-import ir.maktab.homeserviceprovider.dto.user.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
+import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
