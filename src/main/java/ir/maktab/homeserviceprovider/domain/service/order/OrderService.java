@@ -7,8 +7,6 @@ import ir.maktab.homeserviceprovider.mapper.order.OrderMapper;
 import ir.maktab.homeserviceprovider.repository.order.OrderRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
 
@@ -34,12 +32,6 @@ public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
     @Override
     protected void updateModelByDto(OrderDto dto, OrderModel model) {
         this.mapper.updateModelByDto(model, dto);
-    }
-
-    @Override
-    public Optional<OrderDto> save(OrderDto dto) {
-        OrderModel savedModel = repository.save(mapToModel(dto));
-        return Optional.ofNullable(mapToDto(savedModel));
     }
 
 }
