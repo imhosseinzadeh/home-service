@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.dto.user;
+package ir.maktab.homeserviceprovider.dto.user.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
