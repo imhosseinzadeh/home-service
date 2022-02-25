@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "\"Order\"")
+@Entity
+@Table(name = "\"Order\"")
 @Getter
 @Setter
 @RequiredArgsConstructor
