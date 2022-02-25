@@ -1,22 +1,22 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
+import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -82,6 +82,11 @@ public class ExpertController implements IUserController<ExpertDto> {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Expert with id: " + id + " does not exist");
         }
+    }
+
+    @GetMapping("/related-orders/{id}")
+    public ResponseEntity<List<OrderDto>> getRelatedOrder(ExpertDto dto) {
+        return ResponseEntity.ok(this.service.getRelatedOrders(dto, Pageable.unpaged()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
