@@ -3,10 +3,11 @@ package ir.maktab.homeserviceprovider.domain.service.user;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
 import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModel;
 import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
-import ir.maktab.homeserviceprovider.domain.model.service.SubServiceModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
+import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.dto.user.param.UserSearchParam;
+import ir.maktab.homeserviceprovider.mapper.order.OrderMapper;
 import ir.maktab.homeserviceprovider.mapper.service.ServiceMapper;
 import ir.maktab.homeserviceprovider.mapper.user.ExpertMapper;
 import ir.maktab.homeserviceprovider.repository.service.ExpertServiceRepository;
@@ -28,44 +29,33 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     private final ExpertRepository repository;
     private final ExpertServiceRepository expertServiceRepository;
     private final ExpertSpecifications specifications;
-    private final ExpertMapper expertMapper;
     private final ServiceMapper serviceMapper;
+    private final ExpertMapper expertMapper;
+    private final OrderMapper orderMapper;
 
-    public ExpertService(UserRepository<ExpertModel> userRepository, ExpertSpecifications specifications, ExpertRepository repository, ExpertServiceRepository expertServiceRepository, ExpertMapper expertMapper, ServiceMapper serviceMapper) {
+    public ExpertService(UserRepository<ExpertModel> userRepository, ExpertSpecifications specifications,
+                         ExpertRepository repository, ExpertServiceRepository expertServiceRepository,
+                         ExpertMapper expertMapper, ServiceMapper serviceMapper, OrderMapper orderMapper) {
         super(userRepository, specifications);
         this.repository = repository;
         this.expertServiceRepository = expertServiceRepository;
         this.specifications = specifications;
         this.expertMapper = expertMapper;
         this.serviceMapper = serviceMapper;
+        this.orderMapper = orderMapper;
     }
 
     @Transactional(readOnly = true)
-    public List<OrderModel> getRelatedOrders(ExpertModel expert, Pageable pageable) {
-        Page<ServiceModel> relatedServices = findServicesByExpert(expert, pageable);
-        List<SubServiceModel> relatedSubServices = getSubServices(relatedServices);
-        return getOrders(relatedSubServices);
-    }
-
-    private List<OrderModel> getOrders(List<SubServiceModel> subServiceModelList) {
-        List<OrderModel> orders = new ArrayList<>();
-
-        for (SubServiceModel s : subServiceModelList) {
-            orders.addAll(s.getOrders());
+    public List<OrderDto> getRelatedOrders(ExpertDto expert, Pageable pageable) {
+        List<OrderModel> relatedOrder = repository.getRelatedOrder(mapToModel(expert));
+        List<OrderDto> resultDto = new ArrayList<>();
+        for (OrderModel orderModel : relatedOrder) {
+            OrderDto orderDto = this.orderMapper.mapToDto(orderModel);
+            resultDto.add(orderDto);
         }
-
-        return orders;
+        return resultDto;
     }
 
-    private List<SubServiceModel> getSubServices(Page<ServiceModel> services) {
-        List<SubServiceModel> subServiceList = new ArrayList<>();
-
-        for (ServiceModel s : services) {
-            subServiceList.addAll(s.getSubServices());
-        }
-
-        return subServiceList;
-    }
 
     @Transactional(readOnly = true)
     public Page<ServiceModel> findServicesByExpert(ExpertModel expert, Pageable pageable) {
