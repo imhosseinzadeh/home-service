@@ -1,4 +1,4 @@
-package ir.maktab.homeserviceprovider.repository.order;
+package ir.maktab.homeserviceprovider.repository.user;
 
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel_;
@@ -16,7 +16,7 @@ import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
-public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
+public class ExpertRepositoryCustomImpl implements ExpertRepositoryCustom {
 
     @PersistenceUnit
     private final EntityManagerFactory managerFactory;
@@ -24,13 +24,13 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
     private final EntityManager entityManager;
 
     @Autowired
-    public OrderRepositoryCustomImpl(EntityManagerFactory managerFactory) {
+    public ExpertRepositoryCustomImpl(EntityManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
         this.entityManager = managerFactory.createEntityManager();
     }
 
     @Override
-    public List<OrderModel> relatedOrder(ExpertModel expertModel) {
+    public List<OrderModel> getRelatedOrder(ExpertModel expertModel) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderModel> query = builder.createQuery(OrderModel.class);
 
