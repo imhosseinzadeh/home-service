@@ -1,6 +1,5 @@
 package ir.maktab.homeserviceprovider.domain.model.service;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-@AllArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
