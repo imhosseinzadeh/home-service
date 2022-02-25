@@ -20,7 +20,6 @@ public class ExpertRepositoryCustomImpl implements ExpertRepositoryCustom {
 
     @PersistenceUnit
     private final EntityManagerFactory managerFactory;
-
     private final EntityManager entityManager;
 
     @Autowired
