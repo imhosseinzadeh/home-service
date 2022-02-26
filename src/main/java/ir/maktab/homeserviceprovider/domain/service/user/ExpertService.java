@@ -12,11 +12,10 @@ import ir.maktab.homeserviceprovider.mapper.service.ServiceMapper;
 import ir.maktab.homeserviceprovider.mapper.user.ExpertMapper;
 import ir.maktab.homeserviceprovider.repository.service.ExpertServiceRepository;
 import ir.maktab.homeserviceprovider.repository.user.ExpertRepository;
-import ir.maktab.homeserviceprovider.repository.user.ExpertSpecifications;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
+import ir.maktab.homeserviceprovider.specification.ExpertSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,18 +27,17 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
 
     private final ExpertRepository repository;
     private final ExpertServiceRepository expertServiceRepository;
-    private final ExpertSpecifications specifications;
+
     private final ServiceMapper serviceMapper;
     private final ExpertMapper expertMapper;
     private final OrderMapper orderMapper;
 
-    public ExpertService(UserRepository<ExpertModel> userRepository, ExpertSpecifications specifications,
+    public ExpertService(UserRepository<ExpertModel> userRepository,
                          ExpertRepository repository, ExpertServiceRepository expertServiceRepository,
                          ExpertMapper expertMapper, ServiceMapper serviceMapper, OrderMapper orderMapper) {
-        super(userRepository, specifications);
+        super(userRepository);
         this.repository = repository;
         this.expertServiceRepository = expertServiceRepository;
-        this.specifications = specifications;
         this.expertMapper = expertMapper;
         this.serviceMapper = serviceMapper;
         this.orderMapper = orderMapper;
@@ -86,11 +84,10 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
 
     @Override
     public Page<ExpertModel> findAll(UserSearchParam searchParam, Pageable pageable) {
-        ServiceModel serviceModel = this.serviceMapper.mapToModel(searchParam.getService());
-
-        return repository.findAll(Specification.where(this.specifications
-                        .withFirstname(searchParam.getFirstname())
-                        .and(specifications.withLastname(searchParam.getLastname())))
-                .and(specifications.withService(serviceModel)), pageable);
+        return repository.findAll(ExpertSpecifications.withFirstname(searchParam.getFirstname())
+                        .and(ExpertSpecifications.withLastname(searchParam.getLastname()))
+                        .and(ExpertSpecifications.withStatus(searchParam.getStatus()))
+                        .and(ExpertSpecifications.withServiceId(searchParam.getServiceId()))
+                , pageable);
     }
 }
