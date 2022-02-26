@@ -21,8 +21,8 @@ import java.util.Set;
 public class CustomerModel extends UserModel {
 
     @Builder(builderMethodName = "customerBuilder")
-    public CustomerModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
-        super(firstname, lastname, email, password, status);
+    public CustomerModel(Long id, String firstname, String lastname, String email, String password, UserModelStatus status) {
+        super(id, firstname, lastname, email, password, status);
     }
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

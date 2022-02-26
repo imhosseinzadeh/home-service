@@ -45,7 +45,8 @@ public class UserModel extends BaseModel<Long> {
     private WalletModel wallet;
 
     @Builder
-    public UserModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
+    public UserModel(Long id, String firstname, String lastname, String email, String password, UserModelStatus status) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;

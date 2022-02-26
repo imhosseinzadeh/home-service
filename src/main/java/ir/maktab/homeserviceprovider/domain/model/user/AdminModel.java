@@ -14,8 +14,8 @@ import javax.persistence.Entity;
 public class AdminModel extends UserModel {
 
     @Builder(builderMethodName = "adminBuilder")
-    public AdminModel(String firstname, String lastname, String email, String password, UserModelStatus status) {
-        super(firstname, lastname, email, password, status);
+    public AdminModel(Long id, String firstname, String lastname, String email, String password, UserModelStatus status) {
+        super(id, firstname, lastname, email, password, status);
     }
 
 }

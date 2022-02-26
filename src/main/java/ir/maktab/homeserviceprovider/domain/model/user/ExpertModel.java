@@ -18,8 +18,8 @@ import java.util.Set;
 public class ExpertModel extends UserModel {
 
     @Builder(builderMethodName = "expertBuilder")
-    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
-        super(firstname, lastname, email, password, status);
+    public ExpertModel(Long id, String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
+        super(id, firstname, lastname, email, password, status);
         this.image = image;
     }
 
