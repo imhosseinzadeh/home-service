@@ -9,14 +9,14 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface OrderMapper {
 
-    @Mapping(target = "customerId", expression = "java(model.getCustomer().getId())")
-    @Mapping(target = "subServiceId", expression = "java(model.getSubService().getId())")
+    @Mapping(target = "customerId", source = "customer.id")
+    @Mapping(target = "subServiceId", source = "subService.id")
     OrderDto mapToDto(OrderModel model);
 
     OrderModel mapToModel(OrderDto dto);
 
-    @Mapping(target = "customerId", expression = "java(model.getCustomer().getId())")
-    @Mapping(target = "subServiceId", expression = "java(model.getSubService().getId())")
+    @Mapping(target = "customerId", source = "customer.id")
+    @Mapping(target = "subServiceId", source = "subService.id")
     void updateDtoByModel(@MappingTarget OrderDto dto, OrderModel model);
 
     void updateModelByDto(@MappingTarget OrderModel model, OrderDto dto);
