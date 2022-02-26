@@ -17,6 +17,12 @@ import java.util.Set;
 @Setter
 public class ExpertModel extends UserModel {
 
+    @Builder(builderMethodName = "expertBuilder")
+    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
+        super(firstname, lastname, email, password, status);
+        this.image = image;
+    }
+
     @Lob
     @Column(columnDefinition = "mediumblob")
     private byte[] image;
@@ -34,12 +40,6 @@ public class ExpertModel extends UserModel {
     @Range(min = 0, max = 5)
     @Setter(AccessLevel.NONE)
     private Integer score;
-
-    @Builder(builderMethodName = "expertBuilder")
-    public ExpertModel(String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
-        super(firstname, lastname, email, password, status);
-        this.image = image;
-    }
 
     public Integer getScore() {
         this.score = reviews.stream().mapToInt(ReviewModel::getScore).sum() / reviews.size();
