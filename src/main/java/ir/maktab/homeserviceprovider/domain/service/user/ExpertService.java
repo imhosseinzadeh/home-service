@@ -44,8 +44,8 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     }
 
     @Transactional(readOnly = true)
-    public List<OrderDto> getRelatedOrders(ExpertDto expert, Pageable pageable) {
-        List<OrderModel> relatedOrder = repository.getRelatedOrder(mapToModel(expert));
+    public List<OrderDto> getRelatedOrders(Long id, Pageable pageable) {
+        List<OrderModel> relatedOrder = repository.getRelatedOrder(id);
         List<OrderDto> resultDto = new ArrayList<>();
         for (OrderModel orderModel : relatedOrder) {
             OrderDto orderDto = this.orderMapper.mapToDto(orderModel);
