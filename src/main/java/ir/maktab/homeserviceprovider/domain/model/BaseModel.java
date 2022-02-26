@@ -24,6 +24,8 @@ public abstract class BaseModel<I extends Serializable> implements Serializable 
 
     public abstract I getId();
 
+    public abstract void setId(I id);
+
     public boolean isNew() {
         return getId() == null;
     }
