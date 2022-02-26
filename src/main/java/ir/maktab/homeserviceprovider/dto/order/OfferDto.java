@@ -1,7 +1,5 @@
 package ir.maktab.homeserviceprovider.dto.order;
 
-import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
-import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -22,12 +19,11 @@ import java.time.Period;
 @EqualsAndHashCode(callSuper = true)
 public class OfferDto extends BaseDto<Long> {
 
-    @NotNull(message = "OfferDto-expert cannot be null")
-    private ExpertModel expert;
+    @NotNull(message = "OfferDto-expertId cannot be null")
+    private Long expertId;
 
-    @ManyToOne
-    @NotNull(message = "OfferDto-order cannot be null")
-    private OrderModel order;
+    @NotNull(message = "OfferDto-orderId cannot be null")
+    private Long orderId;
 
     @NotNull(message = "OfferDto-proposalPrice cannot be null")
     private BigDecimal proposalPrice;
