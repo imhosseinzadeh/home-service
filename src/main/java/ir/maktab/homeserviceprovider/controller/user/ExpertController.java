@@ -85,8 +85,8 @@ public class ExpertController implements IUserController<ExpertDto> {
     }
 
     @GetMapping("/related-orders/{id}")
-    public ResponseEntity<List<OrderDto>> getRelatedOrder(ExpertDto dto) {
-        return ResponseEntity.ok(this.service.getRelatedOrders(dto, Pageable.unpaged()));
+    public ResponseEntity<List<OrderDto>> getRelatedOrder(@PathVariable Long id) {
+        return ResponseEntity.ok(this.service.getRelatedOrders(id, Pageable.unpaged()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
