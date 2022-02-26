@@ -3,6 +3,7 @@ package ir.maktab.homeserviceprovider.domain.model.service;
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "SubService")
+@NoArgsConstructor
 @Getter
 @Setter
 public class SubServiceModel extends BaseModel<Long> {

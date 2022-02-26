@@ -12,9 +12,9 @@ import javax.validation.constraints.Pattern;
 
 @Entity(name = "User")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 public class UserModel extends BaseModel<Long> {
 
     @Id

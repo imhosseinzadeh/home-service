@@ -2,8 +2,9 @@ package ir.maktab.homeserviceprovider.domain.model.wallet;
 
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,7 +13,8 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity(name = "wallet")
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class WalletModel extends BaseModel<Long> {

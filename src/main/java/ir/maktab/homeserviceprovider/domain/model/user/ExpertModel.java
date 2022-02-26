@@ -3,10 +3,7 @@ package ir.maktab.homeserviceprovider.domain.model.user;
 import ir.maktab.homeserviceprovider.domain.model.order.OfferModel;
 import ir.maktab.homeserviceprovider.domain.model.order.ReviewModel;
 import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -15,13 +12,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Expert")
-@Getter
 @NoArgsConstructor
+@Getter
+@Setter
 public class ExpertModel extends UserModel {
 
     @Lob
     @Column(columnDefinition = "mediumblob")
-    @Setter
     private byte[] image;
 
     @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -35,6 +32,7 @@ public class ExpertModel extends UserModel {
 
     @PositiveOrZero(message = "ExpertModel-score must be positive or zero")
     @Range(min = 0, max = 5)
+    @Setter(AccessLevel.NONE)
     private Integer score;
 
     @Builder(builderMethodName = "expertBuilder")

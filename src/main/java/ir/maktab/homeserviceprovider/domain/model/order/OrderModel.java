@@ -4,7 +4,7 @@ import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.service.SubServiceModel;
 import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -17,9 +17,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "\"Order\"")
+@NoArgsConstructor
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class OrderModel extends BaseModel<Long> {
 
     @Id

@@ -5,6 +5,7 @@ import ir.maktab.homeserviceprovider.domain.model.order.ReviewModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,8 +15,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Customer")
-@Getter
 @NoArgsConstructor
+@Getter
+@Setter
 public class CustomerModel extends UserModel {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

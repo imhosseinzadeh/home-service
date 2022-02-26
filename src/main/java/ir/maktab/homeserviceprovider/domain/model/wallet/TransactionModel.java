@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity(name = "Transaction")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class TransactionModel extends BaseModel<Long> {
 
     @Id

@@ -3,6 +3,7 @@ package ir.maktab.homeserviceprovider.domain.model.order;
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
 import java.time.Period;
 
 @Entity(name = "Offer")
+@NoArgsConstructor
 @Getter
 @Setter
 public class OfferModel extends BaseModel<Long> {

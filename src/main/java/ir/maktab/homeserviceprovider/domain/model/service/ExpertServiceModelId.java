@@ -1,7 +1,7 @@
 package ir.maktab.homeserviceprovider.domain.model.service;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class ExpertServiceModelId implements Serializable {
