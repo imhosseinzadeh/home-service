@@ -29,7 +29,7 @@ public class ExpertRepositoryCustomImpl implements ExpertRepositoryCustom {
     }
 
     @Override
-    public List<OrderModel> getRelatedOrder(ExpertModel expertModel) {
+    public List<OrderModel> getRelatedOrder(Long id) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderModel> query = builder.createQuery(OrderModel.class);
 
@@ -41,7 +41,7 @@ public class ExpertRepositoryCustomImpl implements ExpertRepositoryCustom {
         Join<ExpertServiceModel, ExpertModel> ExpertServiceJoinExpert = serviceJoinExpertService.join(ExpertServiceModel_.expert, JoinType.INNER);
 
         query.select(root);
-        query.where(builder.equal(ExpertServiceJoinExpert.get(ExpertModel_.id), expertModel.getId()));
+        query.where(builder.equal(ExpertServiceJoinExpert.get(ExpertModel_.id), id));
 
         TypedQuery<OrderModel> result = entityManager.createQuery(query);
         return result.getResultList();
