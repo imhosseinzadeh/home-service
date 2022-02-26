@@ -1,6 +1,6 @@
 package ir.maktab.homeserviceprovider.dto.user.param;
 
-import ir.maktab.homeserviceprovider.dto.service.ServiceDto;
+import ir.maktab.homeserviceprovider.domain.model.user.UserModelStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,5 +9,6 @@ import lombok.Setter;
 public class UserSearchParam {
     private String firstname;
     private String Lastname;
-    private ServiceDto service;
+    private UserModelStatus status;
+    private Long serviceId;
 }
