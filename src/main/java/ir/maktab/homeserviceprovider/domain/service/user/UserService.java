@@ -8,7 +8,6 @@ import ir.maktab.homeserviceprovider.dto.user.param.UserSearchParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
-import ir.maktab.homeserviceprovider.repository.user.UserSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,12 +19,10 @@ import java.util.Optional;
 public abstract class UserService<U extends UserModel, D extends UserDto> extends BaseService<U, D, Long> {
 
     private final UserRepository<U> repository;
-    private final UserSpecifications<U> specifications;
 
-    protected UserService(UserRepository<U> userRepository, UserSpecifications<U> specifications) {
+    protected UserService(UserRepository<U> userRepository) {
         super(userRepository);
         this.repository = userRepository;
-        this.specifications = specifications;
     }
 
     @Transactional(readOnly = true)
