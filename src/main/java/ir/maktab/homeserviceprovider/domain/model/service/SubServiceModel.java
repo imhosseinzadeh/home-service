@@ -2,7 +2,6 @@ package ir.maktab.homeserviceprovider.domain.model.service;
 
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +19,6 @@ public class SubServiceModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(unique = true)

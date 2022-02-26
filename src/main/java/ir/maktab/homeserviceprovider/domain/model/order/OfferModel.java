@@ -2,7 +2,6 @@ package ir.maktab.homeserviceprovider.domain.model.order;
 
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +18,6 @@ public class OfferModel extends BaseModel<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     private Long id;
 
     @ManyToOne

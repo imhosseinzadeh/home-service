@@ -4,6 +4,7 @@ import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Entity(name = "Review")
 @Getter
+@Setter
 public class ReviewModel extends BaseModel<Long> {
 
     @Id

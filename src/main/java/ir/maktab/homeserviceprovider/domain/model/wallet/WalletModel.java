@@ -2,7 +2,6 @@ package ir.maktab.homeserviceprovider.domain.model.wallet;
 
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -19,7 +18,6 @@ import java.util.Set;
 public class WalletModel extends BaseModel<Long> {
 
     @Id
-    @Setter(AccessLevel.NONE)
     private Long id;
 
     @OneToOne(optional = false)
