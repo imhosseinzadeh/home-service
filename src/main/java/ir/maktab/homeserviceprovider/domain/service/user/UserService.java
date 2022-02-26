@@ -26,7 +26,7 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
     }
 
     @Transactional(readOnly = true)
-    public abstract Page<U> findAll(UserSearchParam searchParam, Pageable pageable);
+    public abstract Page<D> findAll(UserSearchParam searchParam, Pageable pageable);
 
     @Transactional(readOnly = true)
     public U findByEmail(String email) {

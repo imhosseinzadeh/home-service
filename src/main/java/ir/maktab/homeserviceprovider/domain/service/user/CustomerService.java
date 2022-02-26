@@ -38,11 +38,12 @@ public class CustomerService extends UserService<CustomerModel, CustomerDto> {
     }
 
     @Override
-    public Page<CustomerModel> findAll(UserSearchParam searchParam, Pageable pageable) {
+    public Page<CustomerDto> findAll(UserSearchParam searchParam, Pageable pageable) {
         return repository.findAll(CustomerSpecifications.withFirstname(searchParam.getFirstname())
-                        .and(CustomerSpecifications.withLastname(searchParam.getLastname()))
-                        .and(CustomerSpecifications.withStatus(searchParam.getStatus()))
-                , pageable);
+                                .and(CustomerSpecifications.withLastname(searchParam.getLastname()))
+                                .and(CustomerSpecifications.withStatus(searchParam.getStatus()))
+                        , pageable)
+                .map(this::mapToDto);
     }
 
 }

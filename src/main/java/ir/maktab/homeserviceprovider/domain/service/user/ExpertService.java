@@ -83,11 +83,12 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     }
 
     @Override
-    public Page<ExpertModel> findAll(UserSearchParam searchParam, Pageable pageable) {
+    public Page<ExpertDto> findAll(UserSearchParam searchParam, Pageable pageable) {
         return repository.findAll(ExpertSpecifications.withFirstname(searchParam.getFirstname())
-                        .and(ExpertSpecifications.withLastname(searchParam.getLastname()))
-                        .and(ExpertSpecifications.withStatus(searchParam.getStatus()))
-                        .and(ExpertSpecifications.withServiceId(searchParam.getServiceId()))
-                , pageable);
+                                .and(ExpertSpecifications.withLastname(searchParam.getLastname()))
+                                .and(ExpertSpecifications.withStatus(searchParam.getStatus()))
+                                .and(ExpertSpecifications.withServiceId(searchParam.getServiceId()))
+                        , pageable)
+                .map(this::mapToDto);
     }
 }

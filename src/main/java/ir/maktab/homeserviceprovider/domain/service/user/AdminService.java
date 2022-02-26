@@ -38,11 +38,12 @@ public class AdminService extends UserService<AdminModel, AdminDto> {
     }
 
     @Override
-    public Page<AdminModel> findAll(UserSearchParam searchParam, Pageable pageable) {
+    public Page<AdminDto> findAll(UserSearchParam searchParam, Pageable pageable) {
         return repository.findAll(AdminSpecifications.withFirstname(searchParam.getFirstname())
-                        .and(AdminSpecifications.withLastname(searchParam.getLastname()))
-                        .and(AdminSpecifications.withStatus(searchParam.getStatus()))
-                , pageable);
+                                .and(AdminSpecifications.withLastname(searchParam.getLastname()))
+                                .and(AdminSpecifications.withStatus(searchParam.getStatus()))
+                        , pageable)
+                .map(this::mapToDto);
     }
 
 }
