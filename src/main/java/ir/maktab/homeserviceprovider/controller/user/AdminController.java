@@ -3,6 +3,8 @@ package ir.maktab.homeserviceprovider.controller.user;
 import ir.maktab.homeserviceprovider.domain.service.user.AdminService;
 import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
+import ir.maktab.homeserviceprovider.dto.service.ServiceDto;
+import ir.maktab.homeserviceprovider.dto.service.SubServiceDto;
 import ir.maktab.homeserviceprovider.dto.user.AdminDto;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
@@ -42,6 +44,30 @@ public class AdminController implements IUserController<AdminDto> {
     public ResponseEntity<Page<ExpertDto>> getExpertsList(@PathVariable int page) {
         return ResponseEntity
                 .ok(this.expertService.findAllByPage(PageRequest.of(page, 10)));
+    }
+
+    @PostMapping("add-service")
+    public ResponseEntity<ServiceDto> addService(ServiceDto serviceDto) {
+        Optional<ServiceDto> optSaved = this.service.addService(serviceDto);
+        return optSaved
+                .map(savedDto -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(savedDto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
+    }
+
+    @PostMapping("add-subService")
+    public ResponseEntity<SubServiceDto> addSubService(SubServiceDto subServiceDto) {
+        Optional<SubServiceDto> optSaved = this.service.addSubService(subServiceDto);
+        return optSaved
+                .map(savedDto -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(savedDto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @Override
