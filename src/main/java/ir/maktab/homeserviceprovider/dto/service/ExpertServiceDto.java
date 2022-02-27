@@ -20,11 +20,11 @@ import javax.validation.constraints.PositiveOrZero;
 @EqualsAndHashCode(callSuper = true)
 public class ExpertServiceDto extends BaseDto<ExpertServiceModelId> {
 
-    @NotNull(message = "ExpertServiceDto-expert can not be null")
-    private ExpertModel expert;
+    @NotNull(message = "ExpertServiceDto-expertId can not be null")
+    private Long expertId;
 
-    @NotNull(message = "ExpertServiceDto-service can not be null")
-    private ServiceModel service;
+    @NotNull(message = "ExpertServiceDto-serviceId can not be null")
+    private Long serviceId;
 
     @PositiveOrZero(message = "ExpertServiceDto-experienceYears must be positive or zero")
     private Integer experienceYears;
