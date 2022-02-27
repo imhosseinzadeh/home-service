@@ -6,14 +6,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface ServiceMapper {
+public abstract class ServiceMapper {
 
-    ServiceDto mapToDto(ServiceModel model);
+    public abstract ServiceDto mapToDto(ServiceModel model);
 
-    ServiceModel mapToModel(ServiceDto dto);
+    public abstract ServiceModel mapToModel(ServiceDto dto);
 
-    void updateDtoByModel(@MappingTarget ServiceDto dto, ServiceModel model);
+    public abstract void updateDtoByModel(@MappingTarget ServiceDto dto, ServiceModel model);
 
-    void updateModelByDto(@MappingTarget ServiceModel model, ServiceDto dto);
+    public abstract void updateModelByDto(@MappingTarget ServiceModel model, ServiceDto dto);
 
 }

@@ -7,18 +7,18 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface SubServiceMapper {
+public abstract class SubServiceMapper {
 
     @Mapping(target = "serviceId", source = "service.id")
-    SubServiceDto mapToDto(SubServiceModel model);
+    public abstract SubServiceDto mapToDto(SubServiceModel model);
 
     @Mapping(target = "service.id", source = "serviceId")
-    SubServiceModel mapToModel(SubServiceDto dto);
+    public abstract SubServiceModel mapToModel(SubServiceDto dto);
 
     @Mapping(target = "serviceId", source = "service.id")
-    void updateDtoByModel(@MappingTarget SubServiceDto dto, SubServiceModel model);
+    public abstract void updateDtoByModel(@MappingTarget SubServiceDto dto, SubServiceModel model);
 
     @Mapping(target = "service.id", source = "serviceId")
-    void updateModelByDto(@MappingTarget SubServiceModel model, SubServiceDto dto);
+    public abstract void updateModelByDto(@MappingTarget SubServiceModel model, SubServiceDto dto);
 
 }

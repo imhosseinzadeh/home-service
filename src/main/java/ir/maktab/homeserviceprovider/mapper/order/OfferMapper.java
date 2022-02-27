@@ -5,23 +5,33 @@ import ir.maktab.homeserviceprovider.dto.order.OfferDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
-public interface OfferMapper {
+public abstract class OfferMapper {
 
-    @Mapping(target = "expertId", source = "expert.id")
-    @Mapping(target = "orderId", source = "order.id")
-    OfferDto mapToDto(OfferModel model);
+    @Mappings({
+            @Mapping(target = "expertId", source = "expert.id"),
+            @Mapping(target = "orderId", source = "order.id")
+    })
+    public abstract OfferDto mapToDto(OfferModel model);
 
-    @Mapping(target = "expert.id", source = "expertId")
-    @Mapping(target = "order.id", source = "orderId")
-    OfferModel mapToModel(OfferDto dto);
+    @Mappings({
+            @Mapping(target = "expert.id", source = "expertId"),
+            @Mapping(target = "order.id", source = "orderId")
+    })
+    public abstract OfferModel mapToModel(OfferDto dto);
 
-    @Mapping(target = "expertId", source = "expert.id")
-    @Mapping(target = "orderId", source = "order.id")
-    void updateDtoByModel(@MappingTarget OfferDto dto, OfferModel model);
+    @Mappings({
+            @Mapping(target = "expertId", source = "expert.id"),
+            @Mapping(target = "orderId", source = "order.id")
+    })
+    public abstract void updateDtoByModel(@MappingTarget OfferDto dto, OfferModel model);
 
-    @Mapping(target = "expert.id", source = "expertId")
-    @Mapping(target = "order.id", source = "orderId")
-    void updateModelByDto(@MappingTarget OfferModel model, OfferDto dto);
+    @Mappings({
+            @Mapping(target = "expert.id", source = "expertId"),
+            @Mapping(target = "order.id", source = "orderId")
+    })
+    public abstract void updateModelByDto(@MappingTarget OfferModel model, OfferDto dto);
+
 }

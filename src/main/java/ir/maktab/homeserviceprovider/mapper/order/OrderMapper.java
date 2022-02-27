@@ -5,20 +5,25 @@ import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
-public interface OrderMapper {
+public abstract class OrderMapper {
 
-    @Mapping(target = "customerId", source = "customer.id")
-    @Mapping(target = "subServiceId", source = "subService.id")
-    OrderDto mapToDto(OrderModel model);
+    @Mappings({
+            @Mapping(target = "customerId", source = "customer.id"),
+            @Mapping(target = "subServiceId", source = "subService.id")
+    })
+    public abstract OrderDto mapToDto(OrderModel model);
 
-    OrderModel mapToModel(OrderDto dto);
+    public abstract OrderModel mapToModel(OrderDto dto);
 
-    @Mapping(target = "customerId", source = "customer.id")
-    @Mapping(target = "subServiceId", source = "subService.id")
-    void updateDtoByModel(@MappingTarget OrderDto dto, OrderModel model);
+    @Mappings({
+            @Mapping(target = "customerId", source = "customer.id"),
+            @Mapping(target = "subServiceId", source = "subService.id")
+    })
+    public abstract void updateDtoByModel(@MappingTarget OrderDto dto, OrderModel model);
 
-    void updateModelByDto(@MappingTarget OrderModel model, OrderDto dto);
+    public abstract void updateModelByDto(@MappingTarget OrderModel model, OrderDto dto);
 
 }
