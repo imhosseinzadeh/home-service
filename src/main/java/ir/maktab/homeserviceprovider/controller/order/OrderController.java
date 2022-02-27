@@ -33,7 +33,7 @@ public class OrderController {
     //detail
     @GetMapping("/detail/{id}")
     ResponseEntity<OrderDto> getOrder(@PathVariable Long id) {
-        Optional<OrderDto> optLoaded = this.service.load(id);
+        Optional<OrderDto> optLoaded = this.service.findById(id);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity

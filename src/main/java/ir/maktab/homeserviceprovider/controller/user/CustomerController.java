@@ -41,7 +41,7 @@ public class CustomerController implements IUserController<CustomerDto> {
 
     @Override
     public ResponseEntity<CustomerDto> getProfile(Long id) {
-        Optional<CustomerDto> optLoaded = this.service.load(id);
+        Optional<CustomerDto> optLoaded = this.service.findById(id);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity

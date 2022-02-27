@@ -84,7 +84,7 @@ public class AdminController implements IUserController<AdminDto> {
 
     @Override
     public ResponseEntity<AdminDto> getProfile(Long id) {
-        Optional<AdminDto> optLoaded = this.service.load(id);
+        Optional<AdminDto> optLoaded = this.service.findById(id);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity

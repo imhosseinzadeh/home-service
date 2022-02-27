@@ -35,7 +35,7 @@ public abstract class UserService<U extends UserModel, D extends UserDto> extend
 
     @Transactional
     public void updatePasswordById(Long id, ChangePasswordParam param) throws DataNotExistsException, WrongDataInputException {
-        Optional<D> optUser = load(id);
+        Optional<D> optUser = findById(id);
         if (optUser.isPresent()) {
 
             String userPass = optUser.get().getPassword();

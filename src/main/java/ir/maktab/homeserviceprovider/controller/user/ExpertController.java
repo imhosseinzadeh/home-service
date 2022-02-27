@@ -41,7 +41,7 @@ public class ExpertController implements IUserController<ExpertDto> {
 
     @Override
     public ResponseEntity<ExpertDto> getProfile(Long id) {
-        Optional<ExpertDto> optLoaded = this.service.load(id);
+        Optional<ExpertDto> optLoaded = this.service.findById(id);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity

@@ -59,7 +59,7 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     }
 
     @Transactional(readOnly = true)
-    public Optional<D> load(I id) {
+    public Optional<D> findById(I id) {
         return jpaRepository.findById(id).map(this::mapToDto);
     }
 
