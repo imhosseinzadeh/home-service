@@ -2,9 +2,7 @@ package ir.maktab.homeserviceprovider.domain.model.service;
 
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,7 +12,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity(name = "ExpertService")
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class ExpertServiceModel extends BaseModel<ExpertServiceModelId> {
