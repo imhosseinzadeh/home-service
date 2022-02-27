@@ -1,6 +1,5 @@
 package ir.maktab.homeserviceprovider.dto.service;
 
-import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +21,8 @@ public class SubServiceDto extends BaseDto<Long> {
     @NotBlank(message = "SubServiceDto-name cannot blank")
     private String name;
 
-    @NotNull(message = "SubServiceDto cannot exists without service")
-    private ServiceModel service;
+    @NotNull(message = "SubServiceDto-serviceId cannot be null")
+    private Long serviceId;
 
     private BigDecimal basePrice;
 
