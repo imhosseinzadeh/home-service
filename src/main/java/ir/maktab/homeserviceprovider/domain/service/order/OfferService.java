@@ -27,7 +27,7 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
     }
 
     @Override
-    public Optional<OfferDto> save(OfferDto dto) {
+    public OfferDto save(OfferDto dto) {
         Optional<OrderDto> optOrder = this.orderService.findById(dto.getOrderId());
         if (optOrder.isPresent()) {
             BigDecimal orderPrice = optOrder.get().getProposedPrice();
@@ -35,11 +35,11 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
 
             if (offerPrice.compareTo(orderPrice) > 0) {
                 OfferModel saved = this.repository.save(this.offerMapper.mapToModel(dto));
-                return Optional.of(this.offerMapper.mapToDto(saved));
+                return this.offerMapper.mapToDto(saved);
             }
             //throw LesserPriceException();
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override

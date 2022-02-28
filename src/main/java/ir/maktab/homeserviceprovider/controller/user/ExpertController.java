@@ -31,14 +31,8 @@ public class ExpertController implements IUserController<ExpertDto> {
 
     @Override
     public ResponseEntity<ExpertDto> signup(ExpertDto registerDto) {
-        Optional<ExpertDto> optSaved = this.service.save(registerDto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        ExpertDto saved = this.service.save(registerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @Override
@@ -93,14 +87,8 @@ public class ExpertController implements IUserController<ExpertDto> {
 
     @PutMapping("offer-to-order/}")
     public ResponseEntity<OfferDto> offerToOrder(@RequestBody OfferDto offerDto) {
-        Optional<OfferDto> optSaved = this.offerService.save(offerDto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        OfferDto offered = this.offerService.save(offerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(offered);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

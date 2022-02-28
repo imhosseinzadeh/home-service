@@ -48,38 +48,20 @@ public class AdminController implements IUserController<AdminDto> {
 
     @PostMapping("add-service")
     public ResponseEntity<ServiceDto> addService(ServiceDto serviceDto) {
-        Optional<ServiceDto> optSaved = this.service.addService(serviceDto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        ServiceDto savedService = this.service.addService(serviceDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedService);
     }
 
     @PostMapping("add-subService")
     public ResponseEntity<SubServiceDto> addSubService(SubServiceDto subServiceDto) {
-        Optional<SubServiceDto> optSaved = this.service.addSubService(subServiceDto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        SubServiceDto savedSubService = this.service.addSubService(subServiceDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSubService);
     }
 
     @Override
     public ResponseEntity<AdminDto> signup(AdminDto registerDto) {
-        Optional<AdminDto> optSaved = this.service.save(registerDto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        AdminDto saved = this.service.save(registerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @Override

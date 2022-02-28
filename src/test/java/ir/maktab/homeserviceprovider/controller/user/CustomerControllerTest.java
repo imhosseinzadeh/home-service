@@ -7,12 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -43,8 +42,7 @@ class CustomerControllerTest extends AbstractRestControllerTest {
         CustomerDto registerDto = new CustomerDto(email, password);
 
         //mock service
-        Optional<CustomerDto> serviceResult = Optional.of(registerDto);
-        Mockito.when(service.save(any())).thenReturn(serviceResult);
+        OngoingStubbing<CustomerDto> serviceResult = Mockito.when(service.save(any())).thenReturn(registerDto);
 
         mockMvc.perform(post(this.signupUrl)
                         .content(writeJson(registerDto))

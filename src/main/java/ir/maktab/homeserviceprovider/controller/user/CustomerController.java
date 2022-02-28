@@ -29,14 +29,8 @@ public class CustomerController implements IUserController<CustomerDto> {
 
     @Override
     public ResponseEntity<CustomerDto> signup(CustomerDto registerDto) {
-        Optional<CustomerDto> optSaved = this.service.save(registerDto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        CustomerDto saved = this.service.save(registerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @Override

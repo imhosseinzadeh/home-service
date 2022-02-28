@@ -60,7 +60,7 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     }
 
     @Transactional
-    public Optional<ExpertServiceDto> addService(Long expertId, ServiceDto serviceDto) throws DataNotExistsException {
+    public ExpertServiceDto addService(Long expertId, ServiceDto serviceDto) throws DataNotExistsException {
         Optional<ExpertDto> optFind = findById(expertId);
         if (optFind.isPresent()) {
             ExpertModel expert = mapToModel(optFind.get());

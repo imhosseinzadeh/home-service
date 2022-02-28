@@ -20,14 +20,8 @@ public class OrderController {
 
     @PostMapping("/submit")
     ResponseEntity<OrderDto> submit(@RequestBody @Valid OrderDto dto) {
-        Optional<OrderDto> optSaved = service.save(dto);
-        return optSaved
-                .map(savedDto -> ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body(savedDto))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body(null));
+        OrderDto saved = this.service.save(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     //detail

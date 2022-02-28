@@ -15,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 public class AdminService extends UserService<AdminModel, AdminDto> {
 
@@ -49,12 +47,12 @@ public class AdminService extends UserService<AdminModel, AdminDto> {
     }
 
     @Transactional
-    public Optional<ServiceDto> addService(ServiceDto serviceDto) {
+    public ServiceDto addService(ServiceDto serviceDto) {
         return this.serviceService.save(serviceDto);
     }
 
     @Transactional
-    public Optional<SubServiceDto> addSubService(SubServiceDto subServiceDto) {
+    public SubServiceDto addSubService(SubServiceDto subServiceDto) {
         return this.subServiceService.save(subServiceDto);
     }
 
