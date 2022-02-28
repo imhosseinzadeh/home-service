@@ -15,11 +15,9 @@ public abstract class BaseModel<I extends Serializable> implements Serializable 
     @Version
     private Long version;
 
-    @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createDate;
 
-    @UpdateTimestamp
     private LocalDateTime updateDate;
 
     public abstract I getId();
