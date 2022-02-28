@@ -1,8 +1,6 @@
 package ir.maktab.homeserviceprovider.dto.service;
 
 import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModelId;
-import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
-import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
