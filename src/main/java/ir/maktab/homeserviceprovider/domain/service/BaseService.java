@@ -24,9 +24,9 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     protected abstract void updateModelByDto(D dto, M model);
 
     @Transactional
-    public Optional<D> save(D dto) {
+    public D save(D dto) {
         M savedModel = jpaRepository.save(mapToModel(dto));
-        return Optional.ofNullable(mapToDto(savedModel));
+        return mapToDto(savedModel);
     }
 
     @Transactional
