@@ -2,18 +2,19 @@ package ir.maktab.homeserviceprovider.mapper.user;
 
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
+import ir.maktab.homeserviceprovider.mapper.AbstractGenericMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface ExpertMapper {
+public abstract class ExpertMapper extends AbstractGenericMapper<ExpertModel, Long> {
 
-    ExpertDto mapToDto(ExpertModel model);
+    public abstract ExpertDto mapToDto(ExpertModel model);
 
-    ExpertModel mapToModel(ExpertDto dto);
+    public abstract ExpertModel mapToModel(ExpertDto dto);
 
-    void updateDtoByModel(@MappingTarget ExpertDto dto, ExpertModel model);
+    public abstract void updateDtoByModel(@MappingTarget ExpertDto dto, ExpertModel model);
 
-    void updateModelByDto(@MappingTarget ExpertModel model, ExpertDto dto);
+    public abstract void updateModelByDto(@MappingTarget ExpertModel model, ExpertDto dto);
 
 }
