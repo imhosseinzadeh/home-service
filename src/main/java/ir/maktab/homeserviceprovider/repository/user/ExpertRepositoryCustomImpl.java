@@ -4,7 +4,7 @@ import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel_;
 import ir.maktab.homeserviceprovider.domain.model.service.*;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
-import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel_;
+import ir.maktab.homeserviceprovider.domain.model.user.UserModel_;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -41,7 +41,7 @@ public class ExpertRepositoryCustomImpl implements ExpertRepositoryCustom {
         Join<ExpertServiceModel, ExpertModel> ExpertServiceJoinExpert = serviceJoinExpertService.join(ExpertServiceModel_.expert, JoinType.INNER);
 
         query.select(root);
-        query.where(builder.equal(ExpertServiceJoinExpert.get(ExpertModel_.id), id));
+        query.where(builder.equal(ExpertServiceJoinExpert.get(UserModel_.id), id));
 
         TypedQuery<OrderModel> result = entityManager.createQuery(query);
         return result.getResultList();

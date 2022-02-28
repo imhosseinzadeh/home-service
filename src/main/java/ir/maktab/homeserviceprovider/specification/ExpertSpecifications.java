@@ -7,6 +7,7 @@ import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel_;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel_;
 import ir.maktab.homeserviceprovider.domain.model.user.UserModelStatus;
+import ir.maktab.homeserviceprovider.domain.model.user.UserModel_;
 import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -20,21 +21,21 @@ public final class ExpertSpecifications {
         if (firstname == null) {
             return null;
         }
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(ExpertModel_.firstname), firstname);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(UserModel_.firstname), firstname);
     }
 
     public static Specification<ExpertModel> withLastname(String lastname) {
         if (lastname == null) {
             return null;
         }
-        return (root, query, builder) -> builder.equal(root.get(ExpertModel_.lastname), lastname);
+        return (root, query, builder) -> builder.equal(root.get(UserModel_.lastname), lastname);
     }
 
     public static Specification<ExpertModel> withStatus(UserModelStatus status) {
         if (status == null) {
             return null;
         }
-        return (root, query, builder) -> builder.equal(root.get(ExpertModel_.status), status);
+        return (root, query, builder) -> builder.equal(root.get(UserModel_.status), status);
     }
 
     public static Specification<ExpertModel> withServiceId(Long serviceId) {
