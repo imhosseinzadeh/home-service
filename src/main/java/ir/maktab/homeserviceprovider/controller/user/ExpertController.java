@@ -1,6 +1,8 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
+import ir.maktab.homeserviceprovider.domain.service.order.OfferService;
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
+import ir.maktab.homeserviceprovider.dto.order.OfferDto;
 import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class ExpertController implements IUserController<ExpertDto> {
 
     private final ExpertService service;
+    private final OfferService offerService;
 
     @Override
     public ResponseEntity<ExpertDto> signup(ExpertDto registerDto) {
@@ -86,6 +89,18 @@ public class ExpertController implements IUserController<ExpertDto> {
     @GetMapping("/related-orders/{id}")
     public ResponseEntity<List<OrderDto>> getRelatedOrders(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.getRelatedOrders(id));
+    }
+
+    @PutMapping("offer-to-order/}")
+    public ResponseEntity<OfferDto> offerToOrder(@RequestBody OfferDto offerDto) {
+        Optional<OfferDto> optSaved = this.offerService.save(offerDto);
+        return optSaved
+                .map(savedDto -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(savedDto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
