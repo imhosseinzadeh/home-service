@@ -85,7 +85,7 @@ public class ExpertController implements IUserController<ExpertDto> {
     }
 
     @GetMapping("/related-orders/{id}")
-    public ResponseEntity<List<OrderDto>> getRelatedOrder(@PathVariable Long id) {
+    public ResponseEntity<List<OrderDto>> getRelatedOrders(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.getRelatedOrders(id, Pageable.unpaged()));
     }
 
