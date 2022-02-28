@@ -34,13 +34,13 @@ public class AdminController implements IUserController<AdminDto> {
     private final CustomerService customerService;
     private final ExpertService expertService;
 
-    @GetMapping("/customer-list/{page}")
-    public ResponseEntity<Page<CustomerDto>> getCustomerList(@PathVariable int page) {
+    @GetMapping("/customers-list/{page}")
+    public ResponseEntity<Page<CustomerDto>> getCustomersList(@PathVariable int page) {
         return ResponseEntity
                 .ok(this.customerService.findAllByPage(PageRequest.of(page, 10)));
     }
 
-    @GetMapping("/expert-list/{page}")
+    @GetMapping("/experts-list/{page}")
     public ResponseEntity<Page<ExpertDto>> getExpertsList(@PathVariable int page) {
         return ResponseEntity
                 .ok(this.expertService.findAllByPage(PageRequest.of(page, 10)));
