@@ -1,5 +1,7 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
+import ir.maktab.homeserviceprovider.domain.service.service.ServiceService;
+import ir.maktab.homeserviceprovider.domain.service.service.SubServiceService;
 import ir.maktab.homeserviceprovider.domain.service.user.AdminService;
 import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
@@ -31,6 +33,8 @@ import java.util.Optional;
 public class AdminController implements IUserController<AdminDto> {
 
     private final AdminService service;
+    private final ServiceService serviceService;
+    private final SubServiceService subServiceService;
     private final CustomerService customerService;
     private final ExpertService expertService;
 
@@ -48,13 +52,13 @@ public class AdminController implements IUserController<AdminDto> {
 
     @PostMapping("add-service")
     public ResponseEntity<ServiceDto> addService(ServiceDto serviceDto) {
-        ServiceDto savedService = this.service.addService(serviceDto);
+        ServiceDto savedService = this.serviceService.save(serviceDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedService);
     }
 
     @PostMapping("add-subService")
     public ResponseEntity<SubServiceDto> addSubService(SubServiceDto subServiceDto) {
-        SubServiceDto savedSubService = this.service.addSubService(subServiceDto);
+        SubServiceDto savedSubService = this.subServiceService.save(subServiceDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSubService);
     }
 
