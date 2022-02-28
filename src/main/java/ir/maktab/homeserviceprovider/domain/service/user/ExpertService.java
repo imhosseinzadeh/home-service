@@ -49,7 +49,7 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     }
 
     @Transactional(readOnly = true)
-    public List<OrderDto> getRelatedOrders(Long id, Pageable pageable) {
+    public List<OrderDto> getRelatedOrders(Long id) {
         List<OrderModel> relatedOrder = repository.getRelatedOrder(id);
         List<OrderDto> resultDto = new ArrayList<>();
         for (OrderModel orderModel : relatedOrder) {

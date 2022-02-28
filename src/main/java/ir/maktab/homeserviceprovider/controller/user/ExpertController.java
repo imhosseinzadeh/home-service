@@ -7,7 +7,6 @@ import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -86,7 +85,7 @@ public class ExpertController implements IUserController<ExpertDto> {
 
     @GetMapping("/related-orders/{id}")
     public ResponseEntity<List<OrderDto>> getRelatedOrders(@PathVariable Long id) {
-        return ResponseEntity.ok(this.service.getRelatedOrders(id, Pageable.unpaged()));
+        return ResponseEntity.ok(this.service.getRelatedOrders(id));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
