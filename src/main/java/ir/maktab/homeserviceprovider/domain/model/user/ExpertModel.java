@@ -17,29 +17,25 @@ import java.util.Set;
 @Setter
 public class ExpertModel extends UserModel {
 
+    @Lob
+    @Column(columnDefinition = "mediumblob")
+    private byte[] image;
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ExpertServiceModel> expertServices = new HashSet<>();
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<OfferModel> offers = new HashSet<>();
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ReviewModel> reviews = new HashSet<>();
+    @PositiveOrZero(message = "ExpertModel-score must be positive or zero")
+    @Range(min = 0, max = 5)
+    @Setter(AccessLevel.NONE)
+    private Integer score;
+
     @Builder(builderMethodName = "expertBuilder")
     public ExpertModel(Long id, String firstname, String lastname, String email, String password, UserModelStatus status, byte[] image) {
         super(id, firstname, lastname, email, password, status);
         this.image = image;
     }
-
-    @Lob
-    @Column(columnDefinition = "mediumblob")
-    private byte[] image;
-
-    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<ExpertServiceModel> expertServices = new HashSet<>();
-
-    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<OfferModel> offers = new HashSet<>();
-
-    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<ReviewModel> reviews = new HashSet<>();
-
-    @PositiveOrZero(message = "ExpertModel-score must be positive or zero")
-    @Range(min = 0, max = 5)
-    @Setter(AccessLevel.NONE)
-    private Integer score;
 
     public Integer getScore() {
         this.score = reviews.stream().mapToInt(ReviewModel::getScore).sum() / reviews.size();

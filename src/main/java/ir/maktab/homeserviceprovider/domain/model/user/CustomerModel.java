@@ -20,16 +20,15 @@ import java.util.Set;
 @Setter
 public class CustomerModel extends UserModel {
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<OrderModel> orders = new HashSet<>();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ReviewModel> reviews = new HashSet<>();
+
     @Builder(builderMethodName = "customerBuilder")
     public CustomerModel(Long id, String firstname, String lastname, String email, String password, UserModelStatus status) {
         super(id, firstname, lastname, email, password, status);
     }
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<OrderModel> orders = new HashSet<>();
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<ReviewModel> reviews = new HashSet<>();
 
     public void setOrders(Set<OrderModel> orders) {
         orders.forEach(this::addOrder);
