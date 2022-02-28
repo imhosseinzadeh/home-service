@@ -1,3 +1,4 @@
+/*
 package ir.maktab.homeserviceprovider.mapper;
 
 import org.mapstruct.MappingTarget;
@@ -13,3 +14,4 @@ public interface GenericMapper<M, D> {
     void updateModelByDto(@MappingTarget M model, D dto);
 
 }
+*/
