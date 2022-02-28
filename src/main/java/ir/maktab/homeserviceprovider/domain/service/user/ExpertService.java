@@ -88,17 +88,17 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
 
     @Override
     protected ExpertDto mapToDto(ExpertModel model) {
-        return null;
+        return this.expertMapper.mapToDto(model);
     }
 
     @Override
     protected ExpertModel mapToModel(ExpertDto dto) {
-        return null;
+        return this.expertMapper.mapToModel(dto);
     }
 
     @Override
     protected void updateModelByDto(ExpertDto dto, ExpertModel model) {
-
+        this.expertMapper.updateModelByDto(model, dto);
     }
 
     @Override
