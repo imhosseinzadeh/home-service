@@ -19,14 +19,14 @@ public class OrderController {
     private final OrderService service;
 
     @PostMapping("/submit")
-    ResponseEntity<OrderDto> submit(@RequestBody @Valid OrderDto dto) {
+    public ResponseEntity<OrderDto> submit(@RequestBody @Valid OrderDto dto) {
         OrderDto saved = this.service.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     //detail
     @GetMapping("/detail/{id}")
-    ResponseEntity<OrderDto> getOrder(@PathVariable Long id) {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long id) {
         Optional<OrderDto> optLoaded = this.service.findById(id);
         return optLoaded
                 .map(ResponseEntity::ok)
@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     @PutMapping("/detail/{id}")
-    ResponseEntity<OrderDto> updateOrder(@PathVariable Long id, @RequestBody @Valid OrderDto dto) {
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable Long id, @RequestBody @Valid OrderDto dto) {
         dto.setId(id);
         Optional<OrderDto> optUpdated = this.service.update(dto);
         return optUpdated
@@ -47,7 +47,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/delete-order/{id}")
-    ResponseEntity<String> deleteOrder(@PathVariable Long id) {
+    public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
         try {
             this.service.deleteById(id);
             return ResponseEntity.ok("Order has been successfully deleted");
