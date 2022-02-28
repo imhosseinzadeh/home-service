@@ -85,7 +85,7 @@ public class ExpertController implements IUserController<ExpertDto> {
         return ResponseEntity.ok(this.service.getRelatedOrders(id));
     }
 
-    @PutMapping("offer-to-order/}")
+    @PutMapping("offer-to-order}")
     public ResponseEntity<OfferDto> offerToOrder(@RequestBody OfferDto offerDto) {
         OfferDto offered = this.offerService.save(offerDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(offered);
