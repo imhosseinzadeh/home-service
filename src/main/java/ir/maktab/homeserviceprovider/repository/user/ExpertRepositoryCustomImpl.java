@@ -38,10 +38,10 @@ public class ExpertRepositoryCustomImpl implements ExpertRepositoryCustom {
         Join<OrderModel, SubServiceModel> orderJoinSubService = root.join(OrderModel_.subService, JoinType.INNER);
         Join<SubServiceModel, ServiceModel> subServiceJoinService = orderJoinSubService.join(SubServiceModel_.service, JoinType.INNER);
         Join<ServiceModel, ExpertServiceModel> serviceJoinExpertService = subServiceJoinService.join(ServiceModel_.expertServices, JoinType.INNER);
-        Join<ExpertServiceModel, ExpertModel> ExpertServiceJoinExpert = serviceJoinExpertService.join(ExpertServiceModel_.expert, JoinType.INNER);
+        Join<ExpertServiceModel, ExpertModel> expertServiceJoinExpert = serviceJoinExpertService.join(ExpertServiceModel_.expert, JoinType.INNER);
 
         query.select(root);
-        query.where(builder.equal(ExpertServiceJoinExpert.get(UserModel_.id), id));
+        query.where(builder.equal(expertServiceJoinExpert.get(UserModel_.id), id));
 
         TypedQuery<OrderModel> result = entityManager.createQuery(query);
         return result.getResultList();

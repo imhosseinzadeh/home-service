@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class UserSearchParam {
     private String firstname;
-    private String Lastname;
+    private String lastname;
     private UserModelStatus status;
     private Long serviceId;
 }
