@@ -75,18 +75,6 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
         }
     }
 
-    @Transactional(readOnly = true)
-    public Page<ServiceModel> findServicesByExpert(ExpertModel expert, Pageable pageable) {
-        Page<ExpertServiceModel> allByExpert = expertServiceService.findAllByExpert(expert, pageable);
-        return allByExpert.map(ExpertServiceModel::getService);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<ExpertModel> findExpertsByService(ServiceModel service, Pageable pageable) {
-        Page<ExpertServiceModel> allByService = expertServiceService.findAllByService(service, pageable);
-        return allByService.map(ExpertServiceModel::getExpert);
-    }
-
     @Override
     protected ExpertDto mapToDto(ExpertModel model) {
         return this.expertMapper.mapToDto(model);
