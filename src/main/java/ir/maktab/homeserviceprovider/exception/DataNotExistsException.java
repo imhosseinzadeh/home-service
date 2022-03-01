@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class DataNotExistsException extends Exception {
+
     public DataNotExistsException(String message) {
         super(message);
     }
