@@ -8,7 +8,6 @@ import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.mapper.order.OfferMapper;
 import ir.maktab.homeserviceprovider.mapper.order.OrderMapper;
-import ir.maktab.homeserviceprovider.repository.order.OfferRepository;
 import ir.maktab.homeserviceprovider.repository.order.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +18,16 @@ import java.util.Set;
 public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
 
     private final OrderRepository repository;
-    private final OfferRepository offerRepository;
-    private final OrderMapper mapper;
+    private final OfferService offerService;
+
+    private final OrderMapper orderMapper;
     private final OfferMapper offerMapper;
 
-    public OrderService(OrderRepository orderRepository, OfferRepository offerRepository, OrderMapper mapper, OfferMapper offerMapper) {
-        super(orderRepository);
-        this.repository = orderRepository;
-        this.offerRepository = offerRepository;
-        this.mapper = mapper;
+    public OrderService(OrderRepository repository, OfferService offerService, OrderMapper orderMapper, OfferMapper offerMapper) {
+        super(repository, orderMapper);
+        this.repository = repository;
+        this.offerService = offerService;
+        this.orderMapper = orderMapper;
         this.offerMapper = offerMapper;
     }
 
@@ -42,29 +42,14 @@ public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
 
     public void acceptOffer(Long orderId, Long offerId) throws DataNotExistsException {
         Optional<OrderModel> optOrder = this.repository.findById(orderId);
-        Optional<OfferModel> optOffer = this.offerRepository.findById(offerId);
+        Optional<OfferDto> optOffer = this.offerService.findById(offerId);
         if (optOrder.isPresent() && optOffer.isPresent()) {
             OrderModel order = optOrder.get();
-            OfferModel offer = optOffer.get();
+            OfferModel offer = this.offerMapper.mapToModel(optOffer.get());
             order.setAcceptedOffer(offer);
             this.repository.save(order);
         }
         throw new DataNotExistsException();
-    }
-
-    @Override
-    protected OrderDto mapToDto(OrderModel model) {
-        return this.mapper.mapToDto(model);
-    }
-
-    @Override
-    protected OrderModel mapToModel(OrderDto dto) {
-        return this.mapper.mapToModel(dto);
-    }
-
-    @Override
-    protected void updateModelByDto(OrderDto dto, OrderModel model) {
-        this.mapper.updateModelByDto(model, dto);
     }
 
 }

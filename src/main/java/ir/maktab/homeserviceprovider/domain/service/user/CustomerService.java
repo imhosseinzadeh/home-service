@@ -14,27 +14,12 @@ import org.springframework.stereotype.Service;
 public class CustomerService extends UserService<CustomerModel, CustomerDto> {
 
     private final CustomerRepository repository;
-    private final CustomerMapper mapper;
+    private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper mapper) {
-        super(customerRepository);
-        this.repository = customerRepository;
-        this.mapper = mapper;
-    }
-
-    @Override
-    protected CustomerDto mapToDto(CustomerModel model) {
-        return this.mapper.mapToDto(model);
-    }
-
-    @Override
-    protected CustomerModel mapToModel(CustomerDto dto) {
-        return this.mapper.mapToModel(dto);
-    }
-
-    @Override
-    protected void updateModelByDto(CustomerDto dto, CustomerModel model) {
-        this.mapper.updateModelByDto(model, dto);
+    public CustomerService(CustomerRepository repository, CustomerMapper mapper) {
+        super(repository, mapper);
+        this.repository = repository;
+        this.customerMapper = mapper;
     }
 
     @Override
@@ -43,7 +28,7 @@ public class CustomerService extends UserService<CustomerModel, CustomerDto> {
                                 .and(CustomerSpecifications.withLastname(searchParam.getLastname()))
                                 .and(CustomerSpecifications.withStatus(searchParam.getStatus()))
                         , pageable)
-                .map(this::mapToDto);
+                .map(customerMapper::mapToDto);
     }
 
 }

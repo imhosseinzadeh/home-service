@@ -7,6 +7,7 @@ import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.dto.user.param.UserSearchParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import ir.maktab.homeserviceprovider.exception.WrongDataInputException;
+import ir.maktab.homeserviceprovider.mapper.user.AbstractUserMapper;
 import ir.maktab.homeserviceprovider.repository.user.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,18 +20,20 @@ import java.util.Optional;
 public abstract class UserService<U extends UserModel, D extends UserDto> extends BaseService<U, D, Long> {
 
     private final UserRepository<U> repository;
+    private final AbstractUserMapper<U, D> userMapper;
 
-    protected UserService(UserRepository<U> userRepository) {
-        super(userRepository);
-        this.repository = userRepository;
+    public UserService(UserRepository<U> repository, AbstractUserMapper<U, D> userMapper) {
+        super(repository, userMapper);
+        this.repository = repository;
+        this.userMapper = userMapper;
     }
 
     @Transactional(readOnly = true)
     public abstract Page<D> findAll(UserSearchParam searchParam, Pageable pageable);
 
     @Transactional(readOnly = true)
-    public U findByEmail(String email) {
-        return repository.findByEmail(email);
+    public D findByEmail(String email) {
+        return userMapper.mapToDto(repository.findByEmail(email));
     }
 
     @Transactional

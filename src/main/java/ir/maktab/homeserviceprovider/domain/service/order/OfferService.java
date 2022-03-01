@@ -15,14 +15,12 @@ import java.math.BigDecimal;
 public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
 
     private final OfferRepository repository;
-    private final OrderService orderService;
 
     private final OfferMapper offerMapper;
 
-    public OfferService(OfferRepository offerRepository, OrderService orderService, OfferMapper offerMapper) {
-        super(offerRepository);
-        this.repository = offerRepository;
-        this.orderService = orderService;
+    public OfferService(OfferRepository repository, OfferMapper offerMapper) {
+        super(repository, offerMapper);
+        this.repository = repository;
         this.offerMapper = offerMapper;
     }
 
@@ -41,21 +39,6 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
         }
         //throw LesserPriceException();
         return null;
-    }
-
-    @Override
-    protected OfferDto mapToDto(OfferModel model) {
-        return null;
-    }
-
-    @Override
-    protected OfferModel mapToModel(OfferDto dto) {
-        return null;
-    }
-
-    @Override
-    protected void updateModelByDto(OfferDto dto, OfferModel model) {
-
     }
 
 }

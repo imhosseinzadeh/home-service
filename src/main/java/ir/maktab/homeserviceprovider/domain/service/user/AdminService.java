@@ -14,27 +14,12 @@ import org.springframework.stereotype.Service;
 public class AdminService extends UserService<AdminModel, AdminDto> {
 
     private final AdminRepository repository;
-    private final AdminMapper mapper;
+    private final AdminMapper adminMapper;
 
-    public AdminService(AdminRepository adminRepository, AdminMapper mapper) {
-        super(adminRepository);
-        this.repository = adminRepository;
-        this.mapper = mapper;
-    }
-
-    @Override
-    protected AdminDto mapToDto(AdminModel model) {
-        return null;
-    }
-
-    @Override
-    protected AdminModel mapToModel(AdminDto dto) {
-        return null;
-    }
-
-    @Override
-    protected void updateModelByDto(AdminDto dto, AdminModel model) {
-
+    public AdminService(AdminRepository repository, AdminMapper adminMapper) {
+        super(repository, adminMapper);
+        this.repository = repository;
+        this.adminMapper = adminMapper;
     }
 
     @Override
@@ -43,7 +28,7 @@ public class AdminService extends UserService<AdminModel, AdminDto> {
                                 .and(AdminSpecifications.withLastname(searchParam.getLastname()))
                                 .and(AdminSpecifications.withStatus(searchParam.getStatus()))
                         , pageable)
-                .map(this::mapToDto);
+                .map(adminMapper::mapToDto);
     }
 
 }

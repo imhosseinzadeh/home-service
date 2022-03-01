@@ -11,26 +11,11 @@ import org.springframework.stereotype.Service;
 public class ServiceService extends BaseService<ServiceModel, ServiceDto, Long> {
 
     private final ServiceRepository repository;
-    private final ServiceMapper mapper;
+    private final ServiceMapper serviceMapper;
 
-    public ServiceService(ServiceRepository serviceRepository, ServiceMapper mapper) {
-        super(serviceRepository);
-        this.repository = serviceRepository;
-        this.mapper = mapper;
-    }
-
-    @Override
-    protected ServiceDto mapToDto(ServiceModel model) {
-        return mapper.mapToDto(model);
-    }
-
-    @Override
-    protected ServiceModel mapToModel(ServiceDto dto) {
-        return mapper.mapToModel(dto);
-    }
-
-    @Override
-    protected void updateModelByDto(ServiceDto dto, ServiceModel model) {
-        mapper.updateModelByDto(model, dto);
+    public ServiceService(ServiceRepository repository, ServiceMapper serviceMapper) {
+        super(repository, serviceMapper);
+        this.repository = repository;
+        this.serviceMapper = serviceMapper;
     }
 }

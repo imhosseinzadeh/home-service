@@ -6,6 +6,7 @@ import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.domain.service.BaseService;
 import ir.maktab.homeserviceprovider.dto.service.ExpertServiceDto;
+import ir.maktab.homeserviceprovider.mapper.user.ExpertServiceMapper;
 import ir.maktab.homeserviceprovider.repository.service.ExpertServiceRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ExpertServiceService extends BaseService<ExpertServiceModel, ExpertServiceDto, ExpertServiceModelId> {
 
     private final ExpertServiceRepository repository;
+    private final ExpertServiceMapper expertServiceMapper;
 
-    public ExpertServiceService(ExpertServiceRepository expertServiceRepository) {
-        super(expertServiceRepository);
-        this.repository = expertServiceRepository;
+    public ExpertServiceService(ExpertServiceRepository repository, ExpertServiceMapper expertServiceMapper) {
+        super(repository, expertServiceMapper);
+        this.repository = repository;
+        this.expertServiceMapper = expertServiceMapper;
     }
 
     public Page<ExpertServiceModel> findAllByService(ServiceModel service, Pageable pageable) {
@@ -42,18 +45,4 @@ public class ExpertServiceService extends BaseService<ExpertServiceModel, Expert
         return allByService.map(ExpertServiceModel::getExpert);
     }
 
-    @Override
-    protected ExpertServiceDto mapToDto(ExpertServiceModel model) {
-        return null;
-    }
-
-    @Override
-    protected ExpertServiceModel mapToModel(ExpertServiceDto dto) {
-        return null;
-    }
-
-    @Override
-    protected void updateModelByDto(ExpertServiceDto dto, ExpertServiceModel model) {
-
-    }
 }
