@@ -1,8 +1,6 @@
 package ir.maktab.homeserviceprovider.domain.model;
 
 import lombok.Getter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,4 +35,5 @@ public abstract class BaseModel<I extends Serializable> implements Serializable 
     public void onUpdate() {
         updateDate = LocalDateTime.now();
     }
+
 }
