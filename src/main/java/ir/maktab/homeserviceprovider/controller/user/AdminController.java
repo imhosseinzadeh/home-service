@@ -1,10 +1,12 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
+import ir.maktab.homeserviceprovider.domain.service.service.ExpertServiceService;
 import ir.maktab.homeserviceprovider.domain.service.service.ServiceService;
 import ir.maktab.homeserviceprovider.domain.service.service.SubServiceService;
 import ir.maktab.homeserviceprovider.domain.service.user.AdminService;
 import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
+import ir.maktab.homeserviceprovider.dto.service.ExpertServiceDto;
 import ir.maktab.homeserviceprovider.dto.service.ServiceDto;
 import ir.maktab.homeserviceprovider.dto.service.SubServiceDto;
 import ir.maktab.homeserviceprovider.dto.user.AdminDto;
@@ -35,6 +37,7 @@ public class AdminController implements IUserController<AdminDto> {
     private final AdminService service;
     private final ServiceService serviceService;
     private final SubServiceService subServiceService;
+    private final ExpertServiceService expertServiceService;
     private final CustomerService customerService;
     private final ExpertService expertService;
 
@@ -60,6 +63,11 @@ public class AdminController implements IUserController<AdminDto> {
     public ResponseEntity<SubServiceDto> addSubService(SubServiceDto subServiceDto) {
         SubServiceDto savedSubService = this.subServiceService.save(subServiceDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSubService);
+    }
+
+    @PostMapping("add-service-to-expert")
+    public ResponseEntity<ExpertServiceDto> addServiceToExpert(@RequestBody ExpertServiceDto serviceDto) {
+        return ResponseEntity.ok(this.expertServiceService.save(serviceDto));
     }
 
     @Override
