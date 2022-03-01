@@ -1,7 +1,5 @@
 package ir.maktab.homeserviceprovider.dto.order;
 
-import ir.maktab.homeserviceprovider.domain.model.user.CustomerModel;
-import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,11 +18,11 @@ import javax.validation.constraints.PositiveOrZero;
 @EqualsAndHashCode(callSuper = true)
 public class ReviewDto extends BaseDto<Long> {
 
-    @NotNull(message = "ReviewDto-customer cannot be null")
-    private CustomerModel customer;
+    @NotNull(message = "ReviewDto-customerId cannot be null")
+    private Long customerId;
 
-    @NotNull(message = "ReviewDto-expert cannot be null")
-    private ExpertModel expert;
+    @NotNull(message = "ReviewDto-expertId cannot be null")
+    private Long expertId;
 
     @NotNull(message = "ReviewDto-score cannot be null")
     @PositiveOrZero(message = "ReviewDto-score must be positive or zero")
