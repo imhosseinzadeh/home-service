@@ -71,6 +71,11 @@ public class OrderModel extends BaseModel<Long> {
         this.offers = offers;
     }
 
+    public void setAcceptedOffer(OfferModel acceptedOffer) {
+        this.acceptedOffer = acceptedOffer;
+        this.status = OrderModelStatus.WAITING_FOR_EXPERT_TO_COME_TO_YOUR_PLACE;
+    }
+
     public void addOffer(OfferModel offer) {
         offer.setOrder(this);
     }
