@@ -71,6 +71,11 @@ public class OrderModel extends BaseModel<Long> {
         this.offers = offers;
     }
 
+    public void setAcceptedOffer(OfferModel acceptedOffer) {
+        this.acceptedOffer = acceptedOffer;
+        this.status = OrderModelStatus.WAIT_FOR_EXPERT_TO_COME_TO_YOUR_PLACE;
+    }
+
     public void addOffer(OfferModel offer) {
         offer.setOrder(this);
     }
@@ -82,7 +87,7 @@ public class OrderModel extends BaseModel<Long> {
     @Override
     public void onPersist() {
         super.onPersist();
-        this.status = OrderModelStatus.WAITING_FOR_EXPERTS_SUGGESTIONS;
+        this.status = OrderModelStatus.WAIT_FOR_EXPERTS_SUGGESTIONS;
     }
 
 }
