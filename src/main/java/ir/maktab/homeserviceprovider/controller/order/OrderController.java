@@ -1,6 +1,7 @@
 package ir.maktab.homeserviceprovider.controller.order;
 
 import ir.maktab.homeserviceprovider.domain.service.order.OrderService;
+import ir.maktab.homeserviceprovider.dto.order.OfferDto;
 import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/orders")
@@ -24,7 +26,6 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    //detail
     @GetMapping("/detail/{id}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable Long id) {
         Optional<OrderDto> optLoaded = this.service.findById(id);
@@ -33,6 +34,12 @@ public class OrderController {
                 .orElse(ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
                         .body(null));
+    }
+
+    @GetMapping("order-offers/{id}")
+    public ResponseEntity<Set<OfferDto>> getOrderOffers(@PathVariable Long id) {
+        Set<OfferDto> orderOffers = this.service.getOrderOffers(id);
+        return ResponseEntity.ok(orderOffers);
     }
 
     @PutMapping("/detail/{id}")
