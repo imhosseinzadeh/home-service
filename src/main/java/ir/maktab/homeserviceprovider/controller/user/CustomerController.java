@@ -1,6 +1,7 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.user.CustomerService;
+import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.dto.user.CustomerDto;
 import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
@@ -10,15 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/customers")
@@ -53,6 +52,17 @@ public class CustomerController implements IUserController<CustomerDto> {
                         .status(HttpStatus.BAD_REQUEST)
                         .body(null));
     }
+
+    @GetMapping("orders-history/{customerId}")
+    public ResponseEntity<Set<OrderDto>> ordersHistory(@PathVariable Long customerId) {
+        try {
+            return ResponseEntity.ok(this.service.ordersHistory(customerId));
+        } catch (DataNotExistsException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public ResponseEntity<String> changePassword(Long id, ChangePasswordParam param) {
