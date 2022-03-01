@@ -36,12 +36,6 @@ public class OrderController {
                         .body(null));
     }
 
-    @GetMapping("order-offers/{id}")
-    public ResponseEntity<Set<OfferDto>> getOrderOffers(@PathVariable Long id) {
-        Set<OfferDto> orderOffers = this.service.getOrderOffers(id);
-        return ResponseEntity.ok(orderOffers);
-    }
-
     @PutMapping("/detail/{id}")
     public ResponseEntity<OrderDto> updateOrder(@PathVariable Long id, @RequestBody @Valid OrderDto dto) {
         dto.setId(id);
@@ -64,4 +58,22 @@ public class OrderController {
                     .body("Order with id: " + id + " does not exist");
         }
     }
+
+
+    @GetMapping("order-offers/{id}")
+    public ResponseEntity<Set<OfferDto>> getOrderOffers(@PathVariable Long id) {
+        Set<OfferDto> orderOffers = this.service.getOrderOffers(id);
+        return ResponseEntity.ok(orderOffers);
+    }
+
+    @PostMapping("accept-offer/{orderId}/{offerId}")
+    public ResponseEntity<String> acceptOffer(@PathVariable Long orderId, @PathVariable Long offerId) {
+        try {
+            this.service.acceptOffer(orderId, offerId);
+            return ResponseEntity.ok("Offer by id:" + offerId + " accepted for Order by id:" + orderId);
+        } catch (DataNotExistsException e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+    }
+
 }
