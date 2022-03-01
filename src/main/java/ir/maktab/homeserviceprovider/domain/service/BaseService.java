@@ -3,6 +3,7 @@ package ir.maktab.homeserviceprovider.domain.service;
 import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
+import ir.maktab.homeserviceprovider.mapper.AbstractMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,17 +17,12 @@ import java.util.Optional;
 public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
 
     private final JpaRepository<M, I> jpaRepository;
-
-    protected abstract D mapToDto(M model);
-
-    protected abstract M mapToModel(D dto);
-
-    protected abstract void updateModelByDto(D dto, M model);
+    private final AbstractMapper<M, D, I> mapper;
 
     @Transactional
     public D save(D dto) {
-        M savedModel = jpaRepository.save(mapToModel(dto));
-        return mapToDto(savedModel);
+        M savedModel = jpaRepository.save(mapper.mapToModel(dto));
+        return mapper.mapToDto(savedModel);
     }
 
     @Transactional
@@ -37,18 +33,21 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
     @Transactional
     public Optional<D> update(D dto) {
         Optional<M> optModel = this.jpaRepository.findById(dto.getId());
+
         if (optModel.isPresent()) {
             M loadedModel = optModel.get();
-            updateModelByDto(dto, loadedModel);
+            mapper.updateModelByDto(loadedModel, dto);
+
             this.jpaRepository.save(loadedModel);
-            return Optional.of(mapToDto(loadedModel));
+            return Optional.of(mapper.mapToDto(loadedModel));
         }
+
         return Optional.empty();
     }
 
     @Transactional
     public void delete(D dto) {
-        jpaRepository.delete(mapToModel(dto));
+        jpaRepository.delete(mapper.mapToModel(dto));
     }
 
     @Transactional
@@ -60,12 +59,12 @@ public abstract class BaseService<M extends BaseModel<I>, D extends BaseDto<I>, 
 
     @Transactional(readOnly = true)
     public Optional<D> findById(I id) {
-        return jpaRepository.findById(id).map(this::mapToDto);
+        return jpaRepository.findById(id).map(mapper::mapToDto);
     }
 
     @Transactional(readOnly = true)
     public Page<D> findAllByPage(Pageable pageable) {
-        return jpaRepository.findAll(pageable).map(this::mapToDto);
+        return jpaRepository.findAll(pageable).map(mapper::mapToDto);
     }
 
     @Transactional(readOnly = true)
