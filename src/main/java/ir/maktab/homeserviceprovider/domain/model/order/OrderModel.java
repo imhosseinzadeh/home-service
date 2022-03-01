@@ -41,6 +41,9 @@ public class OrderModel extends BaseModel<Long> {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OfferModel> offers = new HashSet<>();
 
+    @OneToOne
+    private OfferModel acceptedOffer;
+
     @NotNull(message = "OrderModel-proposedPrice cannot be null")
     private BigDecimal proposedPrice;
 
