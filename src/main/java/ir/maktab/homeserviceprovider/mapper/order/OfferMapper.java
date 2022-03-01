@@ -2,7 +2,7 @@ package ir.maktab.homeserviceprovider.mapper.order;
 
 import ir.maktab.homeserviceprovider.domain.model.order.OfferModel;
 import ir.maktab.homeserviceprovider.dto.order.OfferDto;
-import ir.maktab.homeserviceprovider.mapper.AbstractGenericMapper;
+import ir.maktab.homeserviceprovider.mapper.AbstractMapper;
 import ir.maktab.homeserviceprovider.mapper.user.ExpertMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,7 +11,7 @@ import org.mapstruct.MappingTarget;
 import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = {ExpertMapper.class, OrderMapper.class})
-public abstract class OfferMapper extends AbstractGenericMapper<OfferModel, Long> {
+public abstract class OfferMapper extends AbstractMapper<OfferModel, OfferDto, Long> {
 
     @Mapping(target = "expertId", source = "expert.id")
     @Mapping(target = "orderId", source = "order.id")

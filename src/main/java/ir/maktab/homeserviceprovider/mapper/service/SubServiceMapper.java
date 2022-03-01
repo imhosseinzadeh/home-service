@@ -2,13 +2,13 @@ package ir.maktab.homeserviceprovider.mapper.service;
 
 import ir.maktab.homeserviceprovider.domain.model.service.SubServiceModel;
 import ir.maktab.homeserviceprovider.dto.service.SubServiceDto;
-import ir.maktab.homeserviceprovider.mapper.AbstractGenericMapper;
+import ir.maktab.homeserviceprovider.mapper.AbstractMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", uses = {ServiceMapper.class})
-public abstract class SubServiceMapper extends AbstractGenericMapper<SubServiceModel, Long> {
+public abstract class SubServiceMapper extends AbstractMapper<SubServiceModel, SubServiceDto, Long> {
 
     @Mapping(target = "serviceId", source = "service.id")
     public abstract SubServiceDto mapToDto(SubServiceModel model);
