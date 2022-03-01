@@ -1,15 +1,15 @@
 package ir.maktab.homeserviceprovider.domain.service.order;
 
 import ir.maktab.homeserviceprovider.domain.model.order.OfferModel;
+import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
+import ir.maktab.homeserviceprovider.domain.model.order.OrderModelStatus;
 import ir.maktab.homeserviceprovider.domain.service.BaseService;
 import ir.maktab.homeserviceprovider.dto.order.OfferDto;
-import ir.maktab.homeserviceprovider.dto.order.OrderDto;
 import ir.maktab.homeserviceprovider.mapper.order.OfferMapper;
 import ir.maktab.homeserviceprovider.repository.order.OfferRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @Service
 public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
@@ -28,17 +28,18 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
 
     @Override
     public OfferDto save(OfferDto dto) {
-        Optional<OrderDto> optOrder = this.orderService.findById(dto.getOrderId());
-        if (optOrder.isPresent()) {
-            BigDecimal orderPrice = optOrder.get().getProposedPrice();
-            BigDecimal offerPrice = dto.getProposalPrice();
+        OfferModel offer = this.offerMapper.mapToModel(dto);
+        OrderModel order = offer.getOrder();
 
-            if (offerPrice.compareTo(orderPrice) > 0) {
-                OfferModel saved = this.repository.save(this.offerMapper.mapToModel(dto));
-                return this.offerMapper.mapToDto(saved);
-            }
-            //throw LesserPriceException();
+        BigDecimal offerPrice = offer.getProposalPrice();
+        BigDecimal orderPrice = order.getProposedPrice();
+
+        if (offerPrice.compareTo(orderPrice) > 0) {
+            order.setStatus(OrderModelStatus.WAIT_FOR_ACCEPT_EXPERT_OFFER);
+            OfferModel saved = this.repository.save(offer);
+            return this.offerMapper.mapToDto(saved);
         }
+        //throw LesserPriceException();
         return null;
     }
 
@@ -56,4 +57,5 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
     protected void updateModelByDto(OfferDto dto, OfferModel model) {
 
     }
+
 }
