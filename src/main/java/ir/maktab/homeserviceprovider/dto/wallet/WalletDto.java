@@ -1,6 +1,5 @@
 package ir.maktab.homeserviceprovider.dto.wallet;
 
-import ir.maktab.homeserviceprovider.domain.model.user.UserModel;
 import ir.maktab.homeserviceprovider.dto.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +17,8 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 public class WalletDto extends BaseDto<Long> {
 
-    @NotNull(message = "WalletDto-user cannot be null")
-    private UserModel user;
+    @NotNull(message = "WalletDto-userId cannot be null")
+    private Long userId;
 
     @NotNull(message = "WalletDto-balance cannot be null")
     private BigDecimal balance;
