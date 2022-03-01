@@ -8,6 +8,7 @@ import ir.maktab.homeserviceprovider.dto.order.OfferDto;
 import ir.maktab.homeserviceprovider.mapper.order.OfferMapper;
 import ir.maktab.homeserviceprovider.repository.order.OfferRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -25,6 +26,7 @@ public class OfferService extends BaseService<OfferModel, OfferDto, Long> {
     }
 
     @Override
+    @Transactional
     public OfferDto save(OfferDto dto) {
         OfferModel offer = this.offerMapper.mapToModel(dto);
         OrderModel order = offer.getOrder();

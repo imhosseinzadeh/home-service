@@ -25,10 +25,12 @@ public class ExpertServiceService extends BaseService<ExpertServiceModel, Expert
         this.expertServiceMapper = expertServiceMapper;
     }
 
+    @Transactional(readOnly = true)
     public Page<ExpertServiceModel> findAllByService(ServiceModel service, Pageable pageable) {
         return repository.findAllByService(service, pageable);
     }
 
+    @Transactional(readOnly = true)
     public Page<ExpertServiceModel> findAllByExpert(ExpertModel expert, Pageable pageable) {
         return repository.findAllByExpert(expert, pageable);
     }

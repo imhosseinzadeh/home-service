@@ -9,6 +9,7 @@ import ir.maktab.homeserviceprovider.specification.AdminSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AdminService extends UserService<AdminModel, AdminDto> {
@@ -23,6 +24,7 @@ public class AdminService extends UserService<AdminModel, AdminDto> {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<AdminDto> findAll(UserSearchParam searchParam, Pageable pageable) {
         return repository.findAll(AdminSpecifications.withFirstname(searchParam.getFirstname())
                                 .and(AdminSpecifications.withLastname(searchParam.getLastname()))

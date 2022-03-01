@@ -10,6 +10,7 @@ import ir.maktab.homeserviceprovider.mapper.order.OfferMapper;
 import ir.maktab.homeserviceprovider.mapper.order.OrderMapper;
 import ir.maktab.homeserviceprovider.repository.order.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
@@ -31,6 +32,7 @@ public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
         this.offerMapper = offerMapper;
     }
 
+    @Transactional(readOnly = true)
     public Set<OfferDto> getOrderOffers(Long id) {
         Optional<OrderModel> optOrder = this.repository.findById(id);
         if (optOrder.isPresent()) {
@@ -40,6 +42,7 @@ public class OrderService extends BaseService<OrderModel, OrderDto, Long> {
         return null;
     }
 
+    @Transactional
     public void acceptOffer(Long orderId, Long offerId) throws DataNotExistsException {
         Optional<OrderModel> optOrder = this.repository.findById(orderId);
         Optional<OfferDto> optOffer = this.offerService.findById(offerId);

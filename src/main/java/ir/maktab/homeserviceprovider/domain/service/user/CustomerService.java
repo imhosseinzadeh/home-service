@@ -13,6 +13,7 @@ import ir.maktab.homeserviceprovider.specification.CustomerSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
@@ -31,6 +32,7 @@ public class CustomerService extends UserService<CustomerModel, CustomerDto> {
         this.orderMapper = orderMapper;
     }
 
+    @Transactional(readOnly = true)
     public Set<OrderDto> ordersHistory(Long customerId) throws DataNotExistsException {
         Optional<CustomerModel> optCustomer = this.repository.findById(customerId);
         if (optCustomer.isPresent()) {
@@ -41,6 +43,7 @@ public class CustomerService extends UserService<CustomerModel, CustomerDto> {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<CustomerDto> findAll(UserSearchParam searchParam, Pageable pageable) {
         return repository.findAll(CustomerSpecifications.withFirstname(searchParam.getFirstname())
                                 .and(CustomerSpecifications.withLastname(searchParam.getLastname()))

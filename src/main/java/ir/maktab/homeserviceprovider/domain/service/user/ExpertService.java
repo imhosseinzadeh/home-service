@@ -44,6 +44,7 @@ public class ExpertService extends UserService<ExpertModel, ExpertDto> {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<ExpertDto> findAll(UserSearchParam searchParam, Pageable pageable) {
         return repository.findAll(ExpertSpecifications.withFirstname(searchParam.getFirstname())
                                 .and(ExpertSpecifications.withLastname(searchParam.getLastname()))
