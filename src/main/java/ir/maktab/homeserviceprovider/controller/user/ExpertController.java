@@ -1,9 +1,11 @@
 package ir.maktab.homeserviceprovider.controller.user;
 
 import ir.maktab.homeserviceprovider.domain.service.order.OfferService;
+import ir.maktab.homeserviceprovider.domain.service.service.ExpertServiceService;
 import ir.maktab.homeserviceprovider.domain.service.user.ExpertService;
 import ir.maktab.homeserviceprovider.dto.order.OfferDto;
 import ir.maktab.homeserviceprovider.dto.order.OrderDto;
+import ir.maktab.homeserviceprovider.dto.service.ExpertServiceDto;
 import ir.maktab.homeserviceprovider.dto.user.ExpertDto;
 import ir.maktab.homeserviceprovider.dto.user.param.ChangePasswordParam;
 import ir.maktab.homeserviceprovider.exception.DataNotExistsException;
@@ -27,6 +29,7 @@ import java.util.Optional;
 public class ExpertController implements IUserController<ExpertDto> {
 
     private final ExpertService service;
+    private final ExpertServiceService expertServiceService;
     private final OfferService offerService;
 
     @Override
@@ -80,7 +83,12 @@ public class ExpertController implements IUserController<ExpertDto> {
         }
     }
 
-    @GetMapping("/related-orders/{id}")
+    @PostMapping("add-service-to-expert")
+    public ResponseEntity<ExpertServiceDto> addServiceToExpert(@RequestBody ExpertServiceDto serviceDto) {
+        return ResponseEntity.ok(this.expertServiceService.save(serviceDto));
+    }
+
+    @GetMapping("related-orders/{id}")
     public ResponseEntity<List<OrderDto>> getRelatedOrders(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.getRelatedOrders(id));
     }
