@@ -21,14 +21,14 @@ public class OrderController {
     private final OrderService service;
 
     @PostMapping("/submit")
-    public ResponseEntity<OrderDto> submit(@RequestBody @Valid OrderDto dto) {
-        OrderDto saved = this.service.save(dto);
+    public ResponseEntity<OrderDto> submit(@RequestBody @Valid OrderDto orderDto) {
+        OrderDto saved = this.service.save(orderDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<OrderDto> getOrder(@PathVariable Long id) {
-        Optional<OrderDto> optLoaded = this.service.findById(id);
+    @GetMapping("/detail/{orderId}")
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) {
+        Optional<OrderDto> optLoaded = this.service.findById(orderId);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
@@ -36,9 +36,9 @@ public class OrderController {
                         .body(null));
     }
 
-    @PutMapping("/detail/{id}")
-    public ResponseEntity<OrderDto> updateOrder(@PathVariable Long id, @RequestBody @Valid OrderDto dto) {
-        dto.setId(id);
+    @PutMapping("/detail/{orderId}")
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable Long orderId, @RequestBody @Valid OrderDto dto) {
+        dto.setId(orderId);
         Optional<OrderDto> optUpdated = this.service.update(dto);
         return optUpdated
                 .map(ResponseEntity::ok)
@@ -47,22 +47,21 @@ public class OrderController {
                         .body(null));
     }
 
-    @DeleteMapping("/delete-order/{id}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
+    @DeleteMapping("/delete-order/{orderId}")
+    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
         try {
-            this.service.deleteById(id);
+            this.service.deleteById(orderId);
             return ResponseEntity.ok("Order has been successfully deleted");
         } catch (DataNotExistsException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Order with id: " + id + " does not exist");
+                    .body("Order with id: " + orderId + " does not exist");
         }
     }
 
-
-    @GetMapping("order-offers/{id}")
-    public ResponseEntity<Set<OfferDto>> getOrderOffers(@PathVariable Long id) {
-        Set<OfferDto> orderOffers = this.service.getOrderOffers(id);
+    @GetMapping("order-offers/{orderId}")
+    public ResponseEntity<Set<OfferDto>> getOrderOffers(@PathVariable Long orderId) {
+        Set<OfferDto> orderOffers = this.service.getOrderOffers(orderId);
         return ResponseEntity.ok(orderOffers);
     }
 

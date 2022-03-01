@@ -66,19 +66,19 @@ public class AdminController implements IUserController<AdminDto> {
     }
 
     @PostMapping("add-service-to-expert")
-    public ResponseEntity<ExpertServiceDto> addServiceToExpert(@RequestBody ExpertServiceDto serviceDto) {
-        return ResponseEntity.ok(this.expertServiceService.save(serviceDto));
+    public ResponseEntity<ExpertServiceDto> addServiceToExpert(@RequestBody ExpertServiceDto expertServiceDto) {
+        return ResponseEntity.ok(this.expertServiceService.save(expertServiceDto));
     }
 
     @Override
-    public ResponseEntity<AdminDto> signup(AdminDto registerDto) {
-        AdminDto saved = this.service.save(registerDto);
+    public ResponseEntity<AdminDto> signup(AdminDto adminDto) {
+        AdminDto saved = this.service.save(adminDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @Override
-    public ResponseEntity<AdminDto> getProfile(Long id) {
-        Optional<AdminDto> optLoaded = this.service.findById(id);
+    public ResponseEntity<AdminDto> getProfile(Long adminId) {
+        Optional<AdminDto> optLoaded = this.service.findById(adminId);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
@@ -87,9 +87,9 @@ public class AdminController implements IUserController<AdminDto> {
     }
 
     @Override
-    public ResponseEntity<AdminDto> updateProfile(Long id, AdminDto dto) {
-        dto.setId(id);
-        Optional<AdminDto> optUpdated = this.service.update(dto);
+    public ResponseEntity<AdminDto> updateProfile(Long adminId, AdminDto adminDto) {
+        adminDto.setId(adminId);
+        Optional<AdminDto> optUpdated = this.service.update(adminDto);
         return optUpdated
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
@@ -98,9 +98,9 @@ public class AdminController implements IUserController<AdminDto> {
     }
 
     @Override
-    public ResponseEntity<String> changePassword(Long id, ChangePasswordParam param) {
+    public ResponseEntity<String> changePassword(Long adminId, ChangePasswordParam changePasswordParam) {
         try {
-            this.service.updatePasswordById(id, param);
+            this.service.updatePasswordById(adminId, changePasswordParam);
             return ResponseEntity.ok("Admin password changed successfully");
         } catch (WrongDataInputException | DataNotExistsException e) {
             return ResponseEntity
@@ -110,14 +110,14 @@ public class AdminController implements IUserController<AdminDto> {
     }
 
     @Override
-    public ResponseEntity<String> deleteAccount(Long id) {
+    public ResponseEntity<String> deleteAccount(Long adminId) {
         try {
-            this.service.deleteById(id);
+            this.service.deleteById(adminId);
             return ResponseEntity.ok("Admin account has been successfully deleted");
         } catch (DataNotExistsException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Admin with id: " + id + " does not exist");
+                    .body("Admin with id: " + adminId + " does not exist");
         }
     }
 

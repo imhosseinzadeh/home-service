@@ -33,15 +33,15 @@ public class ExpertController implements IUserController<ExpertDto> {
     private final OfferService offerService;
 
     @Override
-    public ResponseEntity<ExpertDto> signup(ExpertDto registerDto) {
-        ExpertDto saved = this.service.save(registerDto);
+    public ResponseEntity<ExpertDto> signup(ExpertDto expertDto) {
+        ExpertDto saved = this.service.save(expertDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @Override
-    public ResponseEntity<ExpertDto> getProfile(Long id) {
-        Optional<ExpertDto> optLoaded = this.service.findById(id);
-        return optLoaded
+    public ResponseEntity<ExpertDto> getProfile(Long expertId) {
+        Optional<ExpertDto> optExpertDto = this.service.findById(expertId);
+        return optExpertDto
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
@@ -49,9 +49,9 @@ public class ExpertController implements IUserController<ExpertDto> {
     }
 
     @Override
-    public ResponseEntity<ExpertDto> updateProfile(Long id, ExpertDto dto) {
-        dto.setId(id);
-        Optional<ExpertDto> optUpdated = this.service.update(dto);
+    public ResponseEntity<ExpertDto> updateProfile(Long expertId, ExpertDto expertDto) {
+        expertDto.setId(expertId);
+        Optional<ExpertDto> optUpdated = this.service.update(expertDto);
         return optUpdated
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
@@ -60,9 +60,9 @@ public class ExpertController implements IUserController<ExpertDto> {
     }
 
     @Override
-    public ResponseEntity<String> changePassword(Long id, ChangePasswordParam param) {
+    public ResponseEntity<String> changePassword(Long expertId, ChangePasswordParam changePasswordParam) {
         try {
-            service.updatePasswordById(id, param);
+            service.updatePasswordById(expertId, changePasswordParam);
             return ResponseEntity.ok("Expert password changed successfully");
         } catch (WrongDataInputException | DataNotExistsException e) {
             return ResponseEntity
@@ -72,25 +72,25 @@ public class ExpertController implements IUserController<ExpertDto> {
     }
 
     @Override
-    public ResponseEntity<String> deleteAccount(Long id) {
+    public ResponseEntity<String> deleteAccount(Long expertId) {
         try {
-            this.service.deleteById(id);
+            this.service.deleteById(expertId);
             return ResponseEntity.ok("Expert account has been successfully deleted");
         } catch (DataNotExistsException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Expert with id: " + id + " does not exist");
+                    .body("Expert with id: " + expertId + " does not exist");
         }
     }
 
     @PostMapping("add-service-to-expert")
-    public ResponseEntity<ExpertServiceDto> addServiceToExpert(@RequestBody ExpertServiceDto serviceDto) {
-        return ResponseEntity.ok(this.expertServiceService.save(serviceDto));
+    public ResponseEntity<ExpertServiceDto> addServiceToExpert(@RequestBody ExpertServiceDto expertServiceDto) {
+        return ResponseEntity.ok(this.expertServiceService.save(expertServiceDto));
     }
 
-    @GetMapping("related-orders/{id}")
-    public ResponseEntity<List<OrderDto>> getRelatedOrders(@PathVariable Long id) {
-        return ResponseEntity.ok(this.service.getRelatedOrders(id));
+    @GetMapping("related-orders/{expertId}")
+    public ResponseEntity<List<OrderDto>> getRelatedOrders(@PathVariable Long expertId) {
+        return ResponseEntity.ok(this.service.getRelatedOrders(expertId));
     }
 
     @PutMapping("offer-to-order")

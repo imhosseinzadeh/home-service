@@ -27,14 +27,14 @@ public class CustomerController implements IUserController<CustomerDto> {
     private final CustomerService service;
 
     @Override
-    public ResponseEntity<CustomerDto> signup(CustomerDto registerDto) {
-        CustomerDto saved = this.service.save(registerDto);
+    public ResponseEntity<CustomerDto> signup(CustomerDto customerDto) {
+        CustomerDto saved = this.service.save(customerDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @Override
-    public ResponseEntity<CustomerDto> getProfile(Long id) {
-        Optional<CustomerDto> optLoaded = this.service.findById(id);
+    public ResponseEntity<CustomerDto> getProfile(Long customerId) {
+        Optional<CustomerDto> optLoaded = this.service.findById(customerId);
         return optLoaded
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
@@ -43,9 +43,9 @@ public class CustomerController implements IUserController<CustomerDto> {
     }
 
     @Override
-    public ResponseEntity<CustomerDto> updateProfile(Long id, CustomerDto dto) {
-        dto.setId(id);
-        Optional<CustomerDto> optUpdated = this.service.update(dto);
+    public ResponseEntity<CustomerDto> updateProfile(Long id, CustomerDto customerDto) {
+        customerDto.setId(id);
+        Optional<CustomerDto> optUpdated = this.service.update(customerDto);
         return optUpdated
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity
@@ -65,9 +65,9 @@ public class CustomerController implements IUserController<CustomerDto> {
 
 
     @Override
-    public ResponseEntity<String> changePassword(Long id, ChangePasswordParam param) {
+    public ResponseEntity<String> changePassword(Long id, ChangePasswordParam changePasswordParam) {
         try {
-            this.service.updatePasswordById(id, param);
+            this.service.updatePasswordById(id, changePasswordParam);
             return ResponseEntity.ok("Customer password changed successfully");
         } catch (WrongDataInputException | DataNotExistsException e) {
             return ResponseEntity
@@ -77,14 +77,14 @@ public class CustomerController implements IUserController<CustomerDto> {
     }
 
     @Override
-    public ResponseEntity<String> deleteAccount(Long id) {
+    public ResponseEntity<String> deleteAccount(Long customerId) {
         try {
-            this.service.deleteById(id);
+            this.service.deleteById(customerId);
             return ResponseEntity.ok("Customer account has been successfully deleted");
         } catch (DataNotExistsException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Customer with id: " + id + " does not exist");
+                    .body("Customer with id: " + customerId + " does not exist");
         }
     }
 
