@@ -8,8 +8,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import java.util.Set;
-
 @Mapper(componentModel = "spring", uses = {ExpertMapper.class, OrderMapper.class})
 public abstract class OfferMapper extends AbstractMapper<OfferModel, OfferDto, Long> {
 
@@ -20,8 +18,6 @@ public abstract class OfferMapper extends AbstractMapper<OfferModel, OfferDto, L
     @Mapping(target = "expert", source = "expertId")
     @Mapping(target = "order", source = "orderId")
     public abstract OfferModel mapToModel(OfferDto dto);
-
-    public abstract Set<OfferDto> mapToDto(Set<OfferModel> models);
 
     @Mapping(target = "expertId", source = "expert.id")
     @Mapping(target = "orderId", source = "order.id")
