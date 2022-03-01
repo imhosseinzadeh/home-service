@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Component
 public abstract class AbstractMapper<M extends BaseModel<I>, D extends BaseDto<I>, I extends Serializable> {
@@ -17,6 +18,10 @@ public abstract class AbstractMapper<M extends BaseModel<I>, D extends BaseDto<I
     public abstract D mapToDto(M model);
 
     public abstract M mapToModel(D dto);
+
+    public abstract Set<D> mapToDto(Set<M> models);
+
+    public abstract Set<M> mapToModel(Set<D> models);
 
     public abstract void updateDtoByModel(@MappingTarget D dto, M model);
 
