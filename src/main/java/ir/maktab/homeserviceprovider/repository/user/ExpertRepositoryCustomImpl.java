@@ -2,7 +2,9 @@ package ir.maktab.homeserviceprovider.repository.user;
 
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel;
 import ir.maktab.homeserviceprovider.domain.model.order.OrderModel_;
-import ir.maktab.homeserviceprovider.domain.model.service.*;
+import ir.maktab.homeserviceprovider.domain.model.service.ExpertServiceModel;
+import ir.maktab.homeserviceprovider.domain.model.service.ServiceModel;
+import ir.maktab.homeserviceprovider.domain.model.service.SubServiceModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import ir.maktab.homeserviceprovider.domain.model.user.UserModel_;
 import org.springframework.beans.factory.annotation.Autowired;
