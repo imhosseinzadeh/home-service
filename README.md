@@ -1,4 +1,4 @@
-# Home-service
+# home-service
 
 Maktab Sharif Coding Bootcamp final project
 
