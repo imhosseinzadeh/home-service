@@ -18,7 +18,7 @@ import java.util.Set;
 public class ExpertModel extends UserModel {
 
     @Lob
-    @Column(columnDefinition = "mediumblob")
+    @Column(columnDefinition = "bytea")
     private byte[] image;
     @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ExpertServiceModel> expertServices = new HashSet<>();
