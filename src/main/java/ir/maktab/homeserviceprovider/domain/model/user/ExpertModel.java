@@ -11,7 +11,8 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "Expert")
+@Entity
+@Table(name = "\"Expert\"")
 @NoArgsConstructor
 @Getter
 @Setter

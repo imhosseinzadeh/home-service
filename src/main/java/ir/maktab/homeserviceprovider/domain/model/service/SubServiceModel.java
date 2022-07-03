@@ -13,7 +13,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "SubService")
+@Entity
+@Table(name = "\"SubService\"")
 @NoArgsConstructor
 @Getter
 @Setter

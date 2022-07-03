@@ -10,7 +10,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "Service")
+@Entity
+@Table(name = "\"Service\"")
 @NoArgsConstructor
 @Getter
 @Setter

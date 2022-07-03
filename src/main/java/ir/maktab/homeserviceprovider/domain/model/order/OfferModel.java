@@ -12,7 +12,8 @@ import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.Period;
 
-@Entity(name = "Offer")
+@Entity
+@Table(name = "\"Offer\"")
 @NoArgsConstructor
 @Getter
 @Setter

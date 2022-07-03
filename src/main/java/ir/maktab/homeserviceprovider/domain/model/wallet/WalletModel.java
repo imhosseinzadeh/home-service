@@ -12,7 +12,8 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Set;
 
-@Entity(name = "wallet")
+@Entity
+@Table(name = "\"Wallet\"")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

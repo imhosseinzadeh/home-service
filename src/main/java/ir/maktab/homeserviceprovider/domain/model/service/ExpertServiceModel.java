@@ -4,14 +4,12 @@ import ir.maktab.homeserviceprovider.domain.model.BaseModel;
 import ir.maktab.homeserviceprovider.domain.model.user.ExpertModel;
 import lombok.*;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-@Entity(name = "ExpertService")
+@Entity
+@Table(name = "\"ExpertService\"")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

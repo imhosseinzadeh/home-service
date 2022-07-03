@@ -10,7 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Entity(name = "Transaction")
+@Entity
+@Table(name = "\"Transaction\"")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

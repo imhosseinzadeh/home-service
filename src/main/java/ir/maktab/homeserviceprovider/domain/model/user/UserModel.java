@@ -10,7 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Entity(name = "User")
+@Entity
+@Table(name = "\"User\"")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @Getter
